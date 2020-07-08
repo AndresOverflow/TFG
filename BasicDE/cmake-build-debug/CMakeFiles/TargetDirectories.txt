@@ -1,0 +1,3 @@
+/Users/AndresOverflow/Documents/Universidad/TFG/BasicDE/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/AndresOverflow/Documents/Universidad/TFG/BasicDE/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/AndresOverflow/Documents/Universidad/TFG/BasicDE/cmake-build-debug/CMakeFiles/BasicDE.dir

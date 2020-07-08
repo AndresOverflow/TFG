@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/clang  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/BasicDE.dir/line.cpp.o CMakeFiles/BasicDE.dir/individual.cpp.o CMakeFiles/BasicDE.dir/main3.cpp.o  -o BasicDE 

@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.cpp
+Individual.h
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.h
+
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.h
+vector
+-
+string
+-
+cmath
+-
+stdlib.h
+-
+math.h
+-
+
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/main.cpp
+iostream
+-
+string
+-
+vector
+-
+Individual.h
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.h
+

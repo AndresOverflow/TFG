@@ -1,0 +1,9 @@
+Determining if the C compiler works failed with the following output:
+Change Dir: /Users/AndresOverflow/Documents/Universidad/TFG/untitled/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_46bb7/fast && sh: line 1: 19924 Abort trap: 6           /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk '' -find make 2> /dev/null
+make: error: sh -c '/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk '' -find make 2> /dev/null' failed with exit code 34304: (null) (errno=No such file or directory)
+xcode-select: Failed to locate 'make', requesting installation of command line developer tools.
+
+
+
