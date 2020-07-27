@@ -23,13 +23,14 @@ public:
 
     Individual(double fitness);
     Individual(void);
-    double getFitness(void );
+    Individual(vector<double> components_vector);
+    double getFitness(void);
     void setFitness(double fitness);
 
-    vector<int> getComponents(void);
-    void setComponents(vector<int> vector2);
-    void setComponent(int position, int value);
-    int getComponent(int position);
+    vector<double> getComponents(void);
+    void setComponents(vector<double> vector2);
+    void setComponent(int position, double value);
+    double getComponent(int position);
 
     string toString(void);
 
@@ -40,7 +41,7 @@ public:
 
 private:
     double fitness;
-    vector<int> components;
+    vector<double> components;
 
 };
 

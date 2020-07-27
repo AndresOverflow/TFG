@@ -171,6 +171,7 @@ vector<Individual> mutate(vector<Individual> current_population) {
 int main() {
 
 // 1. Inicializar population
+//Hacerlo varias veces
 // 2. Hacer mutate de la poblacion
 // 3. Hacer crossover
 // 4. Hacer la selección del offspring
@@ -180,8 +181,10 @@ int main() {
     // Initialize the population
 
 
+    vector<double> components_ind1 = {1.0, 20.0, 70.0, 3.0, 44.5};
+    vector<double> components_ind2 = {3.0, 2.2, 5.3, 1.0, 15.5};
 
-    current_population = {Individual(30), Individual(50)};
+    current_population = {Individual(components_ind1), Individual(components_ind2)};
 
     cout << "1.INITIALIZE CURRENT POPULATION" << "\n";
     cout << "CURRENT POPULATION" << "\n";
@@ -190,17 +193,35 @@ int main() {
     cout << "2.MUTATE THE POPULATION " << "\n";
     mutated_population = mutate(current_population);
     cout << "MUTATED POPULATION" << "\n";
-    print(offspring);
+    // Calculate fitness
+    for (int individual_i = 0; individual_i < PS; individual_i++) {
+        mutated_population[individual_i].setFitness(mutated_population[individual_i].calculate_fitness());
+    }
+
+    print(mutated_population);
+
 
     cout << "3.DO CROSSOVER" << "\n";
     offspring = crossover(current_population, mutated_population);
-    cout << "MUTATED POPULATION" << "\n";
+    cout << "CROSSOVER POPULATION" << "\n";
+     // Calculate fitness
+    for (int individual_i = 0; individual_i < PS; individual_i++) {
+        offspring[individual_i].setFitness(offspring[individual_i].calculate_fitness());
+    }
+
+
     print(offspring);
+
+
     cout << "4.DO SELECTION" << "\n";
+
+
     current_population = selection(current_population, offspring);
     cout << " \n AFTER SELECTION \n";
+    print(current_population);
 
-    cout << "\n " << bestIndividual(current_population).toString() << "\n";
+
+    cout << "\n " << "BEST INDIVIDUAL" << bestIndividual(current_population).toString() << "\n";
 
 
     cout << "\n" << "end of the program";

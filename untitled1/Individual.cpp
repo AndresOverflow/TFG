@@ -17,8 +17,15 @@ Individual::Individual(double fitness) {
 }
 
 Individual::Individual(void) {
-    this->fitness = 10;
+    this->fitness = 100000;
     this->components = {0,0,0,0,0};
+}
+
+Individual::Individual(vector<double> components_vector) {
+    vector<double>::iterator it;
+    it = components_vector.begin();
+    this->components.assign(it,components_vector.end());
+    this->fitness = this->calculate_fitness();
 }
 
 // fitness
@@ -30,12 +37,12 @@ void Individual::setFitness(double fitness) {
     this->fitness = fitness;
 }
 
-vector<int> Individual::getComponents(void) {
+vector<double> Individual::getComponents(void) {
     return this->components;
 }
 
-void Individual::setComponents(vector<int> vector2) {
-    vector<int>::iterator it;
+void Individual::setComponents(vector<double> vector2) {
+    vector<double>::iterator it;
     it = vector2.begin();
 
     this->components.assign(it,vector2.end());
@@ -61,9 +68,9 @@ string Individual::toString(void) {
 }
 
 double Individual::calculate_fitness() {
-    double aim = 10;
+    double aim = 50;
     double diff = 0;
-    for (int &i: Individual::components) {
+    for (double &i: Individual::components) {
         diff = diff + abs(aim - i);
     }
     return diff;
@@ -85,12 +92,12 @@ bool Individual::betterFitnessThan(Individual individual_to_compare) {
 
 }
 
-void Individual::setComponent(int position, int value) {
+void Individual::setComponent(int position, double value) {
     this->components[position] = value;
 
 }
 
-int Individual::getComponent(int position) {
+double Individual::getComponent(int position) {
 
     return this->components[position];
 }
