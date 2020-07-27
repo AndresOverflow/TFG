@@ -7,7 +7,6 @@
 
 
 
-const int Individual::DIMENSION = 5;
 
 //constructor
 

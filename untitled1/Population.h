@@ -21,18 +21,12 @@ class Population {
 
 public:
 
-    static const int POPULATION_DIMENSION = 5;
+    static const int POPULATION_SIZE = 5;
 
     Population(void);
 
     vector<Individual> getIndividuals(void);
-    void setIndividuals(double fitness);
-
-    int getNumberOfIndividuals(void);
-
-
-
-
+    void setIndividuals(vector<Individual> to_set_population);
 
     string toString(void);
     Individual bestIndividual(void);
@@ -41,7 +35,6 @@ public:
 
 
 private:
-    int number_of_individuals;
     vector<Individual> individuals;
 
 
