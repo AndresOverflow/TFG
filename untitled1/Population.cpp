@@ -1,21 +1,31 @@
 //
-// Created by Andres Ramos on 15/05/2020.
+// Created by Andres Ramos on 09/07/2020.
 //
 
+#include "Population.h"
 
-#include "Individual.h"
-
-
-
-const int Individual::DIMENSION = 5;
+const int Population::POPULATION_DIMENSION;
 
 //constructor
 
-Individual::Individual(double fitness) {
-    this->fitness = fitness;
-    this->components = {1,2,3,4,5};
+Population::Population() {
+    for (int i = 0 ; i < POPULATION_DIMENSION; i++) {
+       this->individuals.insert(this->individuals.begin(),Individual());
+    }
+
 }
 
+vector<Individual> Population::getIndividuals() {
+
+}
+
+void Population::setIndividuals(vector<Individual> to_set_population) {
+    vector<Individual>::iterator it;
+    it = to_set_p.begin();
+
+    this->components.assign(it, vector2.end());
+
+}
 Individual::Individual(void) {
     this->fitness = 10;
     this->components = {0,0,0,0,0};
@@ -84,15 +94,3 @@ bool Individual::betterFitnessThan(Individual individual_to_compare) {
     return result;
 
 }
-
-void Individual::setComponent(int position, int value) {
-    this->components[position] = value;
-
-}
-
-int Individual::getComponent(int position) {
-
-    return this->components[position];
-}
-
-//TODO static double Individual::minus

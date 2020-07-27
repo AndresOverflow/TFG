@@ -7,3 +7,6 @@ CMakeFiles/untitled1.dir/Individual.cpp.o: ../Individual.h
 CMakeFiles/untitled1.dir/main.cpp.o: ../Individual.h
 CMakeFiles/untitled1.dir/main.cpp.o: ../main.cpp
 
+CMakeFiles/untitled1.dir/main2.cpp.o: ../Individual.h
+CMakeFiles/untitled1.dir/main2.cpp.o: ../main2.cpp
+

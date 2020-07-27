@@ -18,6 +18,7 @@ class Individual {
 public:
 
     static const int DIMENSION;
+    static const bool BEST_LESS = 1; // 1 if aims for less fitness else 0.
 
 
     Individual(double fitness);
@@ -27,10 +28,13 @@ public:
 
     vector<int> getComponents(void);
     void setComponents(vector<int> vector2);
+    void setComponent(int position, int value);
+    int getComponent(int position);
 
     string toString(void);
 
     double calculate_fitness();
+    bool betterFitnessThan(Individual compare_to_individual);
 
 
 
