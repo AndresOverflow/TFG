@@ -128,6 +128,7 @@ vector<Individual> DE_rand_1(vector<Individual> current_population) {
 vector<Individual> DE_rand_2(vector<Individual> current_population) {
     vector<Individual> offspring = {Individual(), Individual()};
     cout << " DE_rand_2";
+    Individual::soemthing();
     return offspring;
 }
 

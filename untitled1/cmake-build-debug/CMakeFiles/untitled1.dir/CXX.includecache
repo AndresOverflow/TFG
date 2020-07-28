@@ -17,6 +17,8 @@ stdlib.h
 -
 math.h
 -
+iostream
+-
 
 /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Population.cpp
 Population.h

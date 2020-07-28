@@ -101,4 +101,8 @@ double Individual::getComponent(int position) {
     return this->components[position];
 }
 
+bool Individual::soemthing() {
+    return false;
+}
+
 //TODO static double Individual::minus

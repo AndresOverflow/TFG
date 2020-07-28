@@ -5,11 +5,13 @@
 #ifndef UNTITLED1_POPULATION_H
 #define UNTITLED1_POPULATION_H
 
+
 #include <vector>
 #include <string>
 #include <cmath>
 #include <stdlib.h>
 #include <math.h>
+
 #include "Individual.h"
 
 using namespace std;

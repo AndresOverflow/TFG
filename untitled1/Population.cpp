@@ -3,6 +3,7 @@
 //
 
 #include "Population.h"
+using namespace std;
 
 
 //constructor
@@ -26,4 +27,26 @@ void Population::setIndividuals(vector<Individual> to_set_population) {
 
 }
 
+string Population::toString(void) {
+    std::cout << "output from Population function";
+    std::cout << "The population individuals are :  \n";
 
+    for (int i = 0; i < this->individuals.size(); i++) {
+        cout << "Element number " << i << "\n";
+        cout << this->individuals[i].toString();
+    }
+
+}
+
+Individual Population::bestIndividual(void) {
+    Individual best_individual = Individual();
+    for (int i = 0; i < POPULATION_SIZE; i++) {
+
+        if (this->getIndividuals()[i].getFitness() < best_individual.getFitness()) {
+            best_individual.setFitness(this->getIndividuals()[i].getFitness());
+            best_individual.setComponents(this->getIndividuals()[i].getComponents()) ;
+
+        }
+    }
+    return best_individual;
+}

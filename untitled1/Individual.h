@@ -9,6 +9,7 @@
 #include <cmath>
 #include <stdlib.h>
 #include <math.h>
+#include <iostream>
 
 using namespace std;
 
@@ -37,6 +38,7 @@ public:
     double calculate_fitness();
     bool betterFitnessThan(Individual compare_to_individual);
 
+    static bool soemthing();
 
 
 private:
