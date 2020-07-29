@@ -12,39 +12,23 @@ static const double CR = 0.5; //Crossover factor
 static const bool BEST_LESS = 1; // 1 if aims for less fitness else 0.
 
 
-void print(std::vector<Individual> &a) {
-    std::cout << "The population individuals are :  \n";
-
-    for (int i = 0; i < a.size(); i++) {
-        cout << "Element number " << i << "\n";
-        cout << a[i].toString();
-    }
-}
-
-Individual bestIndividual(vector<Individual> population) {
-    Individual best_individual = Individual();
-    for (int i = 0; i < PS; i++) {
-        if (population[i].getFitness() < best_individual.getFitness()) {
-            best_individual.setFitness(population[i].getFitness());
-            best_individual.setComponents(population[i].getComponents());
-        }
-    }
-
-    return best_individual;
-}
 
 
-vector<Individual> selection(vector<Individual> current_population, vector<Individual> offspring) {
+
+Population selection(Population current_population, Population offspring) {
     cout << "selection function";
-    vector<Individual> final_population = {Individual(), Individual()};
+    Population final_population = Population();
 
-    for (int i = 0; i < PS; i++) {
-        if (current_population[i].betterFitnessThan(offspring[i])) {
-            final_population[i].setComponents(current_population[i].getComponents());
-            final_population[i].setFitness(current_population[i].getFitness());
+    for (int i = 0; i < Population::POPULATION_SIZE; i++) {
+        Individual ind = Individual();
+        if (current_population.getIndividuals()[i].betterFitnessThan(offspring.getIndividuals()[i])) {
+            ind.setComponents(current_population.getIndividuals()[i].getComponents());
+            ind.setFitness(current_population.getIndividuals()[i].getFitness());
+            final_population.setIndividual(i, ind);
         } else {
-            final_population[i].setComponents(offspring[i].getComponents());
-            final_population[i].setFitness(offspring[i].getFitness());
+            ind.setComponents(offspring.getIndividuals()[i].getComponents());
+            ind.setFitness(offspring.getIndividuals()[i].getFitness());
+            final_population.setIndividual(i, ind);
         }
     }
     return final_population;
@@ -52,18 +36,19 @@ vector<Individual> selection(vector<Individual> current_population, vector<Indiv
 
 
 //binomial crossover
-vector<Individual> crossover(vector<Individual> current_population, vector<Individual> mutated_population) {
-    vector<Individual> offspring = {Individual(), Individual()};
+Population crossover(Population current_population, Population mutated_population) {
+    Population offspring = Population();
 
     srand((unsigned) time(0));
     float random_value;
     int j_random, value;
 
+    Individual ind;
 
     //por cada individuo de la poblacion
-    for (int individual_i = 0; individual_i < PS; individual_i++) {
+    for (int individual_i = 0; individual_i < Population::POPULATION_SIZE; individual_i++) {
         //generamos escogemos una componente
-        j_random = (random() % PS);
+        j_random = (random() % Population::POPULATION_SIZE);
         //por cada componente
         for (int component_i = 0; component_i < Individual::DIMENSION; component_i++) {
             // generar un numero random de 0 a 1
@@ -71,9 +56,12 @@ vector<Individual> crossover(vector<Individual> current_population, vector<Indiv
 
             // si el numero es menor que CR o es el indice j entonces es la componente mutada
             // si es mayor que CR y no es j entonces es la componente original
+            ind = Individual();
+            //TODO
             if (random_value <= CR or component_i == j_random) {
-                value = mutated_population[individual_i].getComponent(component_i);
-                offspring[individual_i].setComponent(component_i, value);
+                value = mutated_population.getIndividuals[individual_i].getComponent(component_i);
+                offspring.getIndividuals()[individual_i].setComponent(component_i, value);
+
             } else {
                 value = current_population[individual_i].getComponent(component_i);
                 offspring[individual_i].setComponent(component_i, value);
@@ -158,13 +146,16 @@ vector<Individual> DE_currentToBest_1(vector<Individual> current_population) {
 }
 
 
-vector<Individual> mutate(vector<Individual> current_population) {
-    vector<Individual> offspring;
+Population mutate(Population current_population) {
+    Population offspring = Population();
+    vector<Individual> offspring_vector;
     for (int idx = 0; idx < PS; idx++) {
-        offspring.insert(offspring.end(), Individual(0));
+        offspring.insert(offspring_vector.end(), Individual(0));
     }
 
-    offspring = DE_rand_1(current_population);
+    offspring_vector = DE_rand_1(current_population);
+    offspring.setIndividuals(offspring_vector);
+
     return offspring;
     cout << "\n mutate \n";
 }
@@ -173,30 +164,25 @@ vector<Individual> mutate(vector<Individual> current_population) {
 int main() {
 
 
+    cout << "POPULATION APROXIMATION";
+
+    Population current_population = Population();
+    Population mutated_population = Population();
+    Population offspring = Population();
 
 
-
-
-// 1. Inicializar population
-//Hacerlo varias veces
-// 2. Hacer mutate de la poblacion
-// 3. Hacer crossover
-// 4. Hacer la selección del offspring
-
-
-    vector<Individual> current_population, mutated_population, offspring;
     // Initialize the population
 
 
     vector<double> components_ind1 = {1.0, 20.0, 70.0, 3.0, 44.5};
     vector<double> components_ind2 = {3.0, 2.2, 5.3, 1.0, 15.5};
 
-    current_population = {Individual(components_ind1), Individual(components_ind2)};
+    current_population.setIndividuals({1.0, 20.0, 70.0, 3.0, 44.5}, {3.0, 2.2, 5.3, 1.0, 15.5};
 
     cout << "1.INITIALIZE CURRENT POPULATION" << "\n";
     cout << "CURRENT POPULATION" << "\n";
     print(current_population);
-
+/*
     cout << "2.MUTATE THE POPULATION " << "\n";
     mutated_population = mutate(current_population);
     cout << "MUTATED POPULATION" << "\n";
@@ -206,6 +192,16 @@ int main() {
     }
 
     print(mutated_population);
+
+
+
+    cout << "---------------POPULATION APROXIMATION---------------------------";
+
+
+
+
+
+
 
 
     cout << "3.DO CROSSOVER" << "\n";
@@ -230,7 +226,7 @@ int main() {
 
     cout << "\n " << "BEST INDIVIDUAL" << bestIndividual(current_population).toString() << "\n";
 
-
+*/
     cout << "\n" << "end of the program";
     return 0;
 

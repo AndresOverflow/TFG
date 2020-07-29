@@ -177,59 +177,32 @@ Population.cpp.s:
 	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/Population.cpp.s
 .PHONY : Population.cpp.s
 
-main.o: main.cpp.o
+mainp2.o: mainp2.cpp.o
 
-.PHONY : main.o
-
-# target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/main.cpp.s
-.PHONY : main.cpp.s
-
-main2.o: main2.cpp.o
-
-.PHONY : main2.o
+.PHONY : mainp2.o
 
 # target to build an object file
-main2.cpp.o:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/main2.cpp.o
-.PHONY : main2.cpp.o
+mainp2.cpp.o:
+	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/mainp2.cpp.o
+.PHONY : mainp2.cpp.o
 
-main2.i: main2.cpp.i
+mainp2.i: mainp2.cpp.i
 
-.PHONY : main2.i
+.PHONY : mainp2.i
 
 # target to preprocess a source file
-main2.cpp.i:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/main2.cpp.i
-.PHONY : main2.cpp.i
+mainp2.cpp.i:
+	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/mainp2.cpp.i
+.PHONY : mainp2.cpp.i
 
-main2.s: main2.cpp.s
+mainp2.s: mainp2.cpp.s
 
-.PHONY : main2.s
+.PHONY : mainp2.s
 
 # target to generate assembly for a file
-main2.cpp.s:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/main2.cpp.s
-.PHONY : main2.cpp.s
+mainp2.cpp.s:
+	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/mainp2.cpp.s
+.PHONY : mainp2.cpp.s
 
 # Help Target
 help:
@@ -246,12 +219,9 @@ help:
 	@echo "... Population.o"
 	@echo "... Population.i"
 	@echo "... Population.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... main2.o"
-	@echo "... main2.i"
-	@echo "... main2.s"
+	@echo "... mainp2.o"
+	@echo "... mainp2.i"
+	@echo "... mainp2.s"
 .PHONY : help
 
 

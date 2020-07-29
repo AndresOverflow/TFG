@@ -6,8 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.cpp" "/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/cmake-build-debug/CMakeFiles/untitled1.dir/Individual.cpp.o"
   "/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Population.cpp" "/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/cmake-build-debug/CMakeFiles/untitled1.dir/Population.cpp.o"
-  "/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/main.cpp" "/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/cmake-build-debug/CMakeFiles/untitled1.dir/main.cpp.o"
-  "/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/main2.cpp" "/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/cmake-build-debug/CMakeFiles/untitled1.dir/main2.cpp.o"
+  "/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/mainp2.cpp" "/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/cmake-build-debug/CMakeFiles/untitled1.dir/mainp2.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

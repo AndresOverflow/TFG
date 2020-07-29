@@ -57,18 +57,18 @@ include CMakeFiles/untitled1.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/untitled1.dir/flags.make
 
-CMakeFiles/untitled1.dir/main.cpp.o: CMakeFiles/untitled1.dir/flags.make
-CMakeFiles/untitled1.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/untitled1.dir/main.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/clang++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/untitled1.dir/main.cpp.o -c /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/main.cpp
+CMakeFiles/untitled1.dir/mainp2.cpp.o: CMakeFiles/untitled1.dir/flags.make
+CMakeFiles/untitled1.dir/mainp2.cpp.o: ../mainp2.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/untitled1.dir/mainp2.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/clang++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/untitled1.dir/mainp2.cpp.o -c /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/mainp2.cpp
 
-CMakeFiles/untitled1.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/untitled1.dir/main.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/main.cpp > CMakeFiles/untitled1.dir/main.cpp.i
+CMakeFiles/untitled1.dir/mainp2.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/untitled1.dir/mainp2.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/mainp2.cpp > CMakeFiles/untitled1.dir/mainp2.cpp.i
 
-CMakeFiles/untitled1.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/main.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/main.cpp -o CMakeFiles/untitled1.dir/main.cpp.s
+CMakeFiles/untitled1.dir/mainp2.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/mainp2.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/mainp2.cpp -o CMakeFiles/untitled1.dir/mainp2.cpp.s
 
 CMakeFiles/untitled1.dir/Population.cpp.o: CMakeFiles/untitled1.dir/flags.make
 CMakeFiles/untitled1.dir/Population.cpp.o: ../Population.cpp
@@ -96,36 +96,21 @@ CMakeFiles/untitled1.dir/Individual.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/Individual.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.cpp -o CMakeFiles/untitled1.dir/Individual.cpp.s
 
-CMakeFiles/untitled1.dir/main2.cpp.o: CMakeFiles/untitled1.dir/flags.make
-CMakeFiles/untitled1.dir/main2.cpp.o: ../main2.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/untitled1.dir/main2.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/clang++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/untitled1.dir/main2.cpp.o -c /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/main2.cpp
-
-CMakeFiles/untitled1.dir/main2.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/untitled1.dir/main2.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/main2.cpp > CMakeFiles/untitled1.dir/main2.cpp.i
-
-CMakeFiles/untitled1.dir/main2.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/main2.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/main2.cpp -o CMakeFiles/untitled1.dir/main2.cpp.s
-
 # Object files for target untitled1
 untitled1_OBJECTS = \
-"CMakeFiles/untitled1.dir/main.cpp.o" \
+"CMakeFiles/untitled1.dir/mainp2.cpp.o" \
 "CMakeFiles/untitled1.dir/Population.cpp.o" \
-"CMakeFiles/untitled1.dir/Individual.cpp.o" \
-"CMakeFiles/untitled1.dir/main2.cpp.o"
+"CMakeFiles/untitled1.dir/Individual.cpp.o"
 
 # External object files for target untitled1
 untitled1_EXTERNAL_OBJECTS =
 
-untitled1: CMakeFiles/untitled1.dir/main.cpp.o
+untitled1: CMakeFiles/untitled1.dir/mainp2.cpp.o
 untitled1: CMakeFiles/untitled1.dir/Population.cpp.o
 untitled1: CMakeFiles/untitled1.dir/Individual.cpp.o
-untitled1: CMakeFiles/untitled1.dir/main2.cpp.o
 untitled1: CMakeFiles/untitled1.dir/build.make
 untitled1: CMakeFiles/untitled1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable untitled1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable untitled1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/untitled1.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

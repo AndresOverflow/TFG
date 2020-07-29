@@ -8,9 +8,7 @@ CMakeFiles/untitled1.dir/Population.cpp.o: ../Individual.h
 CMakeFiles/untitled1.dir/Population.cpp.o: ../Population.cpp
 CMakeFiles/untitled1.dir/Population.cpp.o: ../Population.h
 
-CMakeFiles/untitled1.dir/main.cpp.o: ../Individual.h
-CMakeFiles/untitled1.dir/main.cpp.o: ../main.cpp
-
-CMakeFiles/untitled1.dir/main2.cpp.o: ../Individual.h
-CMakeFiles/untitled1.dir/main2.cpp.o: ../main2.cpp
+CMakeFiles/untitled1.dir/mainp2.cpp.o: ../Individual.h
+CMakeFiles/untitled1.dir/mainp2.cpp.o: ../Population.h
+CMakeFiles/untitled1.dir/mainp2.cpp.o: ../mainp2.cpp
 

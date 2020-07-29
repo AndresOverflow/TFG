@@ -27,11 +27,13 @@ void Population::setIndividuals(vector<Individual> to_set_population) {
 
 }
 
-string Population::toString(void) {
+
+
+void Population::toString(void) {
     std::cout << "output from Population function";
     std::cout << "The population individuals are :  \n";
 
-    for (int i = 0; i < this->individuals.size(); i++) {
+    for (int i = 0; i < POPULATION_SIZE; i++) {
         cout << "Element number " << i << "\n";
         cout << this->individuals[i].toString();
     }
@@ -49,4 +51,25 @@ Individual Population::bestIndividual(void) {
         }
     }
     return best_individual;
+}
+
+Individual Population::getIndividual(int position) {
+    return this->individuals[position];
+}
+
+//TODO Posible fallo por paso de referencia cheeckar
+void Population::setIndividual(int position, Individual ind) {
+    this->individuals[position] = ind;
+}
+
+void Population::recalculateFitness(void){
+    Individual individual;
+    for (int individual_i; individual_i< POPULATION_SIZE; individual_i++) {
+        individual = Individual();
+        individual.setComponents(this->getIndividual(individual_i).getComponents());
+        individual.setFitness(individual.calculate_fitness());
+
+        this->setIndividual(individual_i, individual);
+    }
+
 }
