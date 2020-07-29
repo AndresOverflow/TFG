@@ -6,7 +6,6 @@
 
 using namespace std;
 
-static const int PS = 2;
 static const double F = 1.25; //mutate factor
 static const double CR = 0.5; //Crossover factor
 static const bool BEST_LESS = 1; // 1 if aims for less fitness else 0.
@@ -22,7 +21,7 @@ Population selection(Population current_population, Population offspring) {
 
     cout << "selection function";
     //TODO cambiar el numero de individuos en funcion del population size
-    vector<Individual> final_population_vector = {Individual(), Individual()};
+    vector<Individual> final_population_vector = final_population.getIndividuals();
 
     for (int i = 0; i < Population::POPULATION_SIZE; i++) {
         if (current_population_vector[i].betterFitnessThan(offspring_vector[i])) {
@@ -45,7 +44,7 @@ Population crossover(Population current_population, Population mutated_populatio
 
     vector<Individual> current_population_vector = current_population.getIndividuals();
     vector<Individual> mutated_population_vector = current_population.getIndividuals();
-    vector<Individual> offspring_vector = {Individual(), Individual()};
+    vector<Individual> offspring_vector = offspring.getIndividuals();
 
     srand((unsigned) time(0));
     float random_value;
@@ -75,6 +74,7 @@ Population crossover(Population current_population, Population mutated_populatio
 
 
     offspring.setIndividuals(offspring_vector);
+    offspring.recalculateFitness();
 
     cout << "\n crossover \n";
     return offspring;
@@ -89,8 +89,11 @@ Population crossover(Population current_population, Population mutated_populatio
 
 
 
-vector<Individual> DE_rand_1(vector<Individual> current_population) {
-    vector<Individual> offspring = {Individual(), Individual()};
+vector<Individual> DE_rand_1(vector<Individual> current_population_vector) {
+    vector<Individual> offspring_vector;
+    for (int i = 0; i < Population::POPULATION_SIZE; i++) {
+        offspring_vector.insert(offspring_vector.begin(),Individual());
+    }
     srand((unsigned) time(0));
 
     int N_X_r1, N_X_r2, N_X_r3, CN_X_r1, CN_X_r2, CN_X_r3;
@@ -99,25 +102,25 @@ vector<Individual> DE_rand_1(vector<Individual> current_population) {
 
     //Por cada individuo de la población
     //escogemos 3 elementos aleatoriamente de la poblacion
-    for (int i = 0; i < PS; i++) {
-        N_X_r1 = (rand() % PS);
-        N_X_r2 = (rand() % PS);
-        N_X_r3 = (rand() % PS);
+    for (int i = 0; i < Population::POPULATION_SIZE; i++) {
+        N_X_r1 = (rand() % Population::POPULATION_SIZE);
+        N_X_r2 = (rand() % Population::POPULATION_SIZE);
+        N_X_r3 = (rand() % Population::POPULATION_SIZE);
 
         //Por cada componente del individio
         for (int component_i = 0; component_i < Individual::DIMENSION; component_i++) {
 
-            CN_X_r1 = current_population[N_X_r1].getComponents()[component_i];
-            CN_X_r2 = current_population[N_X_r2].getComponents()[component_i];
-            CN_X_r3 = current_population[N_X_r3].getComponents()[component_i];
+            CN_X_r1 = current_population_vector[N_X_r1].getComponents()[component_i];
+            CN_X_r2 = current_population_vector[N_X_r2].getComponents()[component_i];
+            CN_X_r3 = current_population_vector[N_X_r3].getComponents()[component_i];
 
             value = CN_X_r1 + F * (CN_X_r2 - CN_X_r3);
 
-            offspring[i].setComponent(component_i, value);
+            offspring_vector[i].setComponent(component_i, value);
         }
     }
 
-    return offspring;
+    return offspring_vector;
 
 }
 
@@ -164,6 +167,8 @@ Population mutate(Population current_population) {
 
     offspring_vector = DE_rand_1(current_population_vector);
 
+    offspring.setIndividuals(offspring_vector);
+    offspring.recalculateFitness();
     return offspring;
     cout << "\n mutate \n";
 }
@@ -188,17 +193,19 @@ int main() {
     // Initialize the population
 
 
-    vector<double> components_ind1 = {1.0, 20.0, 70.0, 3.0, 44.5};
-    vector<double> components_ind2 = {3.0, 2.2, 5.3, 1.0, 15.5};
+    vector<double> components_ind1 = {1.0, 20.0, 70.0, 3.0, 44.5, 6.9, 50.0, 10.0, 7.0, 100.0};
+    vector<double> components_ind2 = {3.0, 2.2, 5.3, 1.0, 15.5, 70, 80, 20, 100, 500};
+    vector<double> components_ind3 = {1.0, 600.0, 200.0, 3.0, 800.5, 6.9, 50.0, 10.0, 7.0, 10100.0};
+    vector<double> components_ind4 = {1.0, 70.0, 750.0, 3.0, 44.5, 60.9, 50.0, 100.0, 7.0, 1005.0};
+    vector<double> components_ind5 = {1.0, 2000.0, 700.0, 33.0, 445.5, 6.9, 50.0, 10.0, 7.0, 1020.0};
 
-    current_population.setIndividuals({Individual(components_ind1), Individual(components_ind2)});
+    current_population.setIndividuals({Individual(components_ind1), Individual(components_ind2), Individual(components_ind3), Individual(components_ind4),Individual(components_ind5)});
 
 
     cout << "1.INITIALIZE CURRENT POPULATION" << "\n";
     cout << "CURRENT POPULATION" << "\n";
     current_population.toString();
 
-//TODO quitar couts
 
     cout << "2.MUTATE THE POPULATION " << "\n";
     mutated_population = mutate(current_population);
@@ -215,7 +222,6 @@ int main() {
     offspring = crossover(current_population, mutated_population);
     cout << "CROSSOVER POPULATION" << "\n";
     //Calculate fitness
-    offspring.recalculateFitness();
 
 
     offspring.toString();

@@ -18,11 +18,11 @@ class Individual {
 
 public:
 
-    static const int DIMENSION = 5;
+    static const int DIMENSION = 10;
     static const bool BEST_LESS = 1; // 1 if aims for less fitness else 0.
+    constexpr static const double NOT_INITIALIZED = 9999.9;
 
 
-    Individual(double fitness);
     Individual(void);
     Individual(vector<double> components_vector);
     double getFitness(void);

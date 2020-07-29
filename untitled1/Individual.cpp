@@ -10,14 +10,13 @@
 
 //constructor
 
-Individual::Individual(double fitness) {
-    this->fitness = fitness;
-    this->components = {1,2,3,4,5};
-}
+
 
 Individual::Individual(void) {
-    this->fitness = 100000;
-    this->components = {0,0,0,0,0};
+    this->fitness = NOT_INITIALIZED;
+    for (int i = 0 ; i < DIMENSION; i++) {
+       this->components.insert(this->components.begin(), 0);
+    }
 }
 
 Individual::Individual(vector<double> components_vector) {

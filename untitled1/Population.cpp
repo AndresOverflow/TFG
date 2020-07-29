@@ -64,7 +64,7 @@ void Population::setIndividual(int position, Individual ind) {
 
 void Population::recalculateFitness(void){
     Individual individual;
-    for (int individual_i; individual_i< POPULATION_SIZE; individual_i++) {
+    for (int individual_i = 0; individual_i< POPULATION_SIZE; individual_i++) {
         individual = Individual();
         individual.setComponents(this->getIndividual(individual_i).getComponents());
         individual.setFitness(individual.calculate_fitness());
