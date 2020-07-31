@@ -37,6 +37,7 @@ public:
     Individual bestIndividual(void);
 
     void recalculateFitness(void);
+    double calculateMeanFitnessPopulation(void);
 
 
 

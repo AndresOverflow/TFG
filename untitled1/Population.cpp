@@ -73,3 +73,11 @@ void Population::recalculateFitness(void){
     }
 
 }
+
+double Population::calculateMeanFitnessPopulation() {
+    double accumulated = 0;
+    for (int i = 0; i < POPULATION_SIZE; i++) {
+        accumulated += this->getIndividuals()[i].getFitness();
+    }
+    return accumulated;
+}
