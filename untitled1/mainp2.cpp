@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <sstream>
 #include "Individual.h"
 #include "Population.h"
 
@@ -8,7 +10,7 @@ using namespace std;
 
 static const double F = 0.5; //mutate factor
 static const double CR = 0.4; //Crossover factor
-static const int ITERATIONS = 10000;
+static const int ITERATIONS = 0000;
 static const bool BEST_LESS = 1; // 1 if aims for less fitness else 0.
 
 //TODO no crear seeds en los inicios de funciones
@@ -346,11 +348,26 @@ Population mutate(Population current_population) {
 
 int main() {
 
+    vector<double> parameters;
+    fstream file;
+    string word, filename;
+    int number;
+
+    // filename of the file
+    filename = "example.txt";
+
+    // opening file
+    file.open(filename.c_str());
+
+    // extracting words from the file
+    while (file >> word) {
+        number = stoi(word);
+        parameters.insert(parameters.end(),number);
+        // displaying content
+        cout << number << endl;
+    }
+
     srand((unsigned) time(0));
-
-
-
-
 
 // 1. Inicializar population
 //Hacerlo varias veces

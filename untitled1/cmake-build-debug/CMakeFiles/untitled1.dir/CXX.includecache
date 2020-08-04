@@ -41,6 +41,10 @@ string
 -
 vector
 -
+fstream
+-
+sstream
+-
 Individual.h
 /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.h
 Population.h
