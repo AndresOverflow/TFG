@@ -5,13 +5,15 @@
 #include <sstream>
 #include "Individual.h"
 #include "Population.h"
+#include "FileReader.h"
 
 using namespace std;
 
 static const double F = 0.5; //mutate factor
 static const double CR = 0.4; //Crossover factor
-static const int ITERATIONS = 0000;
-static const bool BEST_LESS = 1; // 1 if aims for less fitness else 0.
+static const int ITERATIONS = 10000;
+
+
 
 //TODO no crear seeds en los inicios de funciones
 
@@ -348,25 +350,9 @@ Population mutate(Population current_population) {
 
 int main() {
 
-    vector<double> parameters;
-    fstream file;
-    string word, filename;
-    int number;
 
-    // filename of the file
-    filename = "example.txt";
-
-    // opening file
-    file.open(filename.c_str());
-
-    // extracting words from the file
-    while (file >> word) {
-        number = stoi(word);
-        parameters.insert(parameters.end(),number);
-        // displaying content
-        cout << number << endl;
-    }
-
+    Population population_to_fill = Population();
+    population_to_fill = FileReader::setPopulationIndividualsFromFile();
     srand((unsigned) time(0));
 
 // 1. Inicializar population
@@ -382,7 +368,7 @@ int main() {
     vector<Individual> current_population_vector, mutated_population_vector, offspring_vector;
     // Initialize the population
 
-
+/*
 
     vector<double> components_ind1 = {1.0, 20.0, 70.0, 3.0, 44.5, 6.9, 50.0, 10.0, 7.0, 100.0};
     vector<double> components_ind2 = {3.0, 2.2, 5.3, 1.0, 15.5, 70, 80, 20, 100, 50};
@@ -390,7 +376,10 @@ int main() {
     vector<double> components_ind4 = {1.0, 70.0, 75.0, 3.0, 44.5, 60.9, 50.0, 100.0, 7.0, 105.0};
     vector<double> components_ind5 = {1.0, 20.0, 70.0, 33.0, 45.5, 6.9, 50.0, 10.0, 7.0, 120.0};
 
+
     current_population.setIndividuals({Individual(components_ind1), Individual(components_ind2), Individual(components_ind3), Individual(components_ind4),Individual(components_ind5)});
+    */
+    current_population = FileReader::setPopulationIndividualsFromFile();
 
 
     cout << "1.INITIALIZE CURRENT POPULATION" << "\n";

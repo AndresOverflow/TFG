@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/FileReader.cpp">
+			<Option target="untitled1"/>
+		</Unit>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/FileReader.h">
+			<Option target="untitled1"/>
+		</Unit>
 		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.cpp">
 			<Option target="untitled1"/>
 		</Unit>

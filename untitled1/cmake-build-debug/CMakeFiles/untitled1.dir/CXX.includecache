@@ -6,6 +6,24 @@
 
 #IncludeRegexTransform: 
 
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/FileReader.h
+vector
+-
+string
+-
+cmath
+-
+stdlib.h
+-
+math.h
+-
+iostream
+-
+Population.h
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Population.h
+Individual.h
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.h
+
 /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.h
 vector
 -
@@ -49,4 +67,6 @@ Individual.h
 /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.h
 Population.h
 /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Population.h
+FileReader.h
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/FileReader.h
 
