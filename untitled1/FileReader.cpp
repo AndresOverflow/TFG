@@ -19,7 +19,7 @@ Population FileReader::setPopulationIndividualsFromFile() {
     dimension_number = to_string(Individual::DIMENSION);
     sufix = ".txt";
     vector<double> parameters;
-    int value;
+    double value;
 
 
     for (int i = 0; i < Population::POPULATION_SIZE; i++) {

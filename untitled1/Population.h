@@ -23,7 +23,7 @@ class Population {
 
 public:
 
-    static const int POPULATION_SIZE = 5;
+    static const int POPULATION_SIZE = 10;
 
     Population(void);
 

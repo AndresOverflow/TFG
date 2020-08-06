@@ -9,15 +9,10 @@
 
 using namespace std;
 
-static const double F = 0.5; //mutate factor
-static const double CR = 0.4; //Crossover factor
-static const int ITERATIONS = 10000;
+static const double F = 1.7; //mutate factor
+static const double CR = 0.15; //Crossover factor
+static const int ITERATIONS = 100000;
 
-
-
-//TODO no crear seeds en los inicios de funciones
-
-//TODO posible problema con que todos los elementos son iguales
 
 
 
@@ -55,10 +50,9 @@ Population crossover(Population current_population, Population mutated_populatio
     vector<Individual> mutated_population_vector = mutated_population.getIndividuals();
     vector<Individual> offspring_vector = offspring.getIndividuals();
 
-
     float random_value;
-    int j_random, value;
-
+    int j_random;
+    double value;
 
     //por cada individuo de la poblacion
     for (int individual_i = 0; individual_i < Population::POPULATION_SIZE; individual_i++) {
@@ -106,7 +100,7 @@ vector<Individual> DE_rand_1(vector<Individual> current_population_vector) {
 
     int N_X_r1, N_X_r2, N_X_r3, CN_X_r1, CN_X_r2, CN_X_r3;
 
-    int value;
+    double value;
 
     //Por cada individuo de la población
     //escogemos 3 elementos aleatoriamente de la poblacion
@@ -297,9 +291,10 @@ vector<Individual> DE_currentToBest_1(vector<Individual> current_population_vect
         mutated_vector.insert(mutated_vector.begin(),Individual());
     }
 
-    int N_X_r1, N_X_r2, CN_X_r1, CN_X_r2, CN_X_i, CN_X_best;
+    int N_X_r1, N_X_r2, CN_X_r1;
+    double CN_X_r2, CN_X_i, CN_X_best;
 
-    int value;
+    double value;
 
     //Por cada individuo de la población
     //escogemos 3 elementos aleatoriamente de la poblacion
@@ -353,7 +348,7 @@ int main() {
 
     Population population_to_fill = Population();
     population_to_fill = FileReader::setPopulationIndividualsFromFile();
-    srand((unsigned) time(0));
+//    srand((unsigned) time(0));
 
 // 1. Inicializar population
 //Hacerlo varias veces
@@ -368,17 +363,6 @@ int main() {
     vector<Individual> current_population_vector, mutated_population_vector, offspring_vector;
     // Initialize the population
 
-/*
-
-    vector<double> components_ind1 = {1.0, 20.0, 70.0, 3.0, 44.5, 6.9, 50.0, 10.0, 7.0, 100.0};
-    vector<double> components_ind2 = {3.0, 2.2, 5.3, 1.0, 15.5, 70, 80, 20, 100, 50};
-    vector<double> components_ind3 = {1.0, 60.0, 20.0, 3.0, 80.5, 6.9, 50.0, 10.0, 7.0, 101.0};
-    vector<double> components_ind4 = {1.0, 70.0, 75.0, 3.0, 44.5, 60.9, 50.0, 100.0, 7.0, 105.0};
-    vector<double> components_ind5 = {1.0, 20.0, 70.0, 33.0, 45.5, 6.9, 50.0, 10.0, 7.0, 120.0};
-
-
-    current_population.setIndividuals({Individual(components_ind1), Individual(components_ind2), Individual(components_ind3), Individual(components_ind4),Individual(components_ind5)});
-    */
     current_population = FileReader::setPopulationIndividualsFromFile();
 
 
@@ -426,6 +410,42 @@ int main() {
         //cout << "\n " << "BEST INDIVIDUAL" << current_population.bestIndividual().toString() << "\n";
         cout << " \n iteration " << iterations << "    " << current_population.calculateMeanFitnessPopulation() <<  "\n";
     }
+    cout << "\n2.MUTATE THE POPULATION " << "\n";
+    mutated_population = mutate(current_population);
+    cout << "MUTATED POPULATION" << "\n";
+
+    // Calculate fitness
+
+    mutated_population.recalculateFitness();
+    cout << mutated_population.calculateMeanFitnessPopulation();
+
+    //mutated_population.toString();
+
+
+    cout << "\n 3.DO CROSSOVER" << "\n";
+    offspring = crossover(current_population, mutated_population);
+    cout << "CROSSOVER POPULATION" << "\n";
+    //Calculate fitness
+
+
+    //offspring.toString();
+    offspring.recalculateFitness();
+    cout << offspring.calculateMeanFitnessPopulation();
+
+
+    cout << "\n 4.DO SELECTION" << "\n";
+
+
+    current_population = selection(current_population, offspring);
+    cout << " \n AFTER SELECTION \n";
+    //current_population.toString();
+    difference_mean_improvement -= current_population.calculateMeanFitnessPopulation();
+
+    cout << current_population.calculateMeanFitnessPopulation();
+
+    //cout << "\n " << "BEST INDIVIDUAL" << current_population.bestIndividual().toString() << "\n";
+    cout << " \n iteration + +1" << "    " << current_population.calculateMeanFitnessPopulation() <<  "\n";
+
 
     cout << "\n" << "end of the program \n";
     return 0;

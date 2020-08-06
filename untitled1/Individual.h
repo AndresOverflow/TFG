@@ -38,7 +38,6 @@ public:
     double calculate_fitness();
     bool betterFitnessThan(Individual compare_to_individual);
 
-    static bool soemthing();
 
 
 private:
