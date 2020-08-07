@@ -11,7 +11,7 @@ using namespace std;
 
 static const double F = 1.7; //mutate factor
 static const double CR = 0.15; //Crossover factor
-static const int ITERATIONS = 100000;
+static const int ITERATIONS = 1000;
 
 
 
@@ -98,7 +98,8 @@ vector<Individual> DE_rand_1(vector<Individual> current_population_vector) {
         mutated_vector.insert(mutated_vector.begin(),Individual());
     }
 
-    int N_X_r1, N_X_r2, N_X_r3, CN_X_r1, CN_X_r2, CN_X_r3;
+    int N_X_r1, N_X_r2, N_X_r3;
+    double CN_X_r1, CN_X_r2, CN_X_r3;
 
     double value;
 
@@ -132,9 +133,10 @@ vector<Individual> DE_rand_2(vector<Individual> current_population_vector) {
         mutated_vector.insert(mutated_vector.begin(),Individual());
     }
 
-    int N_X_r1, N_X_r2, N_X_r3, N_X_r4, N_X_r5, CN_X_r1, CN_X_r2, CN_X_r3, CN_X_r4, CN_X_r5;
+    int N_X_r1, N_X_r2, N_X_r3, N_X_r4, N_X_r5;
+    double CN_X_r1, CN_X_r2, CN_X_r3, CN_X_r4, CN_X_r5;
 
-    int value;
+    double value;
 
     //Por cada individuo de la población
     //escogemos 3 elementos aleatoriamente de la poblacion
@@ -173,9 +175,10 @@ vector<Individual> DE_best_1(vector<Individual> current_population_vector) {
         mutated_vector.insert(mutated_vector.begin(),Individual());
     }
 
-    int N_X_r1, N_X_r2, CN_X_r1, CN_X_r2, CN_X_best;
+    int N_X_r1, N_X_r2;
+    double CN_X_r1, CN_X_r2, CN_X_best;
 
-    int value;
+    double value;
 
     //Por cada individuo de la población
     //escogemos 3 elementos aleatoriamente de la poblacion
@@ -210,9 +213,10 @@ vector<Individual> DE_best_2(vector<Individual> current_population_vector) {
         mutated_vector.insert(mutated_vector.begin(),Individual());
     }
 
-    int N_X_r1, N_X_r2, N_X_r3, N_X_r4, CN_X_r1, CN_X_r2, CN_X_r3, CN_X_r4, CN_X_best;
+    int N_X_r1, N_X_r2, N_X_r3, N_X_r4;
+    double CN_X_r1, CN_X_r2, CN_X_r3, CN_X_r4, CN_X_best;
 
-    int value;
+    double value;
 
     //Por cada individuo de la población
     //escogemos 3 elementos aleatoriamente de la poblacion
@@ -248,9 +252,10 @@ vector<Individual> DE_currentToRandom_1(vector<Individual> current_population_ve
         mutated_vector.insert(mutated_vector.begin(),Individual());
     }
 
-    int N_X_r1, N_X_r2, N_X_r3, CN_X_r1, CN_X_r2, CN_X_r3, CN_X_i;
+    int N_X_r1, N_X_r2, N_X_r3;
+    double CN_X_r1, CN_X_r2, CN_X_r3, CN_X_i;
 
-    int value;
+    double value;
 
     //Por cada individuo de la población
     //escogemos 3 elementos aleatoriamente de la poblacion
@@ -291,8 +296,8 @@ vector<Individual> DE_currentToBest_1(vector<Individual> current_population_vect
         mutated_vector.insert(mutated_vector.begin(),Individual());
     }
 
-    int N_X_r1, N_X_r2, CN_X_r1;
-    double CN_X_r2, CN_X_i, CN_X_best;
+    int N_X_r1, N_X_r2;
+    double CN_X_r1, CN_X_r2, CN_X_i, CN_X_best;
 
     double value;
 
@@ -334,12 +339,11 @@ Population mutate(Population current_population) {
         offspring_vector.insert(offspring_vector.end(), Individual());
     }
 
-    offspring_vector = DE_currentToBest_1(current_population_vector);
+    offspring_vector = DE_currentToRandom_1(current_population_vector);
 
     offspring.setIndividuals(offspring_vector);
     offspring.recalculateFitness();
     return offspring;
-    cout << "\n mutate \n";
 }
 
 
