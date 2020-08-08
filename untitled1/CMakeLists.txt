@@ -3,4 +3,4 @@ project(untitled1)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(untitled1 mainp2.cpp Population.cpp Population.h Individual.cpp Individual.h FileReader.h FileReader.cpp)
+add_executable(untitled1 mainp2.cpp Population.cpp Population.h Individual.cpp Individual.h FileReader.h FileReader.cpp MutationProbabilityTable.cpp MutationProbabilityTable.h)
