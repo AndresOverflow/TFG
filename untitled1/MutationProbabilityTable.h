@@ -12,13 +12,17 @@
 #include <math.h>
 #include <iostream>
 #include <altivec.h>
+#include "TripletPST.h"
 
 using namespace std;
 
 class MutationProbabilityTable {
 
 
+
+
 public:
+    static const int MUTATION_STRATEGIES = 5;
     MutationProbabilityTable();
     void updateTable();
     vector<vector<double>> getTableOfProbabilities();
@@ -35,7 +39,7 @@ private:
     int number_of_groups = 0;
     int number_of_elements_per_group = 0;
 
-    vector<vector<double>> table_of_probabilities;
+    vector<vector<TripletPST>> table_of_probabilities;
 
 
 };

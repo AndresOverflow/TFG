@@ -8,8 +8,8 @@ MutationProbabilityTable::MutationProbabilityTable() {
 
 }
 
-int MutationProbabilityTable::updateTable() {
-    return 0;
+void MutationProbabilityTable::updateTable() {
+    cout << "updateTable"
 }
 
 int MutationProbabilityTable::getNumberOfGroups() {

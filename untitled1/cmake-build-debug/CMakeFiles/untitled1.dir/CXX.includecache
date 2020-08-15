@@ -38,6 +38,26 @@ math.h
 iostream
 -
 
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/MutationProbabilityTable.cpp
+MutationProbabilityTable.h
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/MutationProbabilityTable.h
+
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/MutationProbabilityTable.h
+vector
+-
+string
+-
+cmath
+-
+stdlib.h
+-
+math.h
+-
+iostream
+-
+altivec.h
+-
+
 /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Population.h
 vector
 -
@@ -52,7 +72,7 @@ math.h
 Individual.h
 /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.h
 
-/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/mainp2.cpp
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/main.cpp
 iostream
 -
 string

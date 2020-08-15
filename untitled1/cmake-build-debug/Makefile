@@ -231,32 +231,59 @@ Population.cpp.s:
 	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/Population.cpp.s
 .PHONY : Population.cpp.s
 
-mainp2.o: mainp2.cpp.o
+TripletPST.o: TripletPST.cpp.o
 
-.PHONY : mainp2.o
+.PHONY : TripletPST.o
 
 # target to build an object file
-mainp2.cpp.o:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/mainp2.cpp.o
-.PHONY : mainp2.cpp.o
+TripletPST.cpp.o:
+	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/TripletPST.cpp.o
+.PHONY : TripletPST.cpp.o
 
-mainp2.i: mainp2.cpp.i
+TripletPST.i: TripletPST.cpp.i
 
-.PHONY : mainp2.i
+.PHONY : TripletPST.i
 
 # target to preprocess a source file
-mainp2.cpp.i:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/mainp2.cpp.i
-.PHONY : mainp2.cpp.i
+TripletPST.cpp.i:
+	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/TripletPST.cpp.i
+.PHONY : TripletPST.cpp.i
 
-mainp2.s: mainp2.cpp.s
+TripletPST.s: TripletPST.cpp.s
 
-.PHONY : mainp2.s
+.PHONY : TripletPST.s
 
 # target to generate assembly for a file
-mainp2.cpp.s:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/mainp2.cpp.s
-.PHONY : mainp2.cpp.s
+TripletPST.cpp.s:
+	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/TripletPST.cpp.s
+.PHONY : TripletPST.cpp.s
+
+main.o: main.cpp.o
+
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -279,9 +306,12 @@ help:
 	@echo "... Population.o"
 	@echo "... Population.i"
 	@echo "... Population.s"
-	@echo "... mainp2.o"
-	@echo "... mainp2.i"
-	@echo "... mainp2.s"
+	@echo "... TripletPST.o"
+	@echo "... TripletPST.i"
+	@echo "... TripletPST.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 

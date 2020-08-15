@@ -3,7 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/untitled1.dir/Individual.cpp.o"
   "CMakeFiles/untitled1.dir/MutationProbabilityTable.cpp.o"
   "CMakeFiles/untitled1.dir/Population.cpp.o"
-  "CMakeFiles/untitled1.dir/mainp2.cpp.o"
+  "CMakeFiles/untitled1.dir/TripletPST.cpp.o"
+  "CMakeFiles/untitled1.dir/main.cpp.o"
   "untitled1"
   "untitled1.pdb"
 )
