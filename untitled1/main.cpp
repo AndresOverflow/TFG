@@ -13,7 +13,7 @@ static const double F = 1.7; //mutate factor
 static const double CR = 0.15; //Crossover factor
 static const int ITERATIONS = 1000;
 
-
+//TODO: Question, mutation table with probabilities that sum more that 1?
 
 
 
@@ -346,8 +346,44 @@ Population mutate(Population current_population) {
     return offspring;
 }
 
+int roulette (vector<double> probabilities) {
+//Create a reandom and loop over the array of probabilities until findin the corrent number
+
+    float random_value;
+    float accumulated_probability;
+    int mutation_strategy;
+
+
+    random_value = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+    random_value = 0.9;
+    accumulated_probability = 0;
+    mutation_strategy = probabilities[0];
+
+    while (random_value > accumulated_probability or mutation_strategy > probabilities.size()){
+        accumulated_probability = accumulated_probability + probabilities[mutation_strategy];
+        mutation_strategy += 1;
+    }
+
+    return mutation_strategy -1;
+}
 
 int main() {
+
+
+    int group_size = 5;
+
+    Population population_to_fill = Population();
+    population_to_fill = FileReader::setPopulationIndividualsFromFile();
+
+
+
+
+
+    return 0;
+}
+
+
+int main2() {
 
 
     Population population_to_fill = Population();

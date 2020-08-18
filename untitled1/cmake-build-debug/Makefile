@@ -177,33 +177,6 @@ Individual.cpp.s:
 	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/Individual.cpp.s
 .PHONY : Individual.cpp.s
 
-MutationProbabilityTable.o: MutationProbabilityTable.cpp.o
-
-.PHONY : MutationProbabilityTable.o
-
-# target to build an object file
-MutationProbabilityTable.cpp.o:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/MutationProbabilityTable.cpp.o
-.PHONY : MutationProbabilityTable.cpp.o
-
-MutationProbabilityTable.i: MutationProbabilityTable.cpp.i
-
-.PHONY : MutationProbabilityTable.i
-
-# target to preprocess a source file
-MutationProbabilityTable.cpp.i:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/MutationProbabilityTable.cpp.i
-.PHONY : MutationProbabilityTable.cpp.i
-
-MutationProbabilityTable.s: MutationProbabilityTable.cpp.s
-
-.PHONY : MutationProbabilityTable.s
-
-# target to generate assembly for a file
-MutationProbabilityTable.cpp.s:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/MutationProbabilityTable.cpp.s
-.PHONY : MutationProbabilityTable.cpp.s
-
 Population.o: Population.cpp.o
 
 .PHONY : Population.o
@@ -230,33 +203,6 @@ Population.s: Population.cpp.s
 Population.cpp.s:
 	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/Population.cpp.s
 .PHONY : Population.cpp.s
-
-TripletPST.o: TripletPST.cpp.o
-
-.PHONY : TripletPST.o
-
-# target to build an object file
-TripletPST.cpp.o:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/TripletPST.cpp.o
-.PHONY : TripletPST.cpp.o
-
-TripletPST.i: TripletPST.cpp.i
-
-.PHONY : TripletPST.i
-
-# target to preprocess a source file
-TripletPST.cpp.i:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/TripletPST.cpp.i
-.PHONY : TripletPST.cpp.i
-
-TripletPST.s: TripletPST.cpp.s
-
-.PHONY : TripletPST.s
-
-# target to generate assembly for a file
-TripletPST.cpp.s:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/TripletPST.cpp.s
-.PHONY : TripletPST.cpp.s
 
 main.o: main.cpp.o
 
@@ -300,15 +246,9 @@ help:
 	@echo "... Individual.o"
 	@echo "... Individual.i"
 	@echo "... Individual.s"
-	@echo "... MutationProbabilityTable.o"
-	@echo "... MutationProbabilityTable.i"
-	@echo "... MutationProbabilityTable.s"
 	@echo "... Population.o"
 	@echo "... Population.i"
 	@echo "... Population.s"
-	@echo "... TripletPST.o"
-	@echo "... TripletPST.i"
-	@echo "... TripletPST.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
