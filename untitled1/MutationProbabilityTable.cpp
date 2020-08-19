@@ -7,7 +7,7 @@
 MutationProbabilityTable::MutationProbabilityTable(int group_size, double evaporation) {
     for(int group = 0; group < this->table_of_triplets.size(); group++){
         for(int mutation_strategy = 0; mutation_strategy < this->table_of_triplets[mutation_strategy].size(); mutation_strategy++){
-            table_of_triplets[group][mutation_strategy] = TripletPST();
+            table_of_triplets[group][mutation_strategy] = TripletPST(MUTATION_STRATEGIES);
         }
     }
     number_of_mutation_strategies = MUTATION_STRATEGIES;

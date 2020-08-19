@@ -20,7 +20,7 @@ class TripletPST {
 
 public:
 
-    TripletPST(void);
+    TripletPST(int mutation_strategies);
 
     double getProbability(void);
     void setProbability(double probability);
@@ -30,6 +30,7 @@ public:
     void setSuccess(int success);
 
 private:
+
 
     double probability;
     int tries;

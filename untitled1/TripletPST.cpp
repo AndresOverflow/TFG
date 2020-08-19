@@ -6,8 +6,8 @@
 
 
 //constructor
-TripletPST::TripletPST(void) {
-    this->probability = 1/ MutationProbabilityTable::MUTATION_STRATEGIES;
+TripletPST::TripletPST(int mutation_strategies) {
+    this->probability = 1/ mutation_strategies;
     this->tries = 0;
     this->success = 0;
 
