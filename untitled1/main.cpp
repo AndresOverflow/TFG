@@ -6,12 +6,16 @@
 #include "Individual.h"
 #include "Population.h"
 #include "FileReader.h"
-
+#include "MutationProbabilityTable.h"
 using namespace std;
 
 static const double F = 1.7; //mutate factor
 static const double CR = 0.15; //Crossover factor
 static const int ITERATIONS = 1000;
+static const int GROUP_SIZE = 5;
+static const double EVAPORATION_RATE = 0.5;
+static const int LP_RAM = 100;
+
 
 //TODO: Question, mutation table with probabilities that sum more that 1?
 
@@ -355,7 +359,6 @@ int roulette (vector<double> probabilities) {
 
 
     random_value = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-    random_value = 0.9;
     accumulated_probability = 0;
     mutation_strategy = probabilities[0];
 
@@ -369,11 +372,32 @@ int roulette (vector<double> probabilities) {
 
 int main() {
 
+    //inicializar población
+
+    Population current_population, mutated_population, offspring = Population();
+    vector<Individual> current_population_vector, mutated_population_vector, offspring_vector;
+    current_population = FileReader::setPopulationIndividualsFromFile();
+
+    //inicializar parametros
+    vector<int> mutation_strategy_to_use(Population::POPULATION_SIZE, -1);
 
     int group_size = 5;
 
-    Population population_to_fill = Population();
-    population_to_fill = FileReader::setPopulationIndividualsFromFile();
+    // Crear la tabla de mutacion
+    MutationProbabilityTable mutation_probability_table = MutationProbabilityTable(GROUP_SIZE, EVAPORATION_RATE);
+
+    //while iterations to be done
+
+    // seleccion de una mutation strategy para cada individuo
+    //mutation
+    // selection
+    //update success and tries
+    //if the learning period is finished
+        //update probabilities
+
+
+
+
 
 
 
@@ -386,9 +410,6 @@ int main() {
 int main2() {
 
 
-    Population population_to_fill = Population();
-    population_to_fill = FileReader::setPopulationIndividualsFromFile();
-//    srand((unsigned) time(0));
 
 // 1. Inicializar population
 //Hacerlo varias veces

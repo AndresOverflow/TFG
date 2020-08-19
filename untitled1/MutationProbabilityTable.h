@@ -12,6 +12,7 @@
 #include <math.h>
 #include <iostream>
 #include "TripletPST.h"
+#include "Population.h"
 
 using namespace std;
 
@@ -24,19 +25,23 @@ public:
     static const int MUTATION_STRATEGIES = 5;
 
 
-    MutationProbabilityTable();
-    void updateTable();
+
+    MutationProbabilityTable(int group_size, double evaporation);
+    void updateTable(void);
     vector<vector<TripletPST>> getTableOfProbabilities();
-    int getNumberOfGroups();
+    int getNumberOfGroups(void);
     void setNumberOfGroups(int number_of_groups);
     int getNumberOfElementsPerGroup();
     void setNumberOfElementsPerGroup(int number_of_elements_per_group);
-    double getProbability(int group, int element);
+    double getProbability(int group, int mutation_str);
+    void addTries(int group, int mutation_str, int tries_to_add);
+    void addSuccess(int group, int mutation_str, int success_to_add);
 
 
 
 
 private:
+    double evaporation_rate = 0;
     int number_of_mutation_strategies = 0;
     int number_of_groups = 0;
 
