@@ -19,9 +19,6 @@ CMakeFiles/untitled1.dir/Population.cpp.o: ../Individual.h
 CMakeFiles/untitled1.dir/Population.cpp.o: ../Population.cpp
 CMakeFiles/untitled1.dir/Population.cpp.o: ../Population.h
 
-CMakeFiles/untitled1.dir/TripletPST.cpp.o: ../Individual.h
-CMakeFiles/untitled1.dir/TripletPST.cpp.o: ../MutationProbabilityTable.h
-CMakeFiles/untitled1.dir/TripletPST.cpp.o: ../Population.h
 CMakeFiles/untitled1.dir/TripletPST.cpp.o: ../TripletPST.cpp
 CMakeFiles/untitled1.dir/TripletPST.cpp.o: ../TripletPST.h
 

@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <iostream>
-#include "MutationProbabilityTable.h"
+
 
 
 using namespace std;
@@ -34,7 +34,6 @@ private:
     double probability;
     int tries;
     int success;
-
 };
 
 

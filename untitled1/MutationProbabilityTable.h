@@ -5,13 +5,15 @@
 #ifndef UNTITLED1_MUTATIONPROBABILITYTABLE_H
 #define UNTITLED1_MUTATIONPROBABILITYTABLE_H
 
+#include "TripletPST.h"
 #include <vector>
 #include <string>
 #include <cmath>
 #include <stdlib.h>
 #include <math.h>
 #include <iostream>
-#include "TripletPST.h"
+
+
 #include "Population.h"
 
 using namespace std;
@@ -28,7 +30,7 @@ public:
 
     MutationProbabilityTable(int group_size, double evaporation);
     void updateTable(void);
-    vector<vector<TripletPST>> getTableOfProbabilities();
+    //vector<vector<TripletPST>> getTableOfProbabilities(void);
     int getNumberOfGroups(void);
     void setNumberOfGroups(int number_of_groups);
     int getNumberOfElementsPerGroup();
@@ -40,12 +42,17 @@ public:
 
 
 
+
 private:
     double evaporation_rate = 0;
     int number_of_mutation_strategies = 0;
-    int number_of_groups = 0;
+    int number_of_groups;
 
-    vector<vector<TripletPST>> table_of_probabilities;
+   vector<vector<TripletPST>> table_of_triplets;
+
+
+
+
 
 
 };

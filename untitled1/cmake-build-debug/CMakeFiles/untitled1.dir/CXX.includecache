@@ -25,6 +25,8 @@ MutationProbabilityTable.h
 /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/MutationProbabilityTable.h
 
 /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/MutationProbabilityTable.h
+TripletPST.h
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/TripletPST.h
 vector
 -
 string
@@ -37,8 +39,6 @@ math.h
 -
 iostream
 -
-TripletPST.h
-/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/TripletPST.h
 Population.h
 /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Population.h
 
@@ -56,10 +56,6 @@ math.h
 Individual.h
 /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.h
 
-/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/TripletPST.cpp
-TripletPST.h
-/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/TripletPST.h
-
 /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/TripletPST.h
 vector
 -
@@ -73,6 +69,4 @@ math.h
 -
 iostream
 -
-MutationProbabilityTable.h
-/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/MutationProbabilityTable.h
 

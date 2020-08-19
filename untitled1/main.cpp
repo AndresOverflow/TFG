@@ -386,6 +386,9 @@ int main() {
     // Crear la tabla de mutacion
     MutationProbabilityTable mutation_probability_table = MutationProbabilityTable(GROUP_SIZE, EVAPORATION_RATE);
 
+    vector<vector<TripletPST>> table;
+
+
     //while iterations to be done
 
     // seleccion de una mutation strategy para cada individuo
