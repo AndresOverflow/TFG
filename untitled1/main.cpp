@@ -11,7 +11,7 @@ using namespace std;
 
 static const double F = 1.7; //mutate factor
 static const double CR = 0.15; //Crossover factor
-static const int ITERATIONS = 1000;
+static const int ITERATIONS = 100;
 static const int GROUP_SIZE = 5;
 static const double EVAPORATION_RATE = 0.5;
 static const int LP_RAM = 100;
@@ -333,6 +333,47 @@ vector<Individual> DE_currentToBest_1(vector<Individual> current_population_vect
     return mutated_vector;
 }
 
+Individual DE_currentToRandom_1_ind(vector<Individual> current_population_vector, int ind) {
+    vector<Individual> mutated_vector;
+    for (int i = 0; i < Population::POPULATION_SIZE; i++) {
+        mutated_vector.insert(mutated_vector.begin(),Individual());
+    }
+    Individual ind_to_return = Individual();
+
+    int N_X_r1, N_X_r2, N_X_r3;
+    double CN_X_r1, CN_X_r2, CN_X_r3, CN_X_i;
+
+    double value;
+
+    //Por cada individuo de la población
+    //escogemos 3 elementos aleatoriamente de la poblacion
+    N_X_r1 = (rand() % Population::POPULATION_SIZE);
+    N_X_r2 = (rand() % Population::POPULATION_SIZE);
+    N_X_r3 = (rand() % Population::POPULATION_SIZE);
+
+
+
+    //Por cada componente del individio
+    for (int component_i = 0; component_i < Individual::DIMENSION; component_i++) {
+
+        CN_X_i = current_population_vector[ind].getComponents()[component_i];
+
+        CN_X_r1 = current_population_vector[N_X_r1].getComponents()[component_i];
+        CN_X_r2 = current_population_vector[N_X_r2].getComponents()[component_i];
+        CN_X_r3 = current_population_vector[N_X_r3].getComponents()[component_i];
+
+
+
+        value = CN_X_i+ F * (CN_X_r1 - CN_X_i + CN_X_r2 - CN_X_r3);
+
+        ind_to_return.setComponent(component_i, value);
+    }
+
+    return ind_to_return;
+}
+
+
+
 
 Population mutate(Population current_population) {
 
@@ -358,7 +399,9 @@ Population mutate_RAM(Population current_population, vector<int> mutation_vector
         offspring_vector.insert(offspring_vector.end(), Individual());
     }
 
-    offspring_vector = DE_currentToRandom_1(current_population_vector);
+    for (int ind = 0; ind < Population::POPULATION_SIZE; ind++) {
+        offspring_vector[ind] = DE_currentToRandom_1_ind(current_population_vector, ind);
+    }
 
     offspring.setIndividuals(offspring_vector);
     offspring.recalculateFitness();
@@ -393,7 +436,7 @@ vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability
     vector<int> mutation_to_use_vector (Population::POPULATION_SIZE, -1);
     int group = -1;
     vector<double> probability_of_the_group (mutation_probability_table.getNumberOfGroups(), 0);
-    double max_prob_of_the_group = 0;
+    double max_prob_of_the_group;
 
     //for each individual
 
@@ -415,7 +458,7 @@ vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability
 
 
 
-int main() {
+int main2() {
 
     //inicializar población
 
@@ -431,6 +474,40 @@ int main() {
     MutationProbabilityTable mutation_probability_table = MutationProbabilityTable(GROUP_SIZE, EVAPORATION_RATE);
     for (int iterations = 0; iterations < ITERATIONS; iterations++) {
         mutation_strategy_to_use = selectMutationStrategy(mutation_probability_table);
+        cout << "\n2.MUTATE THE POPULATION " << "\n";
+        mutated_population = mutate_RAM(current_population, mutation_strategy_to_use);
+        cout << "MUTATED POPULATION" << "\n";
+        // Calculate fitness
+
+        mutated_population.recalculateFitness();
+        cout << mutated_population.calculateMeanFitnessPopulation();
+
+        //mutated_population.toString();
+
+
+        cout << "\n 3.DO CROSSOVER" << "\n";
+        offspring = crossover(current_population, mutated_population);
+        cout << "CROSSOVER POPULATION" << "\n";
+        //Calculate fitness
+
+        //offspring.toString();
+        offspring.recalculateFitness();
+        cout << offspring.calculateMeanFitnessPopulation();
+
+        cout << "\n Store Tries and Success" << "\n";
+
+
+        cout << "\n 4.DO SELECTION" << "\n";
+
+
+        current_population = selection(current_population, offspring);
+        cout << " \n AFTER SELECTION \n";
+        //current_population.toString();
+
+        cout << current_population.calculateMeanFitnessPopulation();
+
+        //cout << "\n " << "BEST INDIVIDUAL" << current_population.bestIndividual().toString() << "\n";
+        cout << " \n iteration " << iterations << "    " << current_population.calculateMeanFitnessPopulation() <<  "\n";
     }
 
 
@@ -458,7 +535,7 @@ int main() {
 }
 
 
-int main2() {
+int main() {
 
 
 
