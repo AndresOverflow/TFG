@@ -7,7 +7,7 @@
 MutationProbabilityTable::MutationProbabilityTable(int group_size, double evaporation) {
     // primero inicializar el vector con inserts
 
-    std::vector<std::vector<TripletPST>> fog(10, std::vector<TripletPST>(10, TripletPST(MUTATION_STRATEGIES)));
+    std::vector<std::vector<TripletPST>> fog(group_size, std::vector<TripletPST>(MUTATION_STRATEGIES, TripletPST(MUTATION_STRATEGIES)));
     table_of_triplets.assign(fog.begin(),fog.end());
 
     this->number_of_mutation_strategies = MUTATION_STRATEGIES;
@@ -21,10 +21,10 @@ void MutationProbabilityTable::updateTable() {
     double probability_to_set_first;
     double probability_to_set_second;
     double probability_to_set;
-    for(int group = 0; group<this->table_of_triplets.size(); group++) {
-        for (int mutation_strategy = 0; mutation_strategy < this->table_of_triplets[mutation_strategy].size(); mutation_strategy++) {
+    for(int group = 0; group < number_of_groups; group++) {
+        for (int mutation_strategy = 0; mutation_strategy < this->number_of_mutation_strategies; mutation_strategy++) {
             probability_to_set_first = (1 - evaporation_rate) * table_of_triplets[group][mutation_strategy].getProbability();
-            probability_to_set_second = evaporation_rate * (table_of_triplets[group][mutation_strategy].getSuccess()/table_of_triplets[group][mutation_strategy].getTries());
+            probability_to_set_second = evaporation_rate * ((double)table_of_triplets[group][mutation_strategy].getSuccess()/(double)table_of_triplets[group][mutation_strategy].getTries());
             probability_to_set = probability_to_set_first + probability_to_set_second;
             table_of_triplets[group][mutation_strategy].setProbability(probability_to_set);
         }

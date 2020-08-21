@@ -11,13 +11,16 @@ using namespace std;
 
 static const double F = 1.7; //mutate factor
 static const double CR = 0.15; //Crossover factor
-static const int ITERATIONS = 100;
+static const int ITERATIONS = 10000;
 static const int GROUP_SIZE = 5;
-static const double EVAPORATION_RATE = 0.5;
-static const int LP_RAM = 100;
+static const double EVAPORATION_RATE = 0.2;
+static const int LP_RAM = 50;
+
+typedef Individual (*MutationFunctions) (vector<Individual> current_population, int ind);
 
 
 //TODO: Question, mutation table with probabilities that sum more that 1?
+//TODO: Question, cuantas fitness operations? porque para hacer la mutacion también los calculo
 
 
 
@@ -395,12 +398,21 @@ Population mutate_RAM(Population current_population, vector<int> mutation_vector
     Population offspring = Population();
     vector<Individual> current_population_vector = current_population.getIndividuals();
     vector<Individual> offspring_vector;
+
+    MutationFunctions mutation_functions_ram [] = {
+            DE_currentToRandom_1_ind,
+            DE_currentToRandom_1_ind,
+            DE_currentToRandom_1_ind,
+            DE_currentToRandom_1_ind,
+            DE_currentToRandom_1_ind
+    };
     for (int idx = 0; idx < Population::POPULATION_SIZE; idx++) {
         offspring_vector.insert(offspring_vector.end(), Individual());
     }
 
     for (int ind = 0; ind < Population::POPULATION_SIZE; ind++) {
-        offspring_vector[ind] = DE_currentToRandom_1_ind(current_population_vector, ind);
+        // SELECTION OF MUTATION DEPENDING ON THE NUMBER
+        offspring_vector[ind] = mutation_functions_ram[mutation_vector[ind]](current_population_vector, ind);
     }
 
     offspring.setIndividuals(offspring_vector);
@@ -456,9 +468,22 @@ vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability
 
 }
 
+void updateTriesAndSuccess(Population current_population, Population offspring, MutationProbabilityTable *mutation_probability_table, vector<int> mutation_strategy_to_use) {
+    int group;
+    for(int ind = 0; ind < Population::POPULATION_SIZE; ind++) {
+        group = ceil(ind / GROUP_SIZE);
+        mutation_probability_table->addTries(group, mutation_strategy_to_use[ind], 1);
+        if(offspring.getIndividual(ind).betterFitnessThan(current_population.getIndividual(ind))) {
+            mutation_probability_table->addSuccess(group, mutation_strategy_to_use[ind], 1);
+
+        }
+    }
+}
 
 
-int main2() {
+
+
+int main() {
 
     //inicializar población
 
@@ -472,7 +497,8 @@ int main2() {
 
     // Crear la tabla de mutacion
     MutationProbabilityTable mutation_probability_table = MutationProbabilityTable(GROUP_SIZE, EVAPORATION_RATE);
-    for (int iterations = 0; iterations < ITERATIONS; iterations++) {
+
+    for (int iterations = 1; iterations < ITERATIONS; iterations++) {
         mutation_strategy_to_use = selectMutationStrategy(mutation_probability_table);
         cout << "\n2.MUTATE THE POPULATION " << "\n";
         mutated_population = mutate_RAM(current_population, mutation_strategy_to_use);
@@ -497,7 +523,9 @@ int main2() {
         cout << "\n Store Tries and Success" << "\n";
 
 
+
         cout << "\n 4.DO SELECTION" << "\n";
+        updateTriesAndSuccess(current_population, offspring, &mutation_probability_table, mutation_strategy_to_use);
 
 
         current_population = selection(current_population, offspring);
@@ -508,6 +536,11 @@ int main2() {
 
         //cout << "\n " << "BEST INDIVIDUAL" << current_population.bestIndividual().toString() << "\n";
         cout << " \n iteration " << iterations << "    " << current_population.calculateMeanFitnessPopulation() <<  "\n";
+
+        // si es LP_RAM actualizamos
+        if ((iterations % LP_RAM) == 0) {
+            mutation_probability_table.updateTable();
+        }
     }
 
 
@@ -535,7 +568,7 @@ int main2() {
 }
 
 
-int main() {
+int main2() {
 
 
 
