@@ -38,6 +38,8 @@ public:
     double getProbability(int group, int mutation_str);
     void addTries(int group, int mutation_str, int tries_to_add);
     void addSuccess(int group, int mutation_str, int success_to_add);
+    vector<double> getProbabilityFromGroup(int group);
+    double getAccumulatedProbabilityFromGroup(int group);
 
 
 

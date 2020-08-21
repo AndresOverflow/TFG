@@ -350,15 +350,34 @@ Population mutate(Population current_population) {
     return offspring;
 }
 
-int roulette (vector<double> probabilities) {
+Population mutate_RAM(Population current_population, vector<int> mutation_vector) {
+    Population offspring = Population();
+    vector<Individual> current_population_vector = current_population.getIndividuals();
+    vector<Individual> offspring_vector;
+    for (int idx = 0; idx < Population::POPULATION_SIZE; idx++) {
+        offspring_vector.insert(offspring_vector.end(), Individual());
+    }
+
+    offspring_vector = DE_currentToRandom_1(current_population_vector);
+
+    offspring.setIndividuals(offspring_vector);
+    offspring.recalculateFitness();
+    return offspring;
+
+}
+
+int wheel_roulette (vector<double> probabilities, double max_prob_of_group) {
 //Create a reandom and loop over the array of probabilities until findin the corrent number
 
-    float random_value;
-    float accumulated_probability;
+    double random_value;
+    double accumulated_probability;
     int mutation_strategy;
 
 
-    random_value = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+
+    random_value = (double)rand() / RAND_MAX;
+    random_value = 0 + random_value * (max_prob_of_group - 0);
+
     accumulated_probability = 0;
     mutation_strategy = probabilities[0];
 
@@ -369,6 +388,32 @@ int roulette (vector<double> probabilities) {
 
     return mutation_strategy -1;
 }
+
+vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability_table) {
+    vector<int> mutation_to_use_vector (Population::POPULATION_SIZE, -1);
+    int group = -1;
+    vector<double> probability_of_the_group (mutation_probability_table.getNumberOfGroups(), 0);
+    double max_prob_of_the_group = 0;
+
+    //for each individual
+
+
+    for (int individual = 0; individual < mutation_to_use_vector.size(); individual++) {
+        // mirar a que grupo pertenece
+        // coger el vector de probabilidades del grupo
+
+        group = ceil(individual/GROUP_SIZE);
+        max_prob_of_the_group = mutation_probability_table.getAccumulatedProbabilityFromGroup(group);
+        probability_of_the_group = mutation_probability_table.getProbabilityFromGroup(group);
+        mutation_to_use_vector[individual] = wheel_roulette(probability_of_the_group,max_prob_of_the_group);
+
+
+    }
+    return mutation_to_use_vector;
+
+}
+
+
 
 int main() {
 
@@ -381,15 +426,18 @@ int main() {
     //inicializar parametros
     vector<int> mutation_strategy_to_use(Population::POPULATION_SIZE, -1);
 
-    int group_size = 5;
 
     // Crear la tabla de mutacion
     MutationProbabilityTable mutation_probability_table = MutationProbabilityTable(GROUP_SIZE, EVAPORATION_RATE);
+    for (int iterations = 0; iterations < ITERATIONS; iterations++) {
+        mutation_strategy_to_use = selectMutationStrategy(mutation_probability_table);
+    }
 
-    vector<vector<TripletPST>> table;
+
 
 
     //while iterations to be done
+
 
     // seleccion de una mutation strategy para cada individuo
     //mutation

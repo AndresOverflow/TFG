@@ -6,6 +6,24 @@
 
 #IncludeRegexTransform: 
 
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/FileReader.h
+vector
+-
+string
+-
+cmath
+-
+stdlib.h
+-
+math.h
+-
+iostream
+-
+Population.h
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Population.h
+Individual.h
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.h
+
 /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.h
 vector
 -
@@ -19,10 +37,6 @@ math.h
 -
 iostream
 -
-
-/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/MutationProbabilityTable.cpp
-MutationProbabilityTable.h
-/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/MutationProbabilityTable.h
 
 /Users/AndresOverflow/Documents/Universidad/TFG/untitled1/MutationProbabilityTable.h
 TripletPST.h
@@ -69,4 +83,24 @@ math.h
 -
 iostream
 -
+
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/main.cpp
+iostream
+-
+string
+-
+vector
+-
+fstream
+-
+sstream
+-
+Individual.h
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Individual.h
+Population.h
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/Population.h
+FileReader.h
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/FileReader.h
+MutationProbabilityTable.h
+/Users/AndresOverflow/Documents/Universidad/TFG/untitled1/MutationProbabilityTable.h
 

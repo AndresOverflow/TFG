@@ -7,7 +7,7 @@
 
 //constructor
 TripletPST::TripletPST(int mutation_strategies) {
-    this->probability = 1/ mutation_strategies;
+    this->probability = 1.0/ mutation_strategies;
     this->tries = 0;
     this->success = 0;
 
