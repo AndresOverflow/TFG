@@ -7,12 +7,14 @@
 MutationProbabilityTable::MutationProbabilityTable(int group_size, double evaporation) {
     // primero inicializar el vector con inserts
 
-    std::vector<std::vector<TripletPST>> fog(group_size, std::vector<TripletPST>(MUTATION_STRATEGIES, TripletPST(MUTATION_STRATEGIES)));
-    table_of_triplets.assign(fog.begin(),fog.end());
-
     this->number_of_mutation_strategies = MUTATION_STRATEGIES;
     this->number_of_groups = Population::POPULATION_SIZE/group_size;
     this->evaporation_rate = evaporation;
+
+    std::vector<std::vector<TripletPST>> fog(this->number_of_groups, std::vector<TripletPST>(MUTATION_STRATEGIES, TripletPST(MUTATION_STRATEGIES)));
+    table_of_triplets.assign(fog.begin(),fog.end());
+
+
 }
 
 //TODO finish function

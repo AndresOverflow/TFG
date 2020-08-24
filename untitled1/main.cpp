@@ -11,10 +11,10 @@ using namespace std;
 
 static const double F = 1.7; //mutate factor
 static const double CR = 0.15; //Crossover factor
-static const int ITERATIONS = 10000;
+static const int ITERATIONS = 1000;
 static const int GROUP_SIZE = 5;
 static const double EVAPORATION_RATE = 0.2;
-static const int LP_RAM = 50;
+static const int LP_RAM = 100;
 
 typedef Individual (*MutationFunctions) (vector<Individual> current_population, int ind);
 
@@ -335,6 +335,158 @@ vector<Individual> DE_currentToBest_1(vector<Individual> current_population_vect
 
     return mutated_vector;
 }
+Individual DE_rand_1_ind(vector<Individual> current_population_vector, int ind) {
+    vector<Individual> mutated_vector;
+    for (int i = 0; i < Population::POPULATION_SIZE; i++) {
+        mutated_vector.insert(mutated_vector.begin(),Individual());
+    }
+
+    Individual ind_to_return = Individual();
+
+    int N_X_r1, N_X_r2, N_X_r3;
+    double CN_X_r1, CN_X_r2, CN_X_r3;
+
+    double value;
+
+    //Por cada individuo de la población
+    //escogemos 3 elementos aleatoriamente de la poblacion
+    N_X_r1 = (rand() % Population::POPULATION_SIZE);
+    N_X_r2 = (rand() % Population::POPULATION_SIZE);
+    N_X_r3 = (rand() % Population::POPULATION_SIZE);
+
+    //Por cada componente del individio
+    for (int component_i = 0; component_i < Individual::DIMENSION; component_i++) {
+
+        CN_X_r1 = current_population_vector[N_X_r1].getComponents()[component_i];
+        CN_X_r2 = current_population_vector[N_X_r2].getComponents()[component_i];
+        CN_X_r3 = current_population_vector[N_X_r3].getComponents()[component_i];
+
+        value = CN_X_r1 + F * (CN_X_r2 - CN_X_r3);
+
+        ind_to_return.setComponent(component_i, value);
+    }
+
+    return ind_to_return;
+
+}
+
+Individual DE_rand_2_ind(vector<Individual> current_population_vector, int ind) {
+    vector<Individual> mutated_vector;
+    for (int i = 0; i < Population::POPULATION_SIZE; i++) {
+        mutated_vector.insert(mutated_vector.begin(),Individual());
+    }
+    Individual ind_to_return = Individual();
+
+    int N_X_r1, N_X_r2, N_X_r3, N_X_r4, N_X_r5;
+    double CN_X_r1, CN_X_r2, CN_X_r3, CN_X_r4, CN_X_r5;
+
+    double value;
+
+    //Por cada individuo de la población
+    //escogemos 3 elementos aleatoriamente de la poblacion
+    N_X_r1 = (rand() % Population::POPULATION_SIZE);
+    N_X_r2 = (rand() % Population::POPULATION_SIZE);
+    N_X_r3 = (rand() % Population::POPULATION_SIZE);
+    N_X_r4 = (rand() % Population::POPULATION_SIZE);
+    N_X_r5 = (rand() % Population::POPULATION_SIZE);
+
+    //Por cada componente del individio
+    for (int component_i = 0; component_i < Individual::DIMENSION; component_i++) {
+
+        CN_X_r1 = current_population_vector[N_X_r1].getComponents()[component_i];
+        CN_X_r2 = current_population_vector[N_X_r2].getComponents()[component_i];
+        CN_X_r3 = current_population_vector[N_X_r3].getComponents()[component_i];
+        CN_X_r4 = current_population_vector[N_X_r4].getComponents()[component_i];
+        CN_X_r5 = current_population_vector[N_X_r5].getComponents()[component_i];
+
+
+        value = CN_X_r1 + F * (CN_X_r2 - CN_X_r3 + CN_X_r4 - CN_X_r5);
+
+        ind_to_return.setComponent(component_i, value);
+    }
+
+    return ind_to_return;
+}
+
+Individual DE_best_1_ind(vector<Individual> current_population_vector, int ind) {
+    vector<Individual> mutated_vector;
+    Population current_population = Population();
+    current_population.setIndividuals(current_population_vector);
+    vector<double> best_individual_components = current_population.bestIndividual().getComponents();
+    for (int i = 0; i < Population::POPULATION_SIZE; i++) {
+        mutated_vector.insert(mutated_vector.begin(),Individual());
+    }
+
+    Individual ind_to_return = Individual();
+
+    int N_X_r1, N_X_r2;
+    double CN_X_r1, CN_X_r2, CN_X_best;
+
+    double value;
+
+//Por cada individuo de la población
+//escogemos 3 elementos aleatoriamente de la poblacion
+    N_X_r1 = (rand() % Population::POPULATION_SIZE);
+    N_X_r2 = (rand() % Population::POPULATION_SIZE);
+
+
+    //Por cada componente del individio
+    for (int component_i = 0; component_i < Individual::DIMENSION; component_i++) {
+
+        CN_X_r1 = current_population_vector[N_X_r1].getComponents()[component_i];
+        CN_X_r2 = current_population_vector[N_X_r2].getComponents()[component_i];
+        CN_X_best = best_individual_components[component_i];
+
+
+        value = CN_X_best + F * (CN_X_r1 - CN_X_r2);
+
+        ind_to_return.setComponent(component_i, value);
+    }
+
+    return ind_to_return;
+}
+
+Individual DE_best_2_ind(vector<Individual> current_population_vector, int ind) {
+    vector<Individual> mutated_vector;
+    Population current_population = Population();
+    current_population.setIndividuals(current_population_vector);
+    vector<double> best_individual_components = current_population.bestIndividual().getComponents();
+    for (int i = 0; i < Population::POPULATION_SIZE; i++) {
+        mutated_vector.insert(mutated_vector.begin(),Individual());
+    }
+
+    Individual ind_to_return = Individual();
+
+    int N_X_r1, N_X_r2, N_X_r3, N_X_r4;
+    double CN_X_r1, CN_X_r2, CN_X_r3, CN_X_r4, CN_X_best;
+
+    double value;
+
+//Por cada individuo de la población
+//escogemos 3 elementos aleatoriamente de la poblacion
+    N_X_r1 = (rand() % Population::POPULATION_SIZE);
+    N_X_r2 = (rand() % Population::POPULATION_SIZE);
+    N_X_r3 = (rand() % Population::POPULATION_SIZE);
+    N_X_r4 = (rand() % Population::POPULATION_SIZE);
+
+
+    //Por cada componente del individio
+    for (int component_i = 0; component_i < Individual::DIMENSION; component_i++) {
+
+        CN_X_r1 = current_population_vector[N_X_r1].getComponents()[component_i];
+        CN_X_r2 = current_population_vector[N_X_r2].getComponents()[component_i];
+        CN_X_r3 = current_population_vector[N_X_r3].getComponents()[component_i];
+        CN_X_r4 = current_population_vector[N_X_r4].getComponents()[component_i];
+        CN_X_best = best_individual_components[component_i];
+
+
+        value = CN_X_best + F * (CN_X_r1 - CN_X_r2 + CN_X_r3 - CN_X_r4);
+
+        ind_to_return.setComponent(component_i, value);
+    }
+
+    return ind_to_return;
+}
 
 Individual DE_currentToRandom_1_ind(vector<Individual> current_population_vector, int ind) {
     vector<Individual> mutated_vector;
@@ -400,11 +552,13 @@ Population mutate_RAM(Population current_population, vector<int> mutation_vector
     vector<Individual> offspring_vector;
 
     MutationFunctions mutation_functions_ram [] = {
-            DE_currentToRandom_1_ind,
-            DE_currentToRandom_1_ind,
-            DE_currentToRandom_1_ind,
-            DE_currentToRandom_1_ind,
+
+            DE_rand_1_ind,
+            DE_rand_2_ind,
+            DE_best_1_ind,
+            DE_best_2_ind,
             DE_currentToRandom_1_ind
+
     };
     for (int idx = 0; idx < Population::POPULATION_SIZE; idx++) {
         offspring_vector.insert(offspring_vector.end(), Individual());
@@ -536,6 +690,10 @@ int main() {
 
         //cout << "\n " << "BEST INDIVIDUAL" << current_population.bestIndividual().toString() << "\n";
         cout << " \n iteration " << iterations << "    " << current_population.calculateMeanFitnessPopulation() <<  "\n";
+
+        if (iterations == 999) {
+            cout << "asdf";
+        }
 
         // si es LP_RAM actualizamos
         if ((iterations % LP_RAM) == 0) {
