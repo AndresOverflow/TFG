@@ -37,8 +37,8 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="DE_RAM_CEC14">
-				<Option output="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug/DE_RAM_CEC14" prefix_auto="0" extension_auto="0"/>
+			<Target title="DED_RAM_CEC14">
+				<Option output="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug/DED_RAM_CEC14" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -52,14 +52,14 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug/Makefile&quot;  VERBOSE=1 DE_RAM_CEC14"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug/Makefile&quot;  VERBOSE=1 DED_RAM_CEC14"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="DE_RAM_CEC14/fast">
-				<Option output="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug/DE_RAM_CEC14" prefix_auto="0" extension_auto="0"/>
+			<Target title="DED_RAM_CEC14/fast">
+				<Option output="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug/DED_RAM_CEC14" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -73,15 +73,51 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug/Makefile&quot;  VERBOSE=1 DE_RAM_CEC14/fast"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug/Makefile&quot;  VERBOSE=1 DED_RAM_CEC14/fast"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/FileReader.cpp">
+			<Option target="DED_RAM_CEC14"/>
+		</Unit>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/FileReader.h">
+			<Option target="DED_RAM_CEC14"/>
+		</Unit>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/Individual.cpp">
+			<Option target="DED_RAM_CEC14"/>
+		</Unit>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/Individual.h">
+			<Option target="DED_RAM_CEC14"/>
+		</Unit>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/MutationProbabilityTable.cpp">
+			<Option target="DED_RAM_CEC14"/>
+		</Unit>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/MutationProbabilityTable.h">
+			<Option target="DED_RAM_CEC14"/>
+		</Unit>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/Population.cpp">
+			<Option target="DED_RAM_CEC14"/>
+		</Unit>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/Population.h">
+			<Option target="DED_RAM_CEC14"/>
+		</Unit>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/TripletPST.cpp">
+			<Option target="DED_RAM_CEC14"/>
+		</Unit>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/TripletPST.h">
+			<Option target="DED_RAM_CEC14"/>
+		</Unit>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/armadillo.h">
+			<Option target="DED_RAM_CEC14"/>
+		</Unit>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cec14_test_func.cpp">
+			<Option target="DED_RAM_CEC14"/>
+		</Unit>
 		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/main.cpp">
-			<Option target="DE_RAM_CEC14"/>
+			<Option target="DED_RAM_CEC14"/>
 		</Unit>
 		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

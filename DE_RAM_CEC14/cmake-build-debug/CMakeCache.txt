@@ -230,6 +230,12 @@ DE_RAM_CEC14_SOURCE_DIR:STATIC=/Users/AndresOverflow/Documents/Universidad/TFG/D
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=/usr/sbin/sysctl
 
+//Value Computed by CMake
+untitled1_BINARY_DIR:STATIC=/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/cmake-build-debug
+
+//Value Computed by CMake
+untitled1_SOURCE_DIR:STATIC=/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14
+
 
 ########################
 # INTERNAL cache entries
