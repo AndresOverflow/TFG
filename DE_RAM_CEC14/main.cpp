@@ -662,7 +662,7 @@ int main() {
     //current_population = FileReader::setPopulationIndividualsFromFile();
 
     current_population = Population::initializePopulation(UPPER_BOUND, LOWER_BOUND);
-
+    mat mat_current_population = Population::populationToMat(current_population);
     //inicializar parametros
     vector<int> mutation_strategy_to_use(Population::POPULATION_SIZE, -1);
 
