@@ -81,3 +81,21 @@ double Population::calculateMeanFitnessPopulation() {
     }
     return accumulated;
 }
+
+Population Population::initializePopulation(int upper_bound, int lower_bound) {
+    Population population_to_return = Population();
+    vector<Individual> random_individuals  (Population::POPULATION_SIZE, Individual());
+    double random_value = 0.0;
+    for (int i = 0; i < Population::POPULATION_SIZE; i++) {
+        for (int j = 0; j< Individual::DIMENSION; j++) {
+            random_value = (double)rand() / RAND_MAX;
+            random_value = lower_bound + random_value * (upper_bound - lower_bound);
+            random_individuals[i].setComponent(j, random_value);
+
+        }
+    }
+
+    population_to_return.setIndividuals(random_individuals);
+
+    return population_to_return;
+}

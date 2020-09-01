@@ -39,6 +39,8 @@ public:
     void recalculateFitness(void);
     double calculateMeanFitnessPopulation(void);
 
+    static Population initializePopulation(int upper_bound, int lower_bound);
+
 
 
 private:

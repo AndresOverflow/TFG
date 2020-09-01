@@ -7,7 +7,7 @@
 #include "Population.h"
 #include "FileReader.h"
 #include "MutationProbabilityTable.h"
-
+#include "armadillo.h"
 
 
 
@@ -18,8 +18,8 @@ void cec14_test_func(double *, double *,int,int,int);
 double *OShift,*M,*y,*z,*x_bound;
 int ini_flag=0,n_flag,func_flag,*SS;
 
-
 using namespace std;
+using namespace arma;
 
 static const double F = 1.7; //mutate factor
 static const double CR = 0.15; //Crossover factor
@@ -27,6 +27,8 @@ static const int ITERATIONS = 1000;
 static const int GROUP_SIZE = 5;
 static const double EVAPORATION_RATE = 0.2;
 static const int LP_RAM = 100;
+static const int UPPER_BOUND = 100;
+static const int LOWER_BOUND = -100;
 
 typedef Individual (*MutationFunctions) (vector<Individual> current_population, int ind);
 
@@ -648,14 +650,18 @@ void updateTriesAndSuccess(Population current_population, Population offspring, 
 
 
 
-
 int main() {
+
+
+
 
     //inicializar población
 
     Population current_population, mutated_population, offspring = Population();
     vector<Individual> current_population_vector, mutated_population_vector, offspring_vector;
-    current_population = FileReader::setPopulationIndividualsFromFile();
+    //current_population = FileReader::setPopulationIndividualsFromFile();
+
+    current_population = Population::initializePopulation(UPPER_BOUND, LOWER_BOUND);
 
     //inicializar parametros
     vector<int> mutation_strategy_to_use(Population::POPULATION_SIZE, -1);
