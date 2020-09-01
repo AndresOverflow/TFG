@@ -649,6 +649,24 @@ void updateTriesAndSuccess(Population current_population, Population offspring, 
 }
 
 
+vector<double> calculateCECFitness(Population current_population, int dimension, int population_size, int number_of_function) {
+    vector<double> fitness_vector (population_size, 0);
+    rowvec fitness;
+    fitness = ones<rowvec>(population_size);
+    cout << fitness;
+    mat mat_population = Population::populationToMat(current_population);
+    cec14_test_func(mat_population.memptr(), fitness.memptr(), dimension, population_size, number_of_function);
+    for(int i = 0; i < population_size; i++) {
+        fitness_vector[i] = fitness(i);
+    }
+
+    cout << fitness;
+    return fitness_vector;
+
+
+}
+
+
 
 int main() {
 
@@ -664,6 +682,12 @@ int main() {
     current_population = Population::initializePopulation(UPPER_BOUND, LOWER_BOUND);
     mat mat_current_population = Population::populationToMat(current_population);
     //inicializar parametros
+
+    vector<double> fitness_vector;
+    fitness_vector = calculateCECFitness(current_population, Individual::DIMENSION, Population::POPULATION_SIZE, 1);
+    current_population.assignFitness(fitness_vector);
+
+
     vector<int> mutation_strategy_to_use(Population::POPULATION_SIZE, -1);
 
     Population population_test = Population();
@@ -697,8 +721,6 @@ int main() {
         cout << offspring.calculateMeanFitnessPopulation();
 
         cout << "\n Store Tries and Success" << "\n";
-
-
 
         cout << "\n 4.DO SELECTION" << "\n";
         updateTriesAndSuccess(current_population, offspring, &mutation_probability_table, mutation_strategy_to_use);

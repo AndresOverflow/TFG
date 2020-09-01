@@ -82,5 +82,14 @@ double Population::calculateMeanFitnessPopulation() {
     return accumulated;
 }
 
+void Population::assignFitness(vector<double> fitness_vector) {
+    for (int i = 0; i <POPULATION_SIZE; i++) {
+        this->individuals[i].setFitness(fitness_vector[i]);
+    }
+
+}
+
+
+
 
 

@@ -42,6 +42,9 @@ public:
     void recalculateFitness(void);
     double calculateMeanFitnessPopulation(void);
 
+    void assignFitness(vector<double> fitness_vector);
+
+
     static Population initializePopulation(int upper_bound, int lower_bound) {
         Population population_to_return = Population();
         vector<Individual> random_individuals  (Population::POPULATION_SIZE, Individual());

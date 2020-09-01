@@ -18,7 +18,7 @@ class Individual {
 
 public:
 
-    static const int DIMENSION = 15;
+    static const int DIMENSION = 2;
     static const bool BEST_LESS = 1; // 1 if aims for less fitness else 0.
     constexpr static const double NOT_INITIALIZED = 9999.9;
 

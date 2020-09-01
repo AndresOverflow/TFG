@@ -37,9 +37,12 @@
   <component name="ChangeListManager">
     <list default="true" id="6ebff52c-997e-4af3-a54f-c2f2575b276a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual.h" beforeDir="false" afterPath="$PROJECT_DIR$/Individual.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Population.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Population.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Population.h" beforeDir="false" afterPath="$PROJECT_DIR$/Population.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/CXX.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/FileReader.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/FileReader.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/Individual.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/Individual.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/MutationProbabilityTable.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/MutationProbabilityTable.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/Population.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/Population.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/main.cpp.o" afterDir="false" />
@@ -110,7 +113,7 @@
       <updated>1598522471271</updated>
       <workItem from="1598522473755" duration="6318000" />
       <workItem from="1598944706278" duration="3515000" />
-      <workItem from="1598950650469" duration="587000" />
+      <workItem from="1598950650469" duration="3114000" />
     </task>
     <servers />
   </component>
@@ -118,38 +121,38 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1598949885720">
+    <state width="1638" height="364" key="GridCell.Tab.0.bottom" timestamp="1598953520507">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1598949885720" />
-    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1598949885718">
+    <state width="1638" height="364" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1598953520507" />
+    <state width="1638" height="364" key="GridCell.Tab.0.center" timestamp="1598953520505">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1598949885718" />
-    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1598949885717">
+    <state width="1638" height="364" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1598953520505" />
+    <state width="1638" height="364" key="GridCell.Tab.0.left" timestamp="1598953520505">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1598949885717" />
-    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1598949885719">
+    <state width="1638" height="364" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1598953520505" />
+    <state width="1638" height="364" key="GridCell.Tab.0.right" timestamp="1598953520506">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1598949885719" />
-    <state width="1638" height="364" key="GridCell.Tab.1.bottom" timestamp="1598949885697">
+    <state width="1638" height="364" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1598953520506" />
+    <state width="1638" height="364" key="GridCell.Tab.1.bottom" timestamp="1598953522113">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1598949885697" />
-    <state width="1638" height="364" key="GridCell.Tab.1.center" timestamp="1598949885695">
+    <state width="1638" height="364" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1598953522113" />
+    <state width="1638" height="364" key="GridCell.Tab.1.center" timestamp="1598953522112">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1598949885695" />
-    <state width="1638" height="364" key="GridCell.Tab.1.left" timestamp="1598949885694">
+    <state width="1638" height="364" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1598953522112" />
+    <state width="1638" height="364" key="GridCell.Tab.1.left" timestamp="1598953522111">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1598949885694" />
-    <state width="1638" height="364" key="GridCell.Tab.1.right" timestamp="1598949885696">
+    <state width="1638" height="364" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1598953522111" />
+    <state width="1638" height="364" key="GridCell.Tab.1.right" timestamp="1598953522112">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1598949885696" />
+    <state width="1638" height="364" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1598953522112" />
     <state x="341" y="164" key="SettingsEditor" timestamp="1598524038392">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -160,8 +163,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>674</line>
-          <option name="timeStamp" value="1" />
+          <line>659</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
