@@ -73,6 +73,19 @@ public:
     cout << mat_population;
     return mat_population;
 }
+    static Population matToPopulation(mat matrix) {
+        Population population_to_create = Population();
+        Individual individual_to_create = Individual();
+        for (int ind = 0; ind < POPULATION_SIZE; ind++) {
+            for(int dim = 0; dim < Individual::DIMENSION; dim++) {
+                individual_to_create = population_to_create.getIndividual(ind);
+                individual_to_create.setComponent(dim, matrix(dim,ind));
+                population_to_create.setIndividual(ind, individual_to_create);
+
+            }
+        }
+        return population_to_create;
+    }
 
 
 

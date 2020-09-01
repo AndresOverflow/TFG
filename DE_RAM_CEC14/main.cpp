@@ -666,6 +666,10 @@ int main() {
     //inicializar parametros
     vector<int> mutation_strategy_to_use(Population::POPULATION_SIZE, -1);
 
+    Population population_test = Population();
+    population_test = Population::matToPopulation(mat_current_population);
+
+
 
     // Crear la tabla de mutacion
     MutationProbabilityTable mutation_probability_table = MutationProbabilityTable(GROUP_SIZE, EVAPORATION_RATE);
