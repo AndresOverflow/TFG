@@ -36,7 +36,7 @@ public:
     string toString(void);
 
     double calculate_fitness();
-    bool betterFitnessThan(Individual compare_to_individual);
+    bool betterFitnessThan(Individual compare_to_individual, int number_of_function);
 
 
 

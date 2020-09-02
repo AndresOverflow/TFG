@@ -21,14 +21,17 @@ int ini_flag=0,n_flag,func_flag,*SS;
 using namespace std;
 using namespace arma;
 
-static const double F = 1.7; //mutate factor
+//static const double F = 1.7; //mutate factor
+static const double F = 0.7; //mutate factor
 static const double CR = 0.15; //Crossover factor
-static const int ITERATIONS = 1000;
+//static const double CR = 0.15; //Crossover factor
+static const int ITERATIONS = 10000;
 static const int GROUP_SIZE = 5;
 static const double EVAPORATION_RATE = 0.2;
 static const int LP_RAM = 100;
 static const int UPPER_BOUND = 100;
 static const int LOWER_BOUND = -100;
+const double EPSILON = pow(10.0, -8);
 
 typedef Individual (*MutationFunctions) (vector<Individual> current_population, int ind);
 
@@ -38,7 +41,7 @@ typedef Individual (*MutationFunctions) (vector<Individual> current_population, 
 
 
 
-Population selection(Population current_population, Population offspring) {
+Population selection(Population current_population, Population offspring, int number_of_function) {
     Population final_population = Population();
     vector<Individual> current_population_vector = current_population.getIndividuals();
     vector<Individual> offspring_vector = offspring.getIndividuals();
@@ -49,7 +52,7 @@ Population selection(Population current_population, Population offspring) {
     vector<Individual> final_population_vector = final_population.getIndividuals();
 
     for (int i = 0; i < Population::POPULATION_SIZE; i++) {
-        if (current_population_vector[i].betterFitnessThan(offspring_vector[i])) {
+        if (current_population_vector[i].betterFitnessThan(offspring_vector[i], number_of_function)) {
             final_population_vector[i].setComponents(current_population_vector[i].getComponents());
             final_population_vector[i].setFitness(current_population_vector[i].getFitness());
         } else {
@@ -636,12 +639,12 @@ vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability
 
 }
 
-void updateTriesAndSuccess(Population current_population, Population offspring, MutationProbabilityTable *mutation_probability_table, vector<int> mutation_strategy_to_use) {
+void updateTriesAndSuccess(Population current_population, Population offspring, MutationProbabilityTable *mutation_probability_table, vector<int> mutation_strategy_to_use, int number_of_function) {
     int group;
     for(int ind = 0; ind < Population::POPULATION_SIZE; ind++) {
         group = ceil(ind / GROUP_SIZE);
         mutation_probability_table->addTries(group, mutation_strategy_to_use[ind], 1);
-        if(offspring.getIndividual(ind).betterFitnessThan(current_population.getIndividual(ind))) {
+        if(offspring.getIndividual(ind).betterFitnessThan(current_population.getIndividual(ind), number_of_function)) {
             mutation_probability_table->addSuccess(group, mutation_strategy_to_use[ind], 1);
 
         }
@@ -666,14 +669,25 @@ vector<double> calculateCECFitness(Population current_population, int dimension,
 
 }
 
+bool isOptimumIndividualFound(double optimum, Population population_to_evaluate) {
+    if ((population_to_evaluate.bestIndividual().getFitness() - optimum) > EPSILON)
+        return false;
+
+    population_to_evaluate.bestIndividual().setFitness(optimum);
+    return true;
+}
+
 
 
 int main() {
 
+    int number_of_function = 1;
 
 
 
     //inicializar población
+
+    cout << "INICIALIZAMOS LA POBLACION";
 
     Population current_population, mutated_population, offspring = Population();
     vector<Individual> current_population_vector, mutated_population_vector, offspring_vector;
@@ -684,16 +698,13 @@ int main() {
     //inicializar parametros
 
     vector<double> fitness_vector;
-    fitness_vector = calculateCECFitness(current_population, Individual::DIMENSION, Population::POPULATION_SIZE, 1);
+    fitness_vector = calculateCECFitness(current_population, Individual::DIMENSION, Population::POPULATION_SIZE, number_of_function);
     current_population.assignFitness(fitness_vector);
 
+    cout << "Su media de Fitness respecto al optimo";
+    cout << current_population.calculateMeanFitnessPopulation(number_of_function);
 
     vector<int> mutation_strategy_to_use(Population::POPULATION_SIZE, -1);
-
-    Population population_test = Population();
-    population_test = Population::matToPopulation(mat_current_population);
-
-
 
     // Crear la tabla de mutacion
     MutationProbabilityTable mutation_probability_table = MutationProbabilityTable(GROUP_SIZE, EVAPORATION_RATE);
@@ -702,39 +713,26 @@ int main() {
         mutation_strategy_to_use = selectMutationStrategy(mutation_probability_table);
         cout << "\n2.MUTATE THE POPULATION " << "\n";
         mutated_population = mutate_RAM(current_population, mutation_strategy_to_use);
-        cout << "MUTATED POPULATION" << "\n";
-        // Calculate fitness
-
-        mutated_population.recalculateFitness();
-        cout << mutated_population.calculateMeanFitnessPopulation();
-
-        //mutated_population.toString();
-
 
         cout << "\n 3.DO CROSSOVER" << "\n";
         offspring = crossover(current_population, mutated_population);
-        cout << "CROSSOVER POPULATION" << "\n";
-        //Calculate fitness
 
-        //offspring.toString();
-        offspring.recalculateFitness();
-        cout << offspring.calculateMeanFitnessPopulation();
+
+        fitness_vector = calculateCECFitness(offspring, Individual::DIMENSION, Population::POPULATION_SIZE, number_of_function);
+        offspring.assignFitness(fitness_vector);
+        cout << "Diff to the optimum of the offspring : " << offspring.calculateMeanFitnessPopulation(number_of_function);
 
         cout << "\n Store Tries and Success" << "\n";
 
         cout << "\n 4.DO SELECTION" << "\n";
-        updateTriesAndSuccess(current_population, offspring, &mutation_probability_table, mutation_strategy_to_use);
+        updateTriesAndSuccess(current_population, offspring, &mutation_probability_table, mutation_strategy_to_use, number_of_function);
 
 
-        current_population = selection(current_population, offspring);
+        current_population = selection(current_population, offspring, number_of_function);
         cout << " \n AFTER SELECTION \n";
-        //current_population.toString();
 
-        cout << current_population.calculateMeanFitnessPopulation();
-
-        //cout << "\n " << "BEST INDIVIDUAL" << current_population.bestIndividual().toString() << "\n";
-        cout << " \n iteration " << iterations << "    " << current_population.calculateMeanFitnessPopulation() <<  "\n";
-
+        cout << " \n iteration " << iterations << "    diff to the optimum de la poblacion:     " << current_population.calculateMeanFitnessPopulation(number_of_function) <<  "\n";
+        cout << "Best individual of the population diff to the optimum:   " << current_population.bestIndividual().getFitness();
         if (iterations == 999) {
             cout << "asdf";
         }
@@ -769,10 +767,10 @@ int main() {
     return 0;
 }
 
+/*
 
 int main2() {
-
-
+    int number_of_function = 1;
 
 // 1. Inicializar population
 //Hacerlo varias veces
@@ -876,3 +874,4 @@ int main2() {
 
 }
 
+*/

@@ -37,6 +37,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6ebff52c-997e-4af3-a54f-c2f2575b276a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Individual.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Individual.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Individual.h" beforeDir="false" afterPath="$PROJECT_DIR$/Individual.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Population.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Population.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Population.h" beforeDir="false" afterPath="$PROJECT_DIR$/Population.h" afterDir="false" />
@@ -86,10 +87,14 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/cmake-build-debug/input_data" />
     <property name="settings.editor.selected.configurable" value="CMakeSettings" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cmake-build-debug/input_data" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -113,7 +118,8 @@
       <updated>1598522471271</updated>
       <workItem from="1598522473755" duration="6318000" />
       <workItem from="1598944706278" duration="3515000" />
-      <workItem from="1598950650469" duration="3114000" />
+      <workItem from="1598950650469" duration="4695000" />
+      <workItem from="1599033383951" duration="3123000" />
     </task>
     <servers />
   </component>
@@ -121,38 +127,38 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1638" height="364" key="GridCell.Tab.0.bottom" timestamp="1598953520507">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1599037857203">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1598953520507" />
-    <state width="1638" height="364" key="GridCell.Tab.0.center" timestamp="1598953520505">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1599037857203" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1599037857202">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1598953520505" />
-    <state width="1638" height="364" key="GridCell.Tab.0.left" timestamp="1598953520505">
+    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1599037857202" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1599037857201">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1598953520505" />
-    <state width="1638" height="364" key="GridCell.Tab.0.right" timestamp="1598953520506">
+    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1599037857201" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1599037857202">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1598953520506" />
-    <state width="1638" height="364" key="GridCell.Tab.1.bottom" timestamp="1598953522113">
+    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1599037857202" />
+    <state width="1638" height="364" key="GridCell.Tab.1.bottom" timestamp="1599036443546">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1598953522113" />
-    <state width="1638" height="364" key="GridCell.Tab.1.center" timestamp="1598953522112">
+    <state width="1638" height="364" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1599036443546" />
+    <state width="1638" height="364" key="GridCell.Tab.1.center" timestamp="1599036443544">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1598953522112" />
-    <state width="1638" height="364" key="GridCell.Tab.1.left" timestamp="1598953522111">
+    <state width="1638" height="364" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1599036443544" />
+    <state width="1638" height="364" key="GridCell.Tab.1.left" timestamp="1599036443543">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1598953522111" />
-    <state width="1638" height="364" key="GridCell.Tab.1.right" timestamp="1598953522112">
+    <state width="1638" height="364" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1599036443543" />
+    <state width="1638" height="364" key="GridCell.Tab.1.right" timestamp="1599036443545">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1598953522112" />
+    <state width="1638" height="364" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1599036443545" />
     <state x="341" y="164" key="SettingsEditor" timestamp="1598524038392">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -162,9 +168,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/cec14_test_func.cpp</url>
+          <line>101</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>659</line>
-          <option name="timeStamp" value="9" />
+          <line>699</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

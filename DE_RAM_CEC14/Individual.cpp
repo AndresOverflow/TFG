@@ -75,19 +75,14 @@ double Individual::calculate_fitness() {
 
 }
 
-bool Individual::betterFitnessThan(Individual individual_to_compare) {
-    bool result;
-    if(this->getFitness() < individual_to_compare.getFitness()) {
-        result = true;
-    } else {
-        result = false;
-    }
-    if(BEST_LESS == 0) {
-        result = !result;
-    }
-
-    return result;
-
+bool Individual::betterFitnessThan(Individual individual_to_compare, int number_of_function) {
+   double dif_1, dif_2;
+   dif_1 = abs((this->getFitness() - (number_of_function * 100)));
+   dif_2 = abs((individual_to_compare.getFitness() - (number_of_function * 100)));
+   if (dif_1 < dif_2) {
+       return true;
+   }
+   return false;
 }
 
 void Individual::setComponent(int position, double value) {
