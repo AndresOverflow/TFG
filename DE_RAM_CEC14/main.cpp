@@ -25,14 +25,13 @@ using namespace arma;
 static const double F = 0.7; //mutate factor
 static const double CR = 0.15; //Crossover factor
 //static const double CR = 0.15; //Crossover factor
-static const int ITERATIONS = 10000;
 static const int GROUP_SIZE = 5;
 static const double EVAPORATION_RATE = 0.2;
 static const int LP_RAM = 100;
 static const int UPPER_BOUND = 100;
 static const int LOWER_BOUND = -100;
 const double EPSILON = pow(10.0, -8);
-const double MAX_FITNESS_EVALUATIONS = Population::POPULATION_SIZE * 10000;
+const int MAX_FITNESS_EVALUATIONS = Population::POPULATION_SIZE * 10000;
 
 typedef Individual (*MutationFunctions) (vector<Individual> current_population, int ind);
 
@@ -670,11 +669,9 @@ vector<double> calculateCECFitness(Population current_population, int dimension,
 
 }
 
-bool isOptimumIndividualFound(double optimum, Population population_to_evaluate) {
-    if ((population_to_evaluate.bestIndividual().getFitness() - optimum) > EPSILON)
+bool isOptimumIndividualFound(Population population_to_evaluate, int number_of_function) {
+    if ((population_to_evaluate.bestIndividual().getErrorToOptimum(number_of_function)) > EPSILON)
         return false;
-
-    population_to_evaluate.bestIndividual().setFitness(optimum);
     return true;
 }
 
@@ -693,8 +690,8 @@ bool isOptimumIndividualFound(double optimum, Population population_to_evaluate)
 
 int main() {
 
-    int number_of_function = 2;
-    int numer_of_fit_eva = 0;
+    int number_of_function = 3;
+    int number_of_fit_eva = 0;
 
 
 
@@ -712,6 +709,7 @@ int main() {
 
     vector<double> fitness_vector;
     fitness_vector = calculateCECFitness(current_population, Individual::DIMENSION, Population::POPULATION_SIZE, number_of_function);
+    number_of_fit_eva += fitness_vector.size();
     current_population.assignFitness(fitness_vector);
 
     cout << "Su media de Fitness respecto al optimo";
@@ -722,7 +720,8 @@ int main() {
     // Crear la tabla de mutacion
     MutationProbabilityTable mutation_probability_table = MutationProbabilityTable(GROUP_SIZE, EVAPORATION_RATE);
 
-    for (int iterations = 1; iterations < ITERATIONS; iterations++) {
+    int iteration = 1;
+    while (number_of_fit_eva < MAX_FITNESS_EVALUATIONS && !isOptimumIndividualFound(current_population, number_of_function)) {
         mutation_strategy_to_use = selectMutationStrategy(mutation_probability_table);
         cout << "\n2.MUTATE THE POPULATION " << "\n";
         mutated_population = mutate_RAM(current_population, mutation_strategy_to_use);
@@ -732,6 +731,7 @@ int main() {
 
 
         fitness_vector = calculateCECFitness(offspring, Individual::DIMENSION, Population::POPULATION_SIZE, number_of_function);
+        number_of_fit_eva += fitness_vector.size();
         offspring.assignFitness(fitness_vector);
         cout << "Diff to the optimum of the offspring : " << offspring.calculateMeanErrorToOptimumPopulation(number_of_function);
 
@@ -744,16 +744,19 @@ int main() {
         current_population = selection(current_population, offspring, number_of_function);
         cout << " \n AFTER SELECTION \n";
 
-        cout << " \n iteration " << iterations << "    diff to the optimum de la poblacion:     " << current_population.calculateMeanErrorToOptimumPopulation(number_of_function) <<  "\n";
-        cout << "Best individual of the population diff to the optimum:   " << current_population.bestIndividual().getErrorToOptimum(number_of_function);
-        if (iterations == 999) {
+        cout << "\n ---------iteration " << iteration << "    diff to the optimum de la poblacion:     " << current_population.calculateMeanErrorToOptimumPopulation(number_of_function) <<  "\n";
+        cout << "\n Fitness Evaluations done to the moment:    " << number_of_fit_eva;
+        cout << "\nBest individual of the population diff to the optimum:   " << current_population.bestIndividual().getErrorToOptimum(number_of_function);
+        if (iteration == 999) {
             cout << "asdf";
         }
 
         // si es LP_RAM actualizamos
-        if ((iterations % LP_RAM) == 0) {
+        if ((iteration % LP_RAM) == 0) {
             mutation_probability_table.updateTable();
         }
+
+        iteration += 1;
     }
 
 
