@@ -40,7 +40,7 @@ public:
     Individual bestIndividual(void);
 
     void recalculateFitness(void);
-    double calculateMeanFitnessPopulation(int function_number);
+    double calculateMeanErrorToOptimumPopulation(int function_number);
 
     void assignFitness(vector<double> fitness_vector);
 

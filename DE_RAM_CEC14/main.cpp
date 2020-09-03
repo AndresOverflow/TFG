@@ -32,6 +32,7 @@ static const int LP_RAM = 100;
 static const int UPPER_BOUND = 100;
 static const int LOWER_BOUND = -100;
 const double EPSILON = pow(10.0, -8);
+const double MAX_FITNESS_EVALUATIONS = Population::POPULATION_SIZE * 10000;
 
 typedef Individual (*MutationFunctions) (vector<Individual> current_population, int ind);
 
@@ -678,10 +679,22 @@ bool isOptimumIndividualFound(double optimum, Population population_to_evaluate)
 }
 
 
+/*
+ * Inicializar poblacion con valores de -100 a 100
+ * Calcular fitness
+ * Iterar hasta que se consigan el máximo de Iteraciones o arrives to the optimum value
+     * hacer mutación
+     * hacer crossover
+     * Calculcar fitness
+     * hacer selección
+     * print best individual
+ *
+ */
 
 int main() {
 
-    int number_of_function = 1;
+    int number_of_function = 2;
+    int numer_of_fit_eva = 0;
 
 
 
@@ -702,7 +715,7 @@ int main() {
     current_population.assignFitness(fitness_vector);
 
     cout << "Su media de Fitness respecto al optimo";
-    cout << current_population.calculateMeanFitnessPopulation(number_of_function);
+    cout << current_population.calculateMeanErrorToOptimumPopulation(number_of_function);
 
     vector<int> mutation_strategy_to_use(Population::POPULATION_SIZE, -1);
 
@@ -720,7 +733,7 @@ int main() {
 
         fitness_vector = calculateCECFitness(offspring, Individual::DIMENSION, Population::POPULATION_SIZE, number_of_function);
         offspring.assignFitness(fitness_vector);
-        cout << "Diff to the optimum of the offspring : " << offspring.calculateMeanFitnessPopulation(number_of_function);
+        cout << "Diff to the optimum of the offspring : " << offspring.calculateMeanErrorToOptimumPopulation(number_of_function);
 
         cout << "\n Store Tries and Success" << "\n";
 
@@ -731,8 +744,8 @@ int main() {
         current_population = selection(current_population, offspring, number_of_function);
         cout << " \n AFTER SELECTION \n";
 
-        cout << " \n iteration " << iterations << "    diff to the optimum de la poblacion:     " << current_population.calculateMeanFitnessPopulation(number_of_function) <<  "\n";
-        cout << "Best individual of the population diff to the optimum:   " << current_population.bestIndividual().getFitness();
+        cout << " \n iteration " << iterations << "    diff to the optimum de la poblacion:     " << current_population.calculateMeanErrorToOptimumPopulation(number_of_function) <<  "\n";
+        cout << "Best individual of the population diff to the optimum:   " << current_population.bestIndividual().getErrorToOptimum(number_of_function);
         if (iterations == 999) {
             cout << "asdf";
         }

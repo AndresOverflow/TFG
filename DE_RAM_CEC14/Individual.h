@@ -38,6 +38,8 @@ public:
     double calculate_fitness();
     bool betterFitnessThan(Individual compare_to_individual, int number_of_function);
 
+    double getErrorToOptimum(int number_of_function);
+
 
 
 private:

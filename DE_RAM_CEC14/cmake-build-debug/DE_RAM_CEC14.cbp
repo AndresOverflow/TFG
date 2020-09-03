@@ -80,12 +80,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/FileReader.cpp">
-			<Option target="DED_RAM_CEC14"/>
-		</Unit>
-		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/FileReader.h">
-			<Option target="DED_RAM_CEC14"/>
-		</Unit>
 		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/Individual.cpp">
 			<Option target="DED_RAM_CEC14"/>
 		</Unit>

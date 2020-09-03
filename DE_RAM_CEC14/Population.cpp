@@ -74,7 +74,7 @@ void Population::recalculateFitness(void){
 
 }
 
-double Population::calculateMeanFitnessPopulation(int number_of_function) {
+double Population::calculateMeanErrorToOptimumPopulation(int number_of_function) {
     double accumulated = 0;
     for (int i = 0; i < POPULATION_SIZE; i++) {
         accumulated += abs(this->getIndividuals()[i].getFitness() - 100 * number_of_function);

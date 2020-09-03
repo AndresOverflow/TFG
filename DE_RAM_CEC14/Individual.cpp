@@ -95,6 +95,12 @@ double Individual::getComponent(int position) {
     return this->components[position];
 }
 
+double Individual::getErrorToOptimum(int function_number) {
+    double dif = 0.0;
+    dif = abs(this->getFitness() - (function_number * 100));
+    return dif;
+}
+
 
 
 //TODO static double Individual::minus

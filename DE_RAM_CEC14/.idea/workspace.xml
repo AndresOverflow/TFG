@@ -37,17 +37,22 @@
   <component name="ChangeListManager">
     <list default="true" id="6ebff52c-997e-4af3-a54f-c2f2575b276a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Individual.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Individual.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Individual.h" beforeDir="false" afterPath="$PROJECT_DIR$/Individual.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Population.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Population.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Population.h" beforeDir="false" afterPath="$PROJECT_DIR$/Population.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/FileReader.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/FileReader.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/Individual.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/Individual.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/MutationProbabilityTable.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/MutationProbabilityTable.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/Population.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/Population.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/link.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DED_RAM_CEC14.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/DED_RAM_CEC14" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/DED_RAM_CEC14" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/DE_RAM_CEC14.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/DE_RAM_CEC14.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../untitled1/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled1/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../untitled1/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled1/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
@@ -119,7 +124,8 @@
       <workItem from="1598522473755" duration="6318000" />
       <workItem from="1598944706278" duration="3515000" />
       <workItem from="1598950650469" duration="4695000" />
-      <workItem from="1599033383951" duration="3123000" />
+      <workItem from="1599033383951" duration="3735000" />
+      <workItem from="1599120434812" duration="1566000" />
     </task>
     <servers />
   </component>
@@ -127,57 +133,45 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1599037857203">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1599121147418">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1599037857203" />
-    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1599037857202">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1599121147418" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1599121147417">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1599037857202" />
-    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1599037857201">
+    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1599121147417" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1599121147416">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1599037857201" />
-    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1599037857202">
+    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1599121147416" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1599121147418">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1599037857202" />
-    <state width="1638" height="364" key="GridCell.Tab.1.bottom" timestamp="1599036443546">
+    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1599121147418" />
+    <state width="1638" height="364" key="GridCell.Tab.1.bottom" timestamp="1599041370356">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1599036443546" />
-    <state width="1638" height="364" key="GridCell.Tab.1.center" timestamp="1599036443544">
+    <state width="1638" height="364" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1599041370356" />
+    <state width="1638" height="364" key="GridCell.Tab.1.center" timestamp="1599041370353">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1599036443544" />
-    <state width="1638" height="364" key="GridCell.Tab.1.left" timestamp="1599036443543">
+    <state width="1638" height="364" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1599041370353" />
+    <state width="1638" height="364" key="GridCell.Tab.1.left" timestamp="1599041370352">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1599036443543" />
-    <state width="1638" height="364" key="GridCell.Tab.1.right" timestamp="1599036443545">
+    <state width="1638" height="364" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1599041370352" />
+    <state width="1638" height="364" key="GridCell.Tab.1.right" timestamp="1599041370355">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="364" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1599036443545" />
+    <state width="1638" height="364" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1599041370355" />
     <state x="341" y="164" key="SettingsEditor" timestamp="1598524038392">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="341" y="164" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1598524038392" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/cec14_test_func.cpp</url>
-          <line>101</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>699</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1599121946785">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1599121946785" />
   </component>
 </project>

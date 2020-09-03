@@ -123,33 +123,6 @@ DED_RAM_CEC14/fast:
 	$(MAKE) -f CMakeFiles/DED_RAM_CEC14.dir/build.make CMakeFiles/DED_RAM_CEC14.dir/build
 .PHONY : DED_RAM_CEC14/fast
 
-FileReader.o: FileReader.cpp.o
-
-.PHONY : FileReader.o
-
-# target to build an object file
-FileReader.cpp.o:
-	$(MAKE) -f CMakeFiles/DED_RAM_CEC14.dir/build.make CMakeFiles/DED_RAM_CEC14.dir/FileReader.cpp.o
-.PHONY : FileReader.cpp.o
-
-FileReader.i: FileReader.cpp.i
-
-.PHONY : FileReader.i
-
-# target to preprocess a source file
-FileReader.cpp.i:
-	$(MAKE) -f CMakeFiles/DED_RAM_CEC14.dir/build.make CMakeFiles/DED_RAM_CEC14.dir/FileReader.cpp.i
-.PHONY : FileReader.cpp.i
-
-FileReader.s: FileReader.cpp.s
-
-.PHONY : FileReader.s
-
-# target to generate assembly for a file
-FileReader.cpp.s:
-	$(MAKE) -f CMakeFiles/DED_RAM_CEC14.dir/build.make CMakeFiles/DED_RAM_CEC14.dir/FileReader.cpp.s
-.PHONY : FileReader.cpp.s
-
 Individual.o: Individual.cpp.o
 
 .PHONY : Individual.o
@@ -321,9 +294,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... DED_RAM_CEC14"
-	@echo "... FileReader.o"
-	@echo "... FileReader.i"
-	@echo "... FileReader.s"
 	@echo "... Individual.o"
 	@echo "... Individual.i"
 	@echo "... Individual.s"

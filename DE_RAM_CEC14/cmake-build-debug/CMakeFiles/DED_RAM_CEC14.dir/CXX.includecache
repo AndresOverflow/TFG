@@ -24,6 +24,10 @@ Population.h
 Individual.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/Individual.h
 
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/Individual.cpp
+Individual.h
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/Individual.h
+
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/Individual.h
 vector
 -
@@ -37,6 +41,10 @@ math.h
 -
 iostream
 -
+
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/MutationProbabilityTable.cpp
+MutationProbabilityTable.h
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/MutationProbabilityTable.h
 
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/MutationProbabilityTable.h
 TripletPST.h
@@ -53,6 +61,10 @@ math.h
 -
 iostream
 -
+Population.h
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/Population.h
+
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/Population.cpp
 Population.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14/Population.h
 
