@@ -690,7 +690,9 @@ bool isOptimumIndividualFound(Population population_to_evaluate, int number_of_f
 
 int main() {
 
-    int number_of_function = 3;
+    srand((unsigned) time(0));
+
+    int number_of_function = 2;
     int number_of_fit_eva = 0;
 
 
