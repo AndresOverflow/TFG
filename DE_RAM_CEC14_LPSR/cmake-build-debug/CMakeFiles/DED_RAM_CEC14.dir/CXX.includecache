@@ -24,10 +24,6 @@ Population.h
 Individual.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Individual.h
 
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Individual.cpp
-Individual.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Individual.h
-
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Individual.h
 vector
 -
@@ -41,10 +37,6 @@ math.h
 -
 iostream
 -
-
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/MutationProbabilityTable.cpp
-MutationProbabilityTable.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/MutationProbabilityTable.h
 
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/MutationProbabilityTable.h
 TripletPST.h
@@ -61,10 +53,6 @@ math.h
 -
 iostream
 -
-Population.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Population.h
-
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Population.cpp
 Population.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Population.h
 
@@ -83,10 +71,6 @@ Individual.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Individual.h
 armadillo.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/armadillo.h
-
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/TripletPST.cpp
-TripletPST.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/TripletPST.h
 
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/TripletPST.h
 vector
@@ -2505,14 +2489,6 @@ hdf5.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/armadillo/9.900.2/include/armadillo_bits/xvec_htrans_bones.hpp
 
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/armadillo/9.900.2/include/armadillo_bits/xvec_htrans_meat.hpp
-
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/cec14_test_func.cpp
-stdio.h
--
-math.h
--
-stdlib.h
--
 
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/main.cpp
 iostream

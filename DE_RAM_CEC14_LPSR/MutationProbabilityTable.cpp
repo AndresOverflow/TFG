@@ -8,7 +8,7 @@ MutationProbabilityTable::MutationProbabilityTable(int group_size, double evapor
     // primero inicializar el vector con inserts
 
     this->number_of_mutation_strategies = MUTATION_STRATEGIES;
-    this->number_of_groups = Population::POPULATION_SIZE/group_size;
+    this->number_of_groups = Population::POPULATION_SIZE_INIT/group_size;
     this->evaporation_rate = evaporation;
 
     std::vector<std::vector<TripletPST>> fog(this->number_of_groups, std::vector<TripletPST>(MUTATION_STRATEGIES, TripletPST(MUTATION_STRATEGIES)));
