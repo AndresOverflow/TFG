@@ -4,6 +4,7 @@
 
 #ifndef DE_RAM_CEC14_INDIVIDUAL_H
 #define DE_RAM_CEC14_INDIVIDUAL_H
+
 #include <vector>
 #include <string>
 #include <cmath>
@@ -24,22 +25,28 @@ public:
 
 
     Individual(void);
+
     Individual(vector<double> components_vector);
+
     double getFitness(void);
+
     void setFitness(double fitness);
 
     vector<double> getComponents(void);
+
     void setComponents(vector<double> vector2);
+
     void setComponent(int position, double value);
+
     double getComponent(int position);
 
     string toString(void);
 
     double calculate_fitness();
+
     bool betterFitnessThan(Individual compare_to_individual, int number_of_function);
 
     double getErrorToOptimum(int number_of_function);
-
 
 
 private:

@@ -14,15 +14,15 @@
 
 Individual::Individual(void) {
     this->fitness = NOT_INITIALIZED;
-    for (int i = 0 ; i < DIMENSION; i++) {
-       this->components.insert(this->components.begin(), 0);
+    for (int i = 0; i < DIMENSION; i++) {
+        this->components.insert(this->components.begin(), 0);
     }
 }
 
 Individual::Individual(vector<double> components_vector) {
     vector<double>::iterator it;
     it = components_vector.begin();
-    this->components.assign(it,components_vector.end());
+    this->components.assign(it, components_vector.end());
     this->fitness = this->calculate_fitness();
 }
 
@@ -43,16 +43,16 @@ void Individual::setComponents(vector<double> vector2) {
     vector<double>::iterator it;
     it = vector2.begin();
 
-    this->components.assign(it,vector2.end());
+    this->components.assign(it, vector2.end());
 
 }
 
 string Individual::toString(void) {
     string result = "------------------ \n";
-    result.append( "Fitness:");
+    result.append("Fitness:");
     result.append(to_string(fitness));
     result.append("\n");
-    for( int i = 0; i < this->components.size(); i++ ){
+    for (int i = 0; i < this->components.size(); i++) {
 
         result.append("Component ");
         result.append(to_string(i));
@@ -76,13 +76,13 @@ double Individual::calculate_fitness() {
 }
 
 bool Individual::betterFitnessThan(Individual individual_to_compare, int number_of_function) {
-   double dif_1, dif_2;
-   dif_1 = abs((this->getFitness() - (number_of_function * 100)));
-   dif_2 = abs((individual_to_compare.getFitness() - (number_of_function * 100)));
-   if (dif_1 < dif_2) {
-       return true;
-   }
-   return false;
+    double dif_1, dif_2;
+    dif_1 = abs((this->getFitness() - (number_of_function * 100)));
+    dif_2 = abs((individual_to_compare.getFitness() - (number_of_function * 100)));
+    if (dif_1 < dif_2) {
+        return true;
+    }
+    return false;
 }
 
 void Individual::setComponent(int position, double value) {

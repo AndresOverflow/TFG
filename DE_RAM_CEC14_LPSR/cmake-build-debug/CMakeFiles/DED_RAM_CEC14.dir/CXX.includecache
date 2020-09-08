@@ -6,24 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/FileReader.h
-vector
--
-string
--
-cmath
--
-stdlib.h
--
-math.h
--
-iostream
--
-Population.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Population.h
-Individual.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Individual.h
-
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Individual.h
 vector
 -
@@ -38,21 +20,7 @@ math.h
 iostream
 -
 
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/MutationProbabilityTable.h
-TripletPST.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/TripletPST.h
-vector
--
-string
--
-cmath
--
-stdlib.h
--
-math.h
--
-iostream
--
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Population.cpp
 Population.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Population.h
 
@@ -71,20 +39,6 @@ Individual.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Individual.h
 armadillo.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/armadillo.h
-
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/TripletPST.h
-vector
--
-string
--
-cmath
--
-stdlib.h
--
-math.h
--
-iostream
--
 
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/armadillo.h
 cstdlib
@@ -2489,26 +2443,4 @@ hdf5.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/armadillo/9.900.2/include/armadillo_bits/xvec_htrans_bones.hpp
 
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/armadillo/9.900.2/include/armadillo_bits/xvec_htrans_meat.hpp
-
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/main.cpp
-iostream
--
-string
--
-vector
--
-fstream
--
-sstream
--
-Individual.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Individual.h
-Population.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/Population.h
-FileReader.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/FileReader.h
-MutationProbabilityTable.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/MutationProbabilityTable.h
-armadillo.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_CEC14_LPSR/armadillo.h
 

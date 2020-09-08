@@ -3,6 +3,7 @@
 //
 
 #include "Population.h"
+
 using namespace std;
 
 
@@ -11,8 +12,16 @@ using namespace std;
 Population::Population() {
     this->population_size = POPULATION_SIZE_INIT;
 
-    for (int i = 0 ; i < this->population_size; i++) {
-       this->individuals.insert(this->individuals.begin(),Individual());
+    for (int i = 0; i < this->population_size; i++) {
+        this->individuals.insert(this->individuals.begin(), Individual());
+    }
+
+}
+Population::Population(int size) {
+    this->population_size = size;
+
+    for (int i = 0; i < this->population_size; i++) {
+        this->individuals.insert(this->individuals.begin(), Individual());
     }
 
 }
@@ -28,7 +37,6 @@ void Population::setIndividuals(vector<Individual> to_set_population) {
     this->individuals.assign(it, to_set_population.end());
 
 }
-
 
 
 void Population::toString(void) {
@@ -48,7 +56,7 @@ Individual Population::bestIndividual(void) {
 
         if (this->getIndividuals()[i].getFitness() < best_individual.getFitness()) {
             best_individual.setFitness(this->getIndividuals()[i].getFitness());
-            best_individual.setComponents(this->getIndividuals()[i].getComponents()) ;
+            best_individual.setComponents(this->getIndividuals()[i].getComponents());
 
         }
     }
@@ -64,9 +72,9 @@ void Population::setIndividual(int position, Individual ind) {
     this->individuals[position] = ind;
 }
 
-void Population::recalculateFitness(void){
+void Population::recalculateFitness(void) {
     Individual individual;
-    for (int individual_i = 0; individual_i< this->population_size; individual_i++) {
+    for (int individual_i = 0; individual_i < this->population_size; individual_i++) {
         individual = Individual();
         individual.setComponents(this->getIndividual(individual_i).getComponents());
         individual.setFitness(individual.calculate_fitness());
@@ -85,10 +93,11 @@ double Population::calculateMeanErrorToOptimumPopulation(int number_of_function)
 }
 
 void Population::assignFitness(vector<double> fitness_vector) {
-    for (int i = 0; i <this->population_size; i++) {
+    for (int i = 0; i < this->population_size; i++) {
         this->individuals[i].setFitness(fitness_vector[i]);
     }
 }
+
 int Population::getPopulationSize(void) {
     return this->population_size;
 }
@@ -105,6 +114,7 @@ int Population::WorstIndividualPosition(void) {
 
 void Population::removeIndividual(int pos) {
     this->individuals.erase(this->individuals.begin() + pos);
+    this->population_size -= 1;
 }
 
 void Population::reducePopulation(int number_of_ind_to_reduce) {
@@ -112,11 +122,4 @@ void Population::reducePopulation(int number_of_ind_to_reduce) {
         removeIndividual(WorstIndividualPosition());
     }
 }
-
-
-
-
-
-
-
 
