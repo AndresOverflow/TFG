@@ -93,6 +93,28 @@ int Population::getPopulationSize(void) {
     return this->population_size;
 }
 
+int Population::WorstIndividualPosition(void) {
+    int worst_ind_position = 0;
+    for (int position = 0; position < this->population_size; position++) {
+        if (this->getIndividual(position).getFitness() > this->getIndividual(worst_ind_position).getFitness()) {
+            worst_ind_position = position;
+        }
+    }
+    return worst_ind_position;
+}
+
+void Population::removeIndividual(int pos) {
+    this->individuals.erase(this->individuals.begin() + pos);
+}
+
+void Population::reducePopulation(int number_of_ind_to_reduce) {
+    for (int i = 0; i < number_of_ind_to_reduce; i++) {
+        removeIndividual(WorstIndividualPosition());
+    }
+}
+
+
+
 
 
 

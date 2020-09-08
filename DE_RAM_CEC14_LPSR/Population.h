@@ -43,6 +43,9 @@ public:
     void toString(void);
     Individual bestIndividual(void);
 
+    int WorstIndividualPosition(void);
+    void removeIndividual(int pos);
+
     void recalculateFitness(void);
     double calculateMeanErrorToOptimumPopulation(int function_number);
 

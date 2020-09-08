@@ -692,15 +692,17 @@ int newPopulationSize(int number_of_fit_eva) {
 
     double division = ((Population::POPULATION_SIZE_MIN - Population::POPULATION_SIZE_INIT)/(MAX_FITNESS_EVALUATIONS));
     new_population_size = round(division * number_of_fit_eva + Population::POPULATION_SIZE_INIT);
+    if (new_population_size < Population::POPULATION_SIZE_MIN) {
+        return 4;
+    }
     return new_population_size;
 }
 
-
+//TODO PROBLEMA DE MIN
 int numberOfIndividualsToReduce(Population current_population, int new_population_size) {
-    int individuals_to_reduce = 0;
-    current_population.getPopulationSize() -
-    return 0;
-
+    int individuals_to_reduce;
+    individuals_to_reduce = current_population.getPopulationSize() - new_population_size;
+    return individuals_to_reduce;
 }
 
 int main() {
@@ -709,7 +711,6 @@ int main() {
 
     int number_of_function = 2;
     int number_of_fit_eva = 0;
-
 
 
     //inicializar población
@@ -781,9 +782,9 @@ int main() {
 
         // Mirar en cuanto se reduce la poblacion
         int new_population_size = newPopulationSize(number_of_fit_eva);
-        int number_of_ind_to_reduce = numberOfIndividualsToReduce()
+        int number_of_ind_to_reduce = numberOfIndividualsToReduce(current_population, new_population_size);
         // Mirar que individuos reducir y reducir la poblacion
-        current current_population.reducePopulation(number_of_ind_to_reduce)
+        current_population.reducePopulation(number_of_ind_to_reduce);
 
         iteration += 1;
     }
