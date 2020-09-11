@@ -42,7 +42,7 @@ typedef Individual (*MutationFunctions)(vector<Individual> current_population, i
 
 
 Population selection(Population current_population, Population offspring, int number_of_function) {
-    Population final_population = Population();
+    Population final_population = Population(current_population.getPopulationSize());
     vector<Individual> current_population_vector = current_population.getIndividuals();
     vector<Individual> offspring_vector = offspring.getIndividuals();
 
@@ -65,10 +65,10 @@ Population selection(Population current_population, Population offspring, int nu
     return final_population;
 }
 
-
+//TODO problem with population_size of offspring
 //binomial crossover
 Population crossover(Population current_population, Population mutated_population) {
-    Population offspring = Population();
+    Population offspring = Population(current_population.getPopulationSize());
 
     vector<Individual> current_population_vector = current_population.getIndividuals();
     vector<Individual> mutated_population_vector = mutated_population.getIndividuals();
@@ -191,7 +191,7 @@ vector<Individual> DE_rand_2(vector<Individual> current_population_vector) {
 
 vector<Individual> DE_best_1(vector<Individual> current_population_vector) {
     vector<Individual> mutated_vector;
-    Population current_population = Population();
+    Population current_population = Population(current_population_vector.size());
     current_population.setIndividuals(current_population_vector);
     vector<double> best_individual_components = current_population.bestIndividual().getComponents();
     for (int i = 0; i < current_population_vector.size(); i++) {
@@ -229,7 +229,7 @@ vector<Individual> DE_best_1(vector<Individual> current_population_vector) {
 
 vector<Individual> DE_best_2(vector<Individual> current_population_vector) {
     vector<Individual> mutated_vector;
-    Population current_population = Population();
+    Population current_population = Population(current_population_vector.size());
     current_population.setIndividuals(current_population_vector);
     vector<double> best_individual_components = current_population.bestIndividual().getComponents();
     for (int i = 0; i < current_population_vector.size(); i++) {
@@ -311,7 +311,7 @@ vector<Individual> DE_currentToRandom_1(vector<Individual> current_population_ve
 vector<Individual> DE_currentToBest_1(vector<Individual> current_population_vector) {
 
     vector<Individual> mutated_vector;
-    Population current_population = Population();
+    Population current_population = Population(current_population_vector.size());
     current_population.setIndividuals(current_population_vector);
     vector<double> best_individual_components = current_population.bestIndividual().getComponents();
     for (int i = 0; i < current_population_vector.size(); i++) {
@@ -425,7 +425,7 @@ Individual DE_rand_2_ind(vector<Individual> current_population_vector, int ind) 
 
 Individual DE_best_1_ind(vector<Individual> current_population_vector, int ind) {
     vector<Individual> mutated_vector;
-    Population current_population = Population();
+    Population current_population = Population(current_population_vector.size());
     current_population.setIndividuals(current_population_vector);
     vector<double> best_individual_components = current_population.bestIndividual().getComponents();
     for (int i = 0; i < current_population_vector.size(); i++) {
@@ -771,7 +771,7 @@ int main() {
 
         }
 
-        if (iteration == 834) {
+        if (iteration == 2000) {
             cout << "asdf";
         }
 
