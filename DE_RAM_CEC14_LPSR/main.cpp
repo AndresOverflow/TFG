@@ -685,11 +685,13 @@ bool isOptimumIndividualFound(Population population_to_evaluate, int number_of_f
  */
 
 int newPopulationSize(int number_of_fit_eva) {
+    double new_population_size_double;
     int new_population_size;
 
     double init_minus_min = (double)(Population::POPULATION_SIZE_INIT - Population::POPULATION_SIZE_MIN);
     double division = (double)(((double)number_of_fit_eva)/(MAX_FITNESS_EVALUATIONS));
-    new_population_size = round(Population::POPULATION_SIZE_INIT - division * init_minus_min);
+    new_population_size_double = Population::POPULATION_SIZE_INIT - division * init_minus_min;
+    new_population_size = round(new_population_size_double);
     if (new_population_size < Population::POPULATION_SIZE_MIN) {
         return 4;
     }
@@ -707,7 +709,7 @@ int main() {
 
     //srand((unsigned) time(0));
 
-    int number_of_function = 2;
+    int number_of_function = 25;
     int number_of_fit_eva = 0;
 
 
@@ -771,7 +773,10 @@ int main() {
 
         }
 
-        if (iteration == 2000) {
+        if (iteration == 833) {
+            cout << "asdf";
+        }
+        if (number_of_fit_eva > 24950){
             cout << "asdf";
         }
 
