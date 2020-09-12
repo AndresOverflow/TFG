@@ -41,6 +41,10 @@ public:
 
     double getComponent(int position);
 
+    int getGroup(void);
+
+    void setGroup(int group);
+
     string toString(void);
 
     double calculate_fitness();
@@ -50,11 +54,11 @@ public:
     double getErrorToOptimum(int number_of_function);
 
 
+
 private:
     double fitness;
     vector<double> components;
-    group;
-
+    int group;
 
 };
 

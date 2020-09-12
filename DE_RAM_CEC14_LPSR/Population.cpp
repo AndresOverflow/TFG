@@ -123,3 +123,17 @@ void Population::reducePopulation(int number_of_ind_to_reduce) {
     }
 }
 
+
+void Population::assignGroupToIndividuals(int group_size) {
+    int group;
+    for (int ind = 0; ind < this->population_size; ind++) {
+        group = ceil(ind/group_size);
+        this->individuals[ind].setGroup(group);
+    }
+
+}
+
+void Population::setGroupToInd(int position, int group_value) {
+    this->individuals[position].setGroup(group_value);
+}
+

@@ -102,6 +102,14 @@ double Individual::getErrorToOptimum(int function_number) {
     return dif;
 }
 
+int Individual::getGroup(){
+    return this->group;
+}
+
+void Individual::setGroup(int group) {
+    this->group = group;
+}
+
 
 
 //TODO static double Individual::minus

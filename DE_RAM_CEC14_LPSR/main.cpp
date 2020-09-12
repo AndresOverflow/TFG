@@ -10,6 +10,7 @@
 #include "armadillo.h"
 
 //TODO raro que el bestIndividual siempre sea el mismo al principio
+//problema el mutation size ha de ser divisor del population_size_init
 
 
 
@@ -25,7 +26,7 @@ using namespace arma;
 static const double F = 0.7; //mutate factor
 static const double CR = 0.15; //Crossover factor
 //static const double CR = 0.15; //Crossover factor
-static const int GROUP_SIZE = 5;
+static const int GROUP_SIZE_INIT = Population::POPULATION_SIZE_INIT/MutationProbabilityTable::MUTATION_STRATEGIES;
 static const double EVAPORATION_RATE = 0.2;
 static const int LP_RAM = 100;
 static const int UPPER_BOUND = 100;
@@ -59,6 +60,7 @@ Population selection(Population current_population, Population offspring, int nu
             final_population_vector[i].setComponents(offspring_vector[i].getComponents());
             final_population_vector[i].setFitness(offspring_vector[i].getFitness());
         }
+        final_population_vector[i].setGroup(current_population_vector[i].getGroup());
     }
 
     final_population.setIndividuals(final_population_vector);
@@ -92,9 +94,13 @@ Population crossover(Population current_population, Population mutated_populatio
             if (random_value <= CR or component_i == j_random) {
                 value = mutated_population_vector[individual_i].getComponent(component_i);
                 offspring_vector[individual_i].setComponent(component_i, value);
+
+                //offspring_vector[individual_i].setGroup(current_population_vector[individual_i].getGroup());
             } else {
                 value = current_population_vector[individual_i].getComponent(component_i);
                 offspring_vector[individual_i].setComponent(component_i, value);
+
+                //offspring_vector[individual_i].setGroup(current_population_vector[individual_i].getGroup());
             }
         }
     }
@@ -580,6 +586,7 @@ Population mutate_RAM(Population current_population, vector<int> mutation_vector
     for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
         // SELECTION OF MUTATION DEPENDING ON THE NUMBER
         offspring_vector[ind] = mutation_functions_ram[mutation_vector[ind]](current_population_vector, ind);
+        offspring_vector[ind].setGroup(current_population.getIndividual(ind).getGroup());
     }
 
     offspring.setIndividuals(offspring_vector);
@@ -624,7 +631,8 @@ vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability
         // mirar a que grupo pertenece
         // coger el vector de probabilidades del grupo
 
-        group = ceil(individual / GROUP_SIZE);
+        //group = ceil(individual / GROUP_SIZE);
+
         group = current_population.getIndividual(individual).getGroup();
         max_prob_of_the_group = mutation_probability_table.getAccumulatedProbabilityFromGroup(group);
         probability_of_the_group = mutation_probability_table.getProbabilityFromGroup(group);
@@ -640,7 +648,7 @@ void updateTriesAndSuccess(Population current_population, Population offspring, 
                            vector<int> mutation_strategy_to_use, int number_of_function) {
     int group;
     for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
-        group = ceil(ind / GROUP_SIZE);
+        group = current_population.getIndividual(ind).getGroup();
         mutation_probability_table->addTries(group, mutation_strategy_to_use[ind], 1);
         if (offspring.getIndividual(ind).betterFitnessThan(current_population.getIndividual(ind), number_of_function)) {
             mutation_probability_table->addSuccess(group, mutation_strategy_to_use[ind], 1);
@@ -735,10 +743,11 @@ int main() {
     cout << "Su media de Fitness respecto al optimo";
     cout << current_population.calculateMeanErrorToOptimumPopulation(number_of_function);
 
+    current_population.assignGroupToIndividuals(GROUP_SIZE_INIT);
     vector<int> mutation_strategy_to_use (current_population.getPopulationSize(), -1);
 
     // Crear la tabla de mutacion
-    MutationProbabilityTable mutation_probability_table = MutationProbabilityTable(GROUP_SIZE, EVAPORATION_RATE);
+    MutationProbabilityTable mutation_probability_table = MutationProbabilityTable(GROUP_SIZE_INIT, EVAPORATION_RATE);
 
     int iteration = 1;
     while (number_of_fit_eva < MAX_FITNESS_EVALUATIONS && !isOptimumIndividualFound(current_population, number_of_function)) {
@@ -758,7 +767,11 @@ int main() {
         //cout << "\n Store Tries and Success" << "\n";
 
         //cout << "\n 4.DO SELECTION" << "\n";
+        for (int ind_to_assign_group = 0; ind_to_assign_group < current_population.getPopulationSize(); ind_to_assign_group++) {
+            offspring.setGroupToInd(ind_to_assign_group, current_population.getIndividual(ind_to_assign_group).getGroup());
+        }
         updateTriesAndSuccess(current_population, offspring, &mutation_probability_table, mutation_strategy_to_use, number_of_function);
+
 
 
         current_population = selection(current_population, offspring, number_of_function);

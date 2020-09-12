@@ -24,7 +24,9 @@ class Population {
 
 public:
 
-    static const int POPULATION_SIZE_INIT = 20;
+    //202.414 5
+    //202.372 30
+    static const int POPULATION_SIZE_INIT = 30;
     static const int POPULATION_SIZE_MIN = 4;
 
     Population(void);
@@ -60,6 +62,8 @@ public:
     void reducePopulation(int number_of_ind_to_reduce);
 
     void assignGroupToIndividuals(int group_size);
+
+    void setGroupToInd(int position, int group_value);
 
 
     static Population initializePopulation(int upper_bound, int lower_bound) {
