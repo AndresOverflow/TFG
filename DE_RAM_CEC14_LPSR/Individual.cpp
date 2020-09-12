@@ -13,6 +13,7 @@
 
 
 Individual::Individual(void) {
+    this->group = NOT_INITIALIZED_GROUP;
     this->fitness = NOT_INITIALIZED;
     for (int i = 0; i < DIMENSION; i++) {
         this->components.insert(this->components.begin(), 0);

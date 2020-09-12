@@ -610,7 +610,7 @@ int wheel_roulette(vector<double> probabilities, double max_prob_of_group) {
     return mutation_strategy - 1;
 }
 
-vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability_table, int number_of_individuals) {
+vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability_table, int number_of_individuals, Population current_population) {
     vector<int> mutation_to_use_vector(number_of_individuals, -1);
     int group = -1;
     vector<double> probability_of_the_group(mutation_probability_table.getNumberOfGroups(), 0);
@@ -619,11 +619,13 @@ vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability
     //for each individual
 
 
+    //obtenemos el individuo
     for (int individual = 0; individual < mutation_to_use_vector.size(); individual++) {
         // mirar a que grupo pertenece
         // coger el vector de probabilidades del grupo
 
         group = ceil(individual / GROUP_SIZE);
+        group = current_population.getIndividual(individual).getGroup();
         max_prob_of_the_group = mutation_probability_table.getAccumulatedProbabilityFromGroup(group);
         probability_of_the_group = mutation_probability_table.getProbabilityFromGroup(group);
         mutation_to_use_vector[individual] = wheel_roulette(probability_of_the_group, max_prob_of_the_group);
@@ -740,7 +742,7 @@ int main() {
 
     int iteration = 1;
     while (number_of_fit_eva < MAX_FITNESS_EVALUATIONS && !isOptimumIndividualFound(current_population, number_of_function)) {
-        mutation_strategy_to_use = selectMutationStrategy(mutation_probability_table, current_population.getPopulationSize());
+        mutation_strategy_to_use = selectMutationStrategy(mutation_probability_table, current_population.getPopulationSize(), current_population);
         //cout << "\n2.MUTATE THE POPULATION " << "\n";
         mutated_population = mutate_RAM(current_population, mutation_strategy_to_use);
 
@@ -776,7 +778,7 @@ int main() {
         if (iteration == 833) {
             cout << "asdf";
         }
-        if (number_of_fit_eva > 24950){
+        if (number_of_fit_eva > 15950){
             cout << "asdf";
         }
 
