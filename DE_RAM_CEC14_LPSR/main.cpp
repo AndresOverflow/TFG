@@ -719,7 +719,7 @@ int main() {
 
     //srand((unsigned) time(0));
 
-    int number_of_function = 25;
+    int number_of_function = 2;
     int number_of_fit_eva = 0;
 
 
@@ -779,12 +779,13 @@ int main() {
 
 
 
-        if (iteration % 10 == 0) {
+        if (iteration % 2 == 0) {
             cout << "\n ---------iteration " << iteration << "    diff to the optimum de la poblacion:     "
                  << current_population.calculateMeanErrorToOptimumPopulation(number_of_function) << "\n";
             cout << "\n Fitness Evaluations done to the moment:    " << number_of_fit_eva;
             cout << "\nBest individual of the population diff to the optimum:   "
                  << current_population.bestIndividual().getErrorToOptimum(number_of_function);
+            cout << "\n" << ((double)number_of_fit_eva/MAX_FITNESS_EVALUATIONS) * 100 << " %" ;
 
         }
 
@@ -807,12 +808,16 @@ int main() {
         current_population.reducePopulation(number_of_ind_to_reduce);
 
         iteration += 1;
+
+
+
     }
     cout << "\n ---------iteration " << iteration << "    diff to the optimum de la poblacion:     "
          << current_population.calculateMeanErrorToOptimumPopulation(number_of_function) << "\n";
     cout << "\n Fitness Evaluations done to the moment:    " << number_of_fit_eva;
     cout << "\nBest individual of the population diff to the optimum:   "
          << current_population.bestIndividual().getErrorToOptimum(number_of_function);
+
 
 
 
