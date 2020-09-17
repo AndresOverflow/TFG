@@ -849,6 +849,8 @@ int main() {
 
     double p = 0;
 
+    double eva_maxeva_ratio = 0.0;
+
     //inicializar población
 
     cout << "INICIALIZAMOS LA POBLACION";
@@ -877,6 +879,9 @@ int main() {
 
     int iteration = 1;
     while (number_of_fit_eva < MAX_FITNESS_EVALUATIONS && !isOptimumIndividualFound(current_population, number_of_function)) {
+
+        eva_maxeva_ratio = ((double)number_of_fit_eva/ MAX_FITNESS_EVALUATIONS);
+
         mutation_strategy_to_use = selectMutationStrategy(mutation_probability_table, current_population.getPopulationSize(), current_population);
         //cout << "\n2.MUTATE THE POPULATION " << "\n";
         mutated_population = mutate_RAM(current_population, mutation_strategy_to_use);

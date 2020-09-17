@@ -6,8 +6,8 @@
 
 
 //constructor
-TripletPST::TripletPST(int mutation_strategies) {
-    this->probability = 1.0/ mutation_strategies;
+TripletPST::TripletPST(int amount_of_cols) {
+    this->probability = 1.0/ amount_of_cols;
     this->tries = 0;
     this->success = 0;
 

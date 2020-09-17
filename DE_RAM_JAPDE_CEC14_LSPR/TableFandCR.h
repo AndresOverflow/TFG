@@ -22,9 +22,21 @@ public:
     static const AMOUNT_OF_POSSIBLE_F = 11;
     static const AMOUNT_OF_POSSIBLE_CR = 11;
 
-private:
+    TableFandCR(void);
 
-    voidTries(int )
+    void updateTable(void);
+
+    void addTries(int cr, int f, int tries_to_add);
+    void addSuccess(int cr, int f, int success_to_add);
+
+    vector<double> getProbabilityFromRow(int row);
+    void getAccumulatedProbabilityFromRow(int row);
+    double getProbabilityFromElement(int cr, int f);
+
+    double incrementMcrf(int rowCr, int colF, double eva_maxeva_ratio);
+    double EPf(int val_f, double eva_maxeva_ratio);
+
+private:
 
     vector<vector<TripletPST>> table_of_triplets;
 
