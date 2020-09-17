@@ -18,9 +18,13 @@ using namespace std;
 class TableFandCR {
 
 public:
-    static const double EVA;
+    static const double EPA = 0.1;
+    static const AMOUNT_OF_POSSIBLE_F = 11;
+    static const AMOUNT_OF_POSSIBLE_CR = 11;
 
 private:
+
+    voidTries(int )
 
     vector<vector<TripletPST>> table_of_triplets;
 

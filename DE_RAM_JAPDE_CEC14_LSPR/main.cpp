@@ -40,9 +40,39 @@ typedef Individual (*MutationFunctions)(vector<Individual> current_population, i
 //TODO: Question, cuantas fitness operations? porque para hacer la mutacion también los calculo
 
 
-double NormalFunction();
-double CouchyFunction();
+//Return random value with uniform distribution [0, 1)
+double rand_double() {
+    return (double) rand() / (double) RAND_MAX;
+}
 
+//TODO: cheeck If random functions are working
+/*
+  Return random value from Cauchy distribution with mean "mu" and variance "gamma"
+*/
+double rand_cauchy(double mu, double gamma) {
+    double result = 0.0;
+    result = mu + gamma * tan(M_PI * (rand_double() - 0.5));
+    if (result < 0)  result = 0.0;
+    if (result > 1)  result = 1.0;
+
+    return result;
+}
+
+
+/*
+  Return random value from normal distribution with mean "mu" and variance "gamma"
+*/
+double rand_gauss(double mu, double sigma) {
+    double result = 0;
+    result = mu + sigma * sqrt(-2.0 * log(rand_double())) * sin(2.0 * M_PI * rand_double());
+    while (result < 0) {
+        result = mu + sigma * sqrt(-2.0 * log(rand_double())) * sin(2.0 * M_PI * rand_double());
+    }
+    if (result > 1)  result = 1.0;
+
+    return result;
+
+}
 
 
 Population selection(Population current_population, Population offspring, int number_of_function) {
@@ -809,6 +839,8 @@ double calculateP(int evaluations_done, int population_size) {
 
 
 int main() {
+
+
 
     //srand((unsigned) time(0));
 
