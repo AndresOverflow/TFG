@@ -40,6 +40,10 @@ typedef Individual (*MutationFunctions)(vector<Individual> current_population, i
 //TODO: Question, cuantas fitness operations? porque para hacer la mutacion también los calculo
 
 
+double NormalFunction();
+double CouchyFunction();
+
+
 
 Population selection(Population current_population, Population offspring, int number_of_function) {
     Population final_population = Population(current_population.getPopulationSize());
@@ -547,6 +551,82 @@ Individual DE_currentToRandom_1_ind(vector<Individual> current_population_vector
     return ind_to_return;
 }
 
+Individual DE_PBest(vector<Individual> current_population_vector, int ind, double p) {
+    vector<Individual> mutated_vector;
+    Population current_population = Population(current_population_vector.size());
+    current_population.setIndividuals(current_population_vector);
+    vector<double> best_individual_components = current_population.bestIndividual().getComponents();
+    for (int i = 0; i < current_population_vector.size(); i++) {
+        mutated_vector.insert(mutated_vector.begin(), Individual());
+    }
+
+    Individual ind_to_return = Individual();
+
+    int N_X_r1, N_X_r2;
+    double CN_X_r1, CN_X_r2, CN_X_best;
+
+    double value;
+
+//Por cada individuo de la población
+//escogemos 3 elementos aleatoriamente de la poblacion
+    N_X_r1 = (rand() % current_population_vector.size());
+    N_X_r2 = (rand() % current_population_vector.size());
+
+
+    //Por cada componente del individio
+    for (int component_i = 0; component_i < Individual::DIMENSION; component_i++) {
+
+        CN_X_r1 = current_population_vector[N_X_r1].getComponents()[component_i];
+        CN_X_r2 = current_population_vector[N_X_r2].getComponents()[component_i];
+        CN_X_best = best_individual_components[component_i];
+
+
+        value = CN_X_best + F * (CN_X_r1 - CN_X_r2);
+
+        ind_to_return.setComponent(component_i, value);
+    }
+
+    return ind_to_return;
+}
+
+Individual DE_currentToPBest(vector<Individual> current_population_vector, int ind, double p) {
+    vector<Individual> mutated_vector;
+    for (int i = 0; i < current_population_vector.size(); i++) {
+        mutated_vector.insert(mutated_vector.begin(), Individual());
+    }
+    Individual ind_to_return = Individual();
+
+    int N_X_r1, N_X_r2, N_X_r3;
+    double CN_X_r1, CN_X_r2, CN_X_r3, CN_X_i;
+
+    double value;
+
+    //Por cada individuo de la población
+    //escogemos 3 elementos aleatoriamente de la poblacion
+    N_X_r1 = (rand() % current_population_vector.size());
+    N_X_r2 = (rand() % current_population_vector.size());
+    N_X_r3 = (rand() % current_population_vector.size());
+
+
+
+    //Por cada componente del individio
+    for (int component_i = 0; component_i < Individual::DIMENSION; component_i++) {
+
+        CN_X_i = current_population_vector[ind].getComponents()[component_i];
+
+        CN_X_r1 = current_population_vector[N_X_r1].getComponents()[component_i];
+        CN_X_r2 = current_population_vector[N_X_r2].getComponents()[component_i];
+        CN_X_r3 = current_population_vector[N_X_r3].getComponents()[component_i];
+
+
+        value = CN_X_i + F * (CN_X_r1 - CN_X_i + CN_X_r2 - CN_X_r3);
+
+        ind_to_return.setComponent(component_i, value);
+    }
+
+    return ind_to_return;
+}
+
 
 Population mutate(Population current_population) {
 
@@ -714,14 +794,28 @@ int numberOfIndividualsToReduce(Population current_population, int new_populatio
     return individuals_to_reduce;
 }
 
+
+double calculateP(int evaluations_done, int population_size) {
+    double p = 0;
+    double first_part = 0;
+    double second_part = 0;
+
+    first_part = (1 - ((double)evaluations_done/ MAX_FITNESS_EVALUATIONS));
+    second_part = 1/(double)Population::POPULATION_SIZE_INIT;
+    p = max(first_part, second_part);
+    return p;
+
+}
+
+
 int main() {
 
-    cout << "begin RAM-JAPDE";
     //srand((unsigned) time(0));
 
     int number_of_function = 2;
     int number_of_fit_eva = 0;
 
+    double p = 0;
 
     //inicializar población
 
@@ -792,8 +886,9 @@ int main() {
         if (iteration == 833) {
             cout << "asdf";
         }
-        if (number_of_fit_eva > 15950){
+        if (number_of_fit_eva > 18000){
             cout << "asdf";
+            p = calculateP(number_of_fit_eva, current_population.getPopulationSize());
         }
 
         // si es LP_RAM actualizamos
