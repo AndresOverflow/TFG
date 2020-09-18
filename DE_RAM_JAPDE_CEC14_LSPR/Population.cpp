@@ -63,6 +63,30 @@ Individual Population::bestIndividual(void) {
     return best_individual;
 }
 
+bool cmp(Individual a, Individual b ) {
+        return a.getFitness() < b.getFitness();
+}
+
+//TODO to be checked set group? y que no se modifique la population
+Individual Population::pBestIndividual(double p) {
+    double max_pbest_individual = ceil( (double) POPULATION_SIZE_INIT * p);
+
+    random_pbest_individual = (rand() % this->max_pbest_individual);
+
+
+    Individual pbest_individual = Individual();
+
+    vector<Individual> individuals_sorted = this->getIndividuals();
+    sort(individuals_sorted.begin(), individuals_sorted.end(), cmp);
+
+
+    pbest_individual.setFitness(individuals_sorted[i].getFitness());
+    pbest_individual.setComponents(individuals_sorted[i].getComponents());
+    pbest_individual.setGroup(individuals_sorted[i].getGroup());
+
+    return best_individual;
+}
+
 Individual Population::getIndividual(int position) {
     return this->individuals[position];
 }

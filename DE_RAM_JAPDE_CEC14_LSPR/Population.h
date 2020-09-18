@@ -11,6 +11,7 @@
 #include <cmath>
 #include <stdlib.h>
 #include <math.h>
+#include <algorithm>
 
 
 #include "Individual.h"
@@ -47,6 +48,11 @@ public:
     void toString(void);
 
     Individual bestIndividual(void);
+
+    bool cmp( Individual a, Individual b );
+
+
+    Individual pBestIndividual(double p);
 
     int WorstIndividualPosition(void);
 

@@ -631,7 +631,7 @@ Individual DE_PBest_1_ind(vector<Individual> current_population_vector, int ind,
     Population current_population = Population(current_population_vector.size());
     current_population.setIndividuals(current_population_vector);
 
-    vector<double> pbest_individual_components = current_population.pBestIndividual().getComponents();
+    vector<double> pbest_individual_components = current_population.pBestIndividual(p).getComponents();
 
     for (int i = 0; i < current_population_vector.size(); i++) {
         mutated_vector.insert(mutated_vector.begin(), Individual());
@@ -671,7 +671,7 @@ Individual DE_currentToPBest_1_ind(vector<Individual> current_population_vector,
 
     Population current_population = Population(current_population_vector.size());
     current_population.setIndividuals(current_population_vector);
-    vector<double> pbest_individual_components = current_population.pBestIndividual().getComponents();
+    vector<double> pbest_individual_components = current_population.pBestIndividual(p).getComponents();
 
     for (int i = 0; i < current_population_vector.size(); i++) {
         mutated_vector.insert(mutated_vector.begin(), Individual());
