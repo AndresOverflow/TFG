@@ -24,7 +24,7 @@ class MutationProbabilityTable {
 
 
 public:
-    static const int MUTATION_STRATEGIES = 5;
+    static const int MUTATION_STRATEGIES = 2;
 
 
 

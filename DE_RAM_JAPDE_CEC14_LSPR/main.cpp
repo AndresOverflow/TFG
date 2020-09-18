@@ -7,6 +7,7 @@
 #include "Population.h"
 #include "MutationProbabilityTable.h"
 #include "armadillo.h"
+#include "TableFandCR.h"
 
 //TODO raro que el bestIndividual siempre sea el mismo al principio
 //problema el mutation size ha de ser divisor del population_size_init
@@ -756,28 +757,6 @@ Population mutate_RAM_JAPDE(Population current_population, vector<int> mutation_
         }
     }
 
-
-
-
-/*
-    }
-    MutationFunctions mutation_functions_ram_japde[] = {
-
-            DE_rand_1_ind,
-            DE_rand_2_ind,
-            DE_best_1_ind,
-            DE_best_2_ind,
-            DE_currentToRandom_1_ind
-
-    };
-
-    for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
-        // SELECTION OF MUTATION DEPENDING ON THE NUMBER
-        offspring_vector[ind] = mutation_functions_ram_japde[mutation_vector[ind]](current_population_vector, ind);
-        offspring_vector[ind].setGroup(current_population.getIndividual(ind).getGroup());
-    }
-*/
-
     offspring.setIndividuals(offspring_vector);
     offspring.recalculateFitness();
     return offspring;
@@ -833,7 +812,61 @@ vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability
 
 }
 
-void updateTriesAndSuccess(Population current_population, Population offspring, MutationProbabilityTable *mutation_probability_table,
+vector<double> selectMeanCRValues(TableFandCR table_mean_values, int number_of_individuals, Population current_population) {
+    vector<int> mutation_to_use_vector(number_of_individuals, -1);
+    vector<double> probability_of_the_cr(TableFandCR::AMOUNT_OF_POSSIBLE_F, 0);
+
+    double max_prob_of_the_group;
+
+    //for each individual
+
+
+    //obtenemos el individuo
+    for (int individual = 0; individual < mutation_to_use_vector.size(); individual++) {
+        // mirar a que grupo pertenece
+        // coger el vector de probabilidades del grupo
+
+
+        max_prob_of_the_Cr = table_mean_values.getAccumulatedProbabilityFromRow()
+
+        max_prob_of_the_group = mutation_probability_table.getAccumulatedProbabilityFromGroup(group);
+        probability_of_the_cr = mutation_probability_table.getProbabilityFromGroup(cr);
+        mutation_to_use_vector[individual] = wheel_roulette(probability_of_the_group, max_prob_of_the_group);
+
+
+    }
+    return mutation_to_use_vector;
+
+}
+
+vector<double> selectMeanFValues(TableFandCR table_mean_values, int number_of_individuals, Population current_population, vector<double> mean_cr_values) {
+    vector<int> mutation_to_use_vector(number_of_individuals, -1);
+    int group = -1;
+    vector<double> probability_of_the_group(mutation_probability_table.getNumberOfGroups(), 0);
+    double max_prob_of_the_group;
+
+    //for each individual
+
+
+    //obtenemos el individuo
+    for (int individual = 0; individual < mutation_to_use_vector.size(); individual++) {
+        // mirar a que grupo pertenece
+        // coger el vector de probabilidades del grupo
+
+        //group = ceil(individual / GROUP_SIZE);
+
+        group = current_population.getIndividual(individual).getGroup();
+        max_prob_of_the_group = mutation_probability_table.getAccumulatedProbabilityFromGroup(group);
+        probability_of_the_group = mutation_probability_table.getProbabilityFromGroup(group);
+        mutation_to_use_vector[individual] = wheel_roulette(probability_of_the_group, max_prob_of_the_group);
+
+
+    }
+    return mutation_to_use_vector;
+
+}
+
+void updateTriesAndSuccessMutTable(Population current_population, Population offspring, MutationProbabilityTable *mutation_probability_table,
                            vector<int> mutation_strategy_to_use, int number_of_function) {
     int group;
     for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
@@ -842,6 +875,19 @@ void updateTriesAndSuccess(Population current_population, Population offspring, 
         if (offspring.getIndividual(ind).betterFitnessThan(current_population.getIndividual(ind), number_of_function)) {
             mutation_probability_table->addSuccess(group, mutation_strategy_to_use[ind], 1);
 
+        }
+    }
+}
+
+//TODO check if it works
+
+void updateTriesAndSuccessMeanValuesCRF(Population current_population, Population offspring, TableFandCR *mean_values_cr_f,
+                                        vector<double>mean_values_cr, vector<double>mean_values_f, int number_of_function) {
+
+    for(int ind = 0; ind < current_population.getPopulationSize(); ind++) {
+        mean_values_cr_f->addTries(mean_values_cr[ind]*10, mean_values_f[ind]*10, 1);
+        if (offspring.getIndividual(ind).betterFitnessThan(current_population.getIndividual(ind), number_of_function)) {
+            mean_values_cr_f->addSuccess(mean_values_cr[ind]*10, mean_values_f[ind]*10, 1);
         }
     }
 }
@@ -952,15 +998,45 @@ int main() {
     cout << current_population.calculateMeanErrorToOptimumPopulation(number_of_function);
 
     current_population.assignGroupToIndividuals(GROUP_SIZE_INIT);
+
+
+
+    vector<double> mean_cr_values (current_population.getPopulationSize(), -1);
+    vector<double> mean_f_values (current_population.getPopulationSize(), -1);
+
+    TableFandCR mean_cr_f_values = TableFandCR();
+
+
     vector<int> mutation_strategy_to_use (current_population.getPopulationSize(), -1);
 
     // Crear la tabla de mutacion
+
+    bool create_new_mutation_table2 = false;
+    bool create_new_mutation_table3 = false;
     MutationProbabilityTable mutation_probability_table = MutationProbabilityTable(GROUP_SIZE_INIT, EVAPORATION_RATE);
+
+
 
     int iteration = 1;
     while (number_of_fit_eva < MAX_FITNESS_EVALUATIONS && !isOptimumIndividualFound(current_population, number_of_function)) {
+        p = calculateP(number_of_fit_eva, current_population.getPopulationSize());
 
         eva_maxeva_ratio = ((double)number_of_fit_eva/ MAX_FITNESS_EVALUATIONS);
+
+        mean_cr_values = selectMeanCRValues( mean_cr_f_values, current_population.getPopulationSize(), current_population);
+        mean_f_values = selectMeanFValues(mean_cr_f_values, current_population.getPopulationSize(), current_population, mean_cr_values);
+
+        if (create_new_mutation_table2 == true && p < 0.8) {
+            mutation_probability_table = MutationProbabilityTable(GROUP_SIZE_INIT,EVAPORATION_RATE);
+            create_new_mutation_table2 = false;
+        }
+        if (create_new_mutation_table3 == true && p < 0.2) {
+            mutation_probability_table = MutationProbabilityTable(GROUP_SIZE_INIT,EVAPORATION_RATE);
+            create_new_mutation_table3 = false;
+        }
+
+
+
 
         mutation_strategy_to_use = selectMutationStrategy(mutation_probability_table, current_population.getPopulationSize(), current_population);
         //cout << "\n2.MUTATE THE POPULATION " << "\n";
@@ -981,7 +1057,8 @@ int main() {
         for (int ind_to_assign_group = 0; ind_to_assign_group < current_population.getPopulationSize(); ind_to_assign_group++) {
             offspring.setGroupToInd(ind_to_assign_group, current_population.getIndividual(ind_to_assign_group).getGroup());
         }
-        updateTriesAndSuccess(current_population, offspring, &mutation_probability_table, mutation_strategy_to_use, number_of_function);
+        updateTriesAndSuccessMutTable(current_population, offspring, &mutation_probability_table, mutation_strategy_to_use, number_of_function);
+        updateTriesAndSuccessMeanValuesCRF(current_population, offspring, &mean_cr_f_values, mean_cr_values, mean_f_values, number_of_function);
 
 
 
