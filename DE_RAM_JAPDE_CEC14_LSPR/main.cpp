@@ -34,7 +34,9 @@ const double EPSILON = pow(10.0, -8);
 const int MAX_FITNESS_EVALUATIONS = Individual::DIMENSION * 10000;
 
 typedef Individual (*MutationFunctions)(vector<Individual> current_population, int ind);
-
+typedef Individual (*MutationFunctions_1)(vector<Individual> current_population, int ind);
+typedef Individual (*MutationFunctions_2)(vector<Individual> current_population, int ind, double p);
+typedef Individual (*MutationFunctions_3)(vector<Individual> current_population, int ind);
 
 //TODO: Question, mutation table with probabilities that sum more that 1?
 //TODO: Question, cuantas fitness operations? porque para hacer la mutacion también los calculo
@@ -704,6 +706,79 @@ Population mutate_RAM(Population current_population, vector<int> mutation_vector
 
 }
 
+//TODO to be done
+Population mutate_RAM_JAPDE(Population current_population, vector<int> mutation_vector, double p) {
+    Population offspring = Population(current_population.getPopulationSize());
+    vector<Individual> current_population_vector = current_population.getIndividuals();
+    vector<Individual> offspring_vector;
+
+
+    for (int idx = 0; idx < current_population.getPopulationSize(); idx++) {
+        offspring_vector.insert(offspring_vector.end(), Individual());
+    }
+    if (p >= 0.2 or p <= 0.8) {
+        MutationFunctions_2 mutation_functions_ram_japde[] {
+            DE_PBest_ind,
+            DE_currentToPBest_ind
+        };
+
+        for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
+        // SELECTION OF MUTATION DEPENDING ON THE NUMBER
+        offspring_vector[ind] = mutation_functions_ram_japde[mutation_vector[ind]](current_population_vector, ind, p);
+        offspring_vector[ind].setGroup(current_population.getIndividual(ind).getGroup());
+        }
+    } else {
+        if (p > 0.8) {
+            MutationFunctions_1 mutation_functions_ram_japde[] = {
+                    DE_rand_1_ind,
+                    DE_currentToRandom_1_ind,
+            };
+            for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
+                // SELECTION OF MUTATION DEPENDING ON THE NUMBER
+                offspring_vector[ind] = mutation_functions_ram_japde[mutation_vector[ind]](current_population_vector, ind);
+                offspring_vector[ind].setGroup(current_population.getIndividual(ind).getGroup());
+            }
+        } else { // p < 0.2
+            MutationFunctions_1 mutation_functions_ram_japde[] = {
+                    DE_best_1_ind,
+                    DE_currentToBest_1_ind
+            };
+            for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
+                // SELECTION OF MUTATION DEPENDING ON THE NUMBER
+                offspring_vector[ind] = mutation_functions_ram_japde[mutation_vector[ind]](current_population_vector, ind);
+                offspring_vector[ind].setGroup(current_population.getIndividual(ind).getGroup());
+            }
+
+        }
+
+
+
+
+/*
+    }
+    MutationFunctions mutation_functions_ram_japde[] = {
+
+            DE_rand_1_ind,
+            DE_rand_2_ind,
+            DE_best_1_ind,
+            DE_best_2_ind,
+            DE_currentToRandom_1_ind
+
+    };
+
+    for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
+        // SELECTION OF MUTATION DEPENDING ON THE NUMBER
+        offspring_vector[ind] = mutation_functions_ram_japde[mutation_vector[ind]](current_population_vector, ind);
+        offspring_vector[ind].setGroup(current_population.getIndividual(ind).getGroup());
+    }
+*/
+
+    offspring.setIndividuals(offspring_vector);
+    offspring.recalculateFitness();
+    return offspring;
+
+}
+
 int wheel_roulette(vector<double> probabilities, double max_prob_of_group) {
 //Create a reandom and loop over the array of probabilities until findin the corrent number
 
@@ -884,7 +959,7 @@ int main() {
 
         mutation_strategy_to_use = selectMutationStrategy(mutation_probability_table, current_population.getPopulationSize(), current_population);
         //cout << "\n2.MUTATE THE POPULATION " << "\n";
-        mutated_population = mutate_RAM(current_population, mutation_strategy_to_use);
+        mutated_population = mutate_RAM_JAPDE(current_population, mutation_strategy_to_use, p);
 
         //cout << "\n 3.DO CROSSOVER" << "\n";
         offspring = crossover(current_population, mutated_population);
