@@ -34,10 +34,7 @@ static const int LOWER_BOUND = -100;
 const double EPSILON = pow(10.0, -8);
 const int MAX_FITNESS_EVALUATIONS = Individual::DIMENSION * 10000;
 
-typedef Individual (*MutationFunctions)(vector<Individual> current_population, int ind);
-typedef Individual (*MutationFunctions_1)(vector<Individual> current_population, int ind);
-typedef Individual (*MutationFunctions_2)(vector<Individual> current_population, int ind, double p);
-typedef Individual (*MutationFunctions_3)(vector<Individual> current_population, int ind);
+typedef Individual (*MutationFunctions)(vector<Individual> current_population, int ind, double p);
 
 //TODO: Question, mutation table with probabilities that sum more that 1?
 //TODO: Question, cuantas fitness operations? porque para hacer la mutacion también los calculo
@@ -721,40 +718,15 @@ Population mutate_RAM_JAPDE(Population current_population, vector<int> mutation_
     for (int idx = 0; idx < current_population.getPopulationSize(); idx++) {
         offspring_vector.insert(offspring_vector.end(), Individual());
     }
-    if (p >= 0.2 or p <= 0.8) {
-        MutationFunctions_2 mutation_functions_ram_japde[] {
-            DE_PBest_1_ind,
-            DE_currentToPBest_1_ind
-        };
+    MutationFunctions mutation_functions_ram_japde[] {
+        DE_PBest_1_ind,
+        DE_currentToPBest_1_ind
+    };
 
-        for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
-        // SELECTION OF MUTATION DEPENDING ON THE NUMBER
-        offspring_vector[ind] = mutation_functions_ram_japde[mutation_vector[ind]](current_population_vector, ind, p);
-        offspring_vector[ind].setGroup(current_population.getIndividual(ind).getGroup());
-        }
-    } else {
-        if (p > 0.8) {
-            MutationFunctions_1 mutation_functions_ram_japde[] = {
-                    DE_rand_1_ind,
-                    DE_currentToRandom_1_ind,
-            };
-            for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
-                // SELECTION OF MUTATION DEPENDING ON THE NUMBER
-                offspring_vector[ind] = mutation_functions_ram_japde[mutation_vector[ind]](current_population_vector, ind);
-                offspring_vector[ind].setGroup(current_population.getIndividual(ind).getGroup());
-            }
-        } else { // p < 0.2
-            MutationFunctions_1 mutation_functions_ram_japde[] = {
-                    DE_best_1_ind,
-                    DE_currentToBest_1_ind
-            };
-            for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
-                // SELECTION OF MUTATION DEPENDING ON THE NUMBER
-                offspring_vector[ind] = mutation_functions_ram_japde[mutation_vector[ind]](current_population_vector, ind);
-                offspring_vector[ind].setGroup(current_population.getIndividual(ind).getGroup());
-            }
-
-        }
+    for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
+    // SELECTION OF MUTATION DEPENDING ON THE NUMBER
+    offspring_vector[ind] = mutation_functions_ram_japde[mutation_vector[ind]](current_population_vector, ind, p);
+    offspring_vector[ind].setGroup(current_population.getIndividual(ind).getGroup());
     }
 
     offspring.setIndividuals(offspring_vector);
@@ -1010,9 +982,6 @@ int main() {
     vector<int> mutation_strategy_to_use (current_population.getPopulationSize(), -1);
 
     // Crear la tabla de mutacion
-
-    bool create_new_mutation_table2 = false;
-    bool create_new_mutation_table3 = false;
     MutationProbabilityTable mutation_probability_table = MutationProbabilityTable(GROUP_SIZE_INIT, EVAPORATION_RATE);
 
 
@@ -1025,18 +994,6 @@ int main() {
 
         mean_cr_values = selectMeanCRValues( mean_cr_f_values, current_population.getPopulationSize(), current_population);
         mean_f_values = selectMeanFValues(mean_cr_f_values, current_population.getPopulationSize(), current_population, mean_cr_values);
-
-        if (create_new_mutation_table2 == true && p < 0.8) {
-            mutation_probability_table = MutationProbabilityTable(GROUP_SIZE_INIT,EVAPORATION_RATE);
-            create_new_mutation_table2 = false;
-        }
-        if (create_new_mutation_table3 == true && p < 0.2) {
-            mutation_probability_table = MutationProbabilityTable(GROUP_SIZE_INIT,EVAPORATION_RATE);
-            create_new_mutation_table3 = false;
-        }
-
-
-
 
         mutation_strategy_to_use = selectMutationStrategy(mutation_probability_table, current_population.getPopulationSize(), current_population);
         //cout << "\n2.MUTATE THE POPULATION " << "\n";
