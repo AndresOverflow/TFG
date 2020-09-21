@@ -697,7 +697,7 @@ Individual DE_currentToPBest_1_ind(vector<Individual> current_population_vector,
         CN_X_r2 = current_population_vector[N_X_r2].getComponents()[component_i];
         CN_X_pbest = pbest_individual_components[component_i];
 
-        value = CN_X_i + F * (CN_X_i - CN_X_pbest  + CN_X_r1 - CN_X_r2);
+        value = CN_X_i + F * (CN_X_pbest - CN_X_i + CN_X_r1 - CN_X_r2);
 
         ind_to_return.setComponent(component_i, value);
     }
@@ -889,17 +889,6 @@ bool isOptimumIndividualFound(Population population_to_evaluate, int number_of_f
 }
 
 
-/*
- * Inicializar poblacion con valores de -100 a 100
- * Calcular fitness
- * Iterar hasta que se consigan el máximo de Iteraciones o arrives to the optimum value
-     * hacer mutación
-     * hacer crossover
-     * Calculcar fitness
-     * hacer selección
-     * print best individual
- *
- */
 
 int newPopulationSize(int number_of_fit_eva) {
     double new_population_size_double;
@@ -935,6 +924,19 @@ double calculateP(int evaluations_done, int population_size) {
 
 }
 
+
+
+/*
+ * Inicializar poblacion con valores de -100 a 100
+ * Calcular fitness
+ * Iterar hasta que se consigan el máximo de Iteraciones o arrives to the optimum value
+     * hacer mutación
+     * hacer crossover
+     * Calculcar fitness
+     * hacer selección
+     * print best individual
+ *
+ */
 
 int main() {
 
