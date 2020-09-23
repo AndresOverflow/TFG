@@ -23,8 +23,8 @@ using namespace std;
 using namespace arma;
 
 //static const double F = 1.7; //mutate factor
-static const double F = 0.7; //mutate factor
-static const double CR = 0.15; //Crossover factor
+//static const double F = 0.7; //mutate factor
+//static const double CR = 0.15; //Crossover factor
 //static const double CR = 0.15; //Crossover factor
 static const int GROUP_SIZE_INIT = Population::POPULATION_SIZE_INIT/MutationProbabilityTable::MUTATION_STRATEGIES;
 static const double EVAPORATION_RATE = 0.2;
@@ -34,7 +34,7 @@ static const int LOWER_BOUND = -100;
 const double EPSILON = pow(10.0, -8);
 const int MAX_FITNESS_EVALUATIONS = Individual::DIMENSION * 10000;
 
-typedef Individual (*MutationFunctions)(vector<Individual> current_population, int ind, double p);
+typedef Individual (*MutationFunctions)(vector<Individual> current_population, int ind, vector<vector<double>> mean_cr_f_values_to_use, double p);
 
 //TODO: Question, mutation table with probabilities that sum more that 1?
 //TODO: Question, cuantas fitness operations? porque para hacer la mutacion también los calculo
@@ -102,7 +102,7 @@ Population selection(Population current_population, Population offspring, int nu
 
 //TODO problem with population_size of offspring
 //binomial crossover
-Population crossover(Population current_population, Population mutated_population) {
+Population crossover(Population current_population, Population mutated_population, vector<vector<double>> mean_cr_f_values_to_use) {
     Population offspring = Population(current_population.getPopulationSize());
 
     vector<Individual> current_population_vector = current_population.getIndividuals();
@@ -152,7 +152,7 @@ Population crossover(Population current_population, Population mutated_populatio
  */
 
 
-
+/*
 
 vector<Individual> DE_rand_1(vector<Individual> current_population_vector) {
     vector<Individual> mutated_vector;
@@ -622,8 +622,9 @@ Individual DE_currentToBest_1_ind(vector<Individual> current_population_vector, 
     return ind_to_return;
 }
 
+ */
 
-Individual DE_PBest_1_ind(vector<Individual> current_population_vector, int ind, double p) {
+Individual DE_PBest_1_ind(vector<Individual> current_population_vector, int ind, vector<vector<double>> mean_cr_f_values_to_use, double p) {
     vector<Individual> mutated_vector;
 
     Population current_population = Population(current_population_vector.size());
@@ -656,7 +657,7 @@ Individual DE_PBest_1_ind(vector<Individual> current_population_vector, int ind,
         CN_X_pbest = pbest_individual_components[component_i];
 
 
-        value = CN_X_pbest + F * (CN_X_r1 - CN_X_r2);
+        value = CN_X_pbest + mean_cr_f_values_to_use[ind][1] * (CN_X_r1 - CN_X_r2);
 
         ind_to_return.setComponent(component_i, value);
     }
@@ -664,7 +665,7 @@ Individual DE_PBest_1_ind(vector<Individual> current_population_vector, int ind,
     return ind_to_return;
 }
 
-Individual DE_currentToPBest_1_ind(vector<Individual> current_population_vector, int ind, double p) {
+Individual DE_currentToPBest_1_ind(vector<Individual> current_population_vector, int ind, vector<vector<double>> mean_cr_f_values_to_use, double p) {
     vector<Individual> mutated_vector;
 
     Population current_population = Population(current_population_vector.size());
@@ -697,7 +698,7 @@ Individual DE_currentToPBest_1_ind(vector<Individual> current_population_vector,
         CN_X_r2 = current_population_vector[N_X_r2].getComponents()[component_i];
         CN_X_pbest = pbest_individual_components[component_i];
 
-        value = CN_X_i + F * (CN_X_pbest - CN_X_i + CN_X_r1 - CN_X_r2);
+        value = CN_X_i + mean_cr_f_values_to_use[ind][1] * (CN_X_pbest - CN_X_i + CN_X_r1 - CN_X_r2);
 
         ind_to_return.setComponent(component_i, value);
     }
@@ -709,7 +710,7 @@ Individual DE_currentToPBest_1_ind(vector<Individual> current_population_vector,
 
 
 //TODO to be tested
-Population mutate_RAM_JAPDE(Population current_population, vector<int> mutation_vector, double p) {
+Population mutate_RAM_JAPDE(Population current_population, vector<int> mutation_vector, vector<vector<double>> mean_cr_f_values_to_use, double p) {
     Population offspring = Population(current_population.getPopulationSize());
     vector<Individual> current_population_vector = current_population.getIndividuals();
     vector<Individual> offspring_vector;
@@ -725,7 +726,7 @@ Population mutate_RAM_JAPDE(Population current_population, vector<int> mutation_
 
     for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
     // SELECTION OF MUTATION DEPENDING ON THE NUMBER
-    offspring_vector[ind] = mutation_functions_ram_japde[mutation_vector[ind]](current_population_vector, ind, p);
+    offspring_vector[ind] = mutation_functions_ram_japde[mutation_vector[ind]](current_population_vector, ind, mean_cr_f_values_to_use, p);
     offspring_vector[ind].setGroup(current_population.getIndividual(ind).getGroup());
     }
 
@@ -734,7 +735,7 @@ Population mutate_RAM_JAPDE(Population current_population, vector<int> mutation_
     return offspring;
 
 }
-
+//TODO check wheel_roulette
 int wheel_roulette(vector<double> probabilities, double max_prob_of_group) {
 //Create a reandom and loop over the array of probabilities until findin the corrent number
 
@@ -747,7 +748,7 @@ int wheel_roulette(vector<double> probabilities, double max_prob_of_group) {
     random_value = 0 + random_value * (max_prob_of_group - 0);
 
     accumulated_probability = 0;
-    mutation_strategy = probabilities[0];
+    mutation_strategy = probabilities[0]; // ????
 
     while (random_value > accumulated_probability or mutation_strategy > probabilities.size()) {
         accumulated_probability = accumulated_probability + probabilities[mutation_strategy];
@@ -760,7 +761,7 @@ int wheel_roulette(vector<double> probabilities, double max_prob_of_group) {
 vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability_table, int number_of_individuals, Population current_population) {
     vector<int> mutation_to_use_vector(number_of_individuals, -1);
     int group = -1;
-    vector<double> probability_of_the_group(mutation_probability_table.getNumberOfGroups(), 0);
+    vector<double> probability_per_mut_str_of_the_group(mutation_probability_table.getNumberOfGroups(), 0);
     double max_prob_of_the_group;
 
     //for each individual
@@ -771,12 +772,11 @@ vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability
         // mirar a que grupo pertenece
         // coger el vector de probabilidades del grupo
 
-        //group = ceil(individual / GROUP_SIZE);
 
         group = current_population.getIndividual(individual).getGroup();
         max_prob_of_the_group = mutation_probability_table.getAccumulatedProbabilityFromGroup(group);
-        probability_of_the_group = mutation_probability_table.getProbabilityFromGroup(group);
-        mutation_to_use_vector[individual] = wheel_roulette(probability_of_the_group, max_prob_of_the_group);
+        probability_per_mut_str_of_the_group = mutation_probability_table.getProbabilityFromGroup(group);
+        mutation_to_use_vector[individual] = wheel_roulette(probability_per_mut_str_of_the_group, max_prob_of_the_group);
 
 
     }
@@ -784,6 +784,33 @@ vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability
 
 }
 
+
+vector<vector<double>> selectMeanCRFValues(TableFandCR table_mean_cr_f_prob, vector<vector<double>> mean_cr_f_values_to_use, int number_of_individuals, Population current_population) {
+    std::vector<std::vector<double>> mean_cr_f_values_to_use_to_return(current_population.getPopulationSize(), std::vector<double>(2, -1));
+
+    vector<double> probability_per_f = table_mean_cr_f_prob.getProbabilityFromRow(0);
+    //get random_value from 0 to cumulative
+
+    rowToSearch = wheel_roulette()
+
+    for (int ind = 0; ind < number_of_individuals; ind++) {
+
+    }
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+/*
 vector<double> selectMeanCRValues(TableFandCR table_mean_values, int number_of_individuals, Population current_population) {
     vector<int> mutation_to_use_vector(number_of_individuals, -1);
     vector<double> probability_of_the_cr(TableFandCR::AMOUNT_OF_POSSIBLE_F, 0);
@@ -837,7 +864,7 @@ vector<double> selectMeanFValues(TableFandCR table_mean_values, int number_of_in
     return mutation_to_use_vector;
 
 }
-
+*/
 void updateTriesAndSuccessMutTable(Population current_population, Population offspring, MutationProbabilityTable *mutation_probability_table,
                            vector<int> mutation_strategy_to_use, int number_of_function) {
     int group;
@@ -854,12 +881,16 @@ void updateTriesAndSuccessMutTable(Population current_population, Population off
 //TODO check if it works
 
 void updateTriesAndSuccessMeanValuesCRF(Population current_population, Population offspring, TableFandCR *mean_values_cr_f,
-                                        vector<double>mean_values_cr, vector<double>mean_values_f, int number_of_function) {
+                                        vector<vector<double>> mean_cr_f_values_to_use, int number_of_function) {
+    int cr_value_to_assign;
+    int f_value_to_assign;
 
     for(int ind = 0; ind < current_population.getPopulationSize(); ind++) {
-        mean_values_cr_f->addTries(mean_values_cr[ind]*10, mean_values_f[ind]*10, 1);
+        cr_value_to_assign = round(mean_cr_f_values_to_use[ind][0] * 10.0);
+        f_value_to_assign = round(mean_cr_f_values_to_use[ind][1] * 10.0);
+        mean_values_cr_f->addTries(cr_value_to_assign, f_value_to_assign, 1);
         if (offspring.getIndividual(ind).betterFitnessThan(current_population.getIndividual(ind), number_of_function)) {
-            mean_values_cr_f->addSuccess(mean_values_cr[ind]*10, mean_values_f[ind]*10, 1);
+            mean_values_cr_f->addSuccess(cr_value_to_assign, f_value_to_assign, 1);
         }
     }
 }
@@ -973,12 +1004,10 @@ int main() {
 
     current_population.assignGroupToIndividuals(GROUP_SIZE_INIT);
 
+    // current_population_size * 2(cr and f)
+    std::vector<std::vector<double>> mean_cr_f_values_to_use(current_population.getPopulationSize(), std::vector<double>(2, -1));
 
-
-    vector<double> mean_cr_values (current_population.getPopulationSize(), -1);
-    vector<double> mean_f_values (current_population.getPopulationSize(), -1);
-
-    TableFandCR mean_cr_f_values = TableFandCR();
+    TableFandCR table_mean_cr_f_prob = TableFandCR();
 
 
     vector<int> mutation_strategy_to_use (current_population.getPopulationSize(), -1);
@@ -994,15 +1023,22 @@ int main() {
 
         eva_maxeva_ratio = ((double)number_of_fit_eva/ MAX_FITNESS_EVALUATIONS);
 
-        mean_cr_values = selectMeanCRValues( mean_cr_f_values, current_population.getPopulationSize(), current_population);
-        mean_f_values = selectMeanFValues(mean_cr_f_values, current_population.getPopulationSize(), current_population, mean_cr_values);
+        mean_cr_f_values_to_use = selectMeanCRFValues( mean_cr_f_values_to_use, current_population.getPopulationSize(), current_population);
+
+        /*
+         * create values for f and cr
+         */
+        for(int ind = 0; ind < current_population.getPopulationSize(); ind++) {
+            mean_cr_f_values_to_use[ind][0] = rand_gauss(mean_cr_f_values_to_use[ind][0], 0.05);          // cr
+            mean_cr_f_values_to_use[ind][1] = rand_cauchy(mean_cr_f_values_to_use[ind][1], 0.05);        // f
+        }
 
         mutation_strategy_to_use = selectMutationStrategy(mutation_probability_table, current_population.getPopulationSize(), current_population);
         //cout << "\n2.MUTATE THE POPULATION " << "\n";
-        mutated_population = mutate_RAM_JAPDE(current_population, mutation_strategy_to_use, p);
+        mutated_population = mutate_RAM_JAPDE(current_population, mutation_strategy_to_use, mean_cr_f_values_to_use, p);
 
         //cout << "\n 3.DO CROSSOVER" << "\n";
-        offspring = crossover(current_population, mutated_population);
+        offspring = crossover(current_population, mutated_population, mean_cr_f_values_to_use);
 
 
         fitness_vector = calculateCECFitness(offspring, Individual::DIMENSION, current_population.getPopulationSize(), number_of_function);
@@ -1017,13 +1053,9 @@ int main() {
             offspring.setGroupToInd(ind_to_assign_group, current_population.getIndividual(ind_to_assign_group).getGroup());
         }
         updateTriesAndSuccessMutTable(current_population, offspring, &mutation_probability_table, mutation_strategy_to_use, number_of_function);
-        updateTriesAndSuccessMeanValuesCRF(current_population, offspring, &mean_cr_f_values, mean_cr_values, mean_f_values, number_of_function);
-
-
+        updateTriesAndSuccessMeanValuesCRF(current_population, offspring, &table_mean_cr_f_prob, mean_cr_f_values_to_use, number_of_function);
 
         current_population = selection(current_population, offspring, number_of_function);
-        //cout << " \n AFTER SELECTION \n";
-
 
 
         if (iteration % 2 == 0) {
@@ -1047,7 +1079,7 @@ int main() {
         // si es LP_RAM actualizamos
         if ((iteration % LP_RAM) == 0) {
             mutation_probability_table.updateTable();
-            mean_cr_f_values.updateTable();
+            table_mean_cr_f_prob.updateTable();
         }
 
         // Mirar en cuanto se reduce la poblacion
