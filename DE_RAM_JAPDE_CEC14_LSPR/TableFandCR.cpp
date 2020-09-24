@@ -10,6 +10,52 @@ TableFandCR::TableFandCR() {
     table_of_triplets.assign(fog.begin(),fog.end());
 }
 
+
+vector<double> TableFandCR::getProbabilityFromRow(int row) {
+    vector<double> vector_of_probabilities (AMOUNT_OF_POSSIBLE_F, -1);
+
+    for(int i_f = 0; i_f < AMOUNT_OF_POSSIBLE_F; i_f++) {
+        vector_of_probabilities[i_f] = table_of_triplets[row][i_f].getProbability();
+    }
+    return vector_of_probabilities;
+}
+vector<double> TableFandCR::getProbabilityFromCol(int col) {
+     vector<double> vector_of_probabilities (AMOUNT_OF_POSSIBLE_CR, -1);
+
+    for(int i_cr = 0; i_cr < AMOUNT_OF_POSSIBLE_CR; i_cr++) {
+        vector_of_probabilities[i_cr] = table_of_triplets[i_cr][col].getProbability();
+    }
+    return vector_of_probabilities;
+}
+
+double TableFandCR::getAccumulatedProbabilityFromRow(int row) {
+     double result = 0.0;
+
+    for(int i_f = 0; i_f < AMOUNT_OF_POSSIBLE_F; i_f++) {
+        result += table_of_triplets[i_f][row].getProbability();
+    }
+    return result;
+}
+
+double TableFandCR::getAccumulatedProbabilityFromCol(int col) {
+    double result = 0.0;
+
+    for(int i_cr = 0; i_cr < AMOUNT_OF_POSSIBLE_CR; i_cr++) {
+        result += table_of_triplets[i_cr][col].getProbability();
+    }
+    return result;
+}
+
+double TableFandCR::getProbabilityFromElement(int cr, int f) {
+    return table_of_triplets[cr][f].getProbability();
+
+}
+
+
+
+
+
+
 void TableFandCR::updateTable(double eva_maxeva_ratio) {
     cout << "updateTable_M table";
     double increment = 0.0
@@ -68,4 +114,14 @@ double TableFandCR::EPf(int val_f, double eva_maxeva_ratio) {
 }
 
 
+void TableFandCR::addTries(int cr, int f, int tries_to_add) {
+    int tries;
+    tries = table_of_triplets[cr][f].getTries();
+    table_of_triplets[cr][f].setTries(tries + tries_to_add);
+}
 
+void TableFandCR::addSuccess(int cr, int f, int success_to_add) {
+    int success;
+    success = table_of_triplets[cr][f].getSuccess();
+    table_of_triplets[cr][f].setSuccess(success + success_to_add);
+}

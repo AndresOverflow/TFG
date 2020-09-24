@@ -788,12 +788,30 @@ vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability
 vector<vector<double>> selectMeanCRFValues(TableFandCR table_mean_cr_f_prob, vector<vector<double>> mean_cr_f_values_to_use, int number_of_individuals, Population current_population) {
     std::vector<std::vector<double>> mean_cr_f_values_to_use_to_return(current_population.getPopulationSize(), std::vector<double>(2, -1));
 
-    vector<double> probability_per_f = table_mean_cr_f_prob.getProbabilityFromRow(0);
+    vector<double> probability_per_f_row0 = table_mean_cr_f_prob.getProbabilityFromRow(0);
+    double max_value_row0 = 0.0;
+    int f = -1;
+    vector<double> probability_per_cr_col_selected;
+    double max_value_col_selected;
+    int cr = -1;
     //get random_value from 0 to cumulative
 
     rowToSearch = wheel_roulette()
 
     for (int ind = 0; ind < number_of_individuals; ind++) {
+        // generar un numero random de 0 al max de la primera fila
+        // obtener el vector de las probabilidades de la primera fila (f)
+        // obtener el max acumulado de la primera fila
+        // hacer ruleta para encontrar el elemento de la columna (f) que tenemos que usar
+
+        // generar un numero random de 0 al max de la fila cuya columna es la encontrada anteriormente
+        // obtener el vector de las probabilidades de la primera fila (f)
+        // obtener el max acumulado de la primera fila
+        //hacer ruleta para encontrar el elemento de la columna (cr) que tenemos que usar
+
+
+        //dividir entre 10 el cr y guardarlo
+        //dividir entre 10 el f y guardarlo
 
     }
 
