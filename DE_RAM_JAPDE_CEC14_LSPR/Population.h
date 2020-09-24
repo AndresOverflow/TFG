@@ -26,7 +26,7 @@ public:
 
     //202.414 5
     //202.372 30
-    static const int POPULATION_SIZE_INIT = 10;
+    static const int POPULATION_SIZE_INIT = 100;
     static const int POPULATION_SIZE_MIN = 4;
 
     Population(void);

@@ -747,15 +747,16 @@ int wheel_roulette(vector<double> probabilities, double max_prob_of_group) {
     random_value = (double) rand() / RAND_MAX;
     random_value = 0 + random_value * (max_prob_of_group - 0);
 
-    accumulated_probability = 0;
-    mutation_strategy = probabilities[0]; // ????
+    mutation_strategy = 0; // ????
+    accumulated_probability = probabilities[mutation_strategy];
 
-    while (random_value > accumulated_probability or mutation_strategy > probabilities.size()) {
-        accumulated_probability = accumulated_probability + probabilities[mutation_strategy];
+
+    while (accumulated_probability < random_value) {
         mutation_strategy += 1;
+        accumulated_probability = accumulated_probability + probabilities[mutation_strategy];
     }
 
-    return mutation_strategy - 1;
+    return mutation_strategy;
 }
 
 vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability_table, int number_of_individuals, Population current_population) {
@@ -946,7 +947,7 @@ int main() {
 
     //srand((unsigned) time(0));
 
-    int number_of_function = 2;
+    int number_of_function = 12;
     int number_of_fit_eva = 0;
 
     double p = 0;
@@ -991,9 +992,7 @@ int main() {
 
     int iteration = 1;
     while (number_of_fit_eva < MAX_FITNESS_EVALUATIONS && !isOptimumIndividualFound(current_population, number_of_function)) {
-        if (iteration == 834) {
-            cout << "asdf";
-        }
+
         p = calculateP(number_of_fit_eva, current_population.getPopulationSize());
 
 
@@ -1032,7 +1031,7 @@ int main() {
         current_population = selection(current_population, offspring, number_of_function);
 
 
-        if (iteration % 2 == 0) {
+        if (iteration % 1 == 0) {
             cout << "\n ---------iteration " << iteration << "    diff to the optimum de la poblacion:     "
                  << current_population.calculateMeanErrorToOptimumPopulation(number_of_function) << "\n";
             cout << "\n Fitness Evaluations done to the moment:    " << number_of_fit_eva;
@@ -1064,6 +1063,10 @@ int main() {
         current_population.reducePopulation(number_of_ind_to_reduce);
 
         iteration += 1;
+
+        if (iteration == 114) {
+            cout << "asdf";
+        }
 
 
 
