@@ -20,21 +20,7 @@ math.h
 iostream
 -
 
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/MutationProbabilityTable.h
-TripletPST.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TripletPST.h
-vector
--
-string
--
-cmath
--
-stdlib.h
--
-math.h
--
-iostream
--
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/Population.cpp
 Population.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/Population.h
 
@@ -55,36 +41,6 @@ Individual.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/Individual.h
 armadillo.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/armadillo.h
-
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TableFandCR.h
-TripletPST.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TripletPST.h
-vector
--
-string
--
-cmath
--
-stdlib.h
--
-math.h
--
-iostream
--
-
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TripletPST.h
-vector
--
-string
--
-cmath
--
-stdlib.h
--
-math.h
--
-iostream
--
 
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/armadillo.h
 cstdlib
@@ -2489,26 +2445,4 @@ hdf5.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/armadillo/9.900.2/include/armadillo_bits/xvec_htrans_bones.hpp
 
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/armadillo/9.900.2/include/armadillo_bits/xvec_htrans_meat.hpp
-
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/main.cpp
-iostream
--
-string
--
-vector
--
-fstream
--
-sstream
--
-Individual.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/Individual.h
-Population.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/Population.h
-MutationProbabilityTable.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/MutationProbabilityTable.h
-armadillo.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/armadillo.h
-TableFandCR.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TableFandCR.h
 

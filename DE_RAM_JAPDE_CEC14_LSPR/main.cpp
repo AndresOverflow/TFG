@@ -27,7 +27,7 @@ using namespace arma;
 //static const double CR = 0.15; //Crossover factor
 //static const double CR = 0.15; //Crossover factor
 static const int GROUP_SIZE_INIT = Population::POPULATION_SIZE_INIT/MutationProbabilityTable::MUTATION_STRATEGIES;
-static const double EVAPORATION_RATE = 0.2;
+static const double EVAPORATION_RATE = 0.05;
 static const int LP_RAM = 100;
 static const int UPPER_BOUND = 100;
 static const int LOWER_BOUND = -100;
@@ -955,6 +955,7 @@ int main() {
 
     //inicializar población
 
+    cout << "\n correcto \n";
     cout << "INICIALIZAMOS LA POBLACION";
 
     Population current_population, mutated_population, offspring = Population();
@@ -990,6 +991,9 @@ int main() {
 
     int iteration = 1;
     while (number_of_fit_eva < MAX_FITNESS_EVALUATIONS && !isOptimumIndividualFound(current_population, number_of_function)) {
+        if (iteration == 834) {
+            cout << "asdf";
+        }
         p = calculateP(number_of_fit_eva, current_population.getPopulationSize());
 
 
@@ -1038,9 +1042,7 @@ int main() {
 
         }
 
-        if (iteration == 833) {
-            cout << "asdf";
-        }
+
         if (number_of_fit_eva > 18000){
             cout << "asdf";
             p = calculateP(number_of_fit_eva, current_population.getPopulationSize());

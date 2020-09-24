@@ -68,7 +68,7 @@ Individual Population::bestIndividual(void) {
 
 //TODO to be checked set group? y que no se modifique la population
 Individual Population::pBestIndividual(double p) {
-    int max_pbest_individual = ceil( (double) POPULATION_SIZE_INIT * p);
+    int max_pbest_individual = round( (double) POPULATION_SIZE_INIT * p);
 
     int random_pbest_individual_index = (rand() % max_pbest_individual); // indice del elemento random de la poblacion
 
