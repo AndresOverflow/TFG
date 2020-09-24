@@ -124,7 +124,7 @@ Population crossover(Population current_population, Population mutated_populatio
 
             // si el numero es menor que CR o es el indice j entonces es la componente mutada
             // si es mayor que CR y no es j entonces es la componente original
-            if (random_value <= CR or component_i == j_random) {
+            if (random_value <= mean_cr_f_values_to_use[individual_i][0] or component_i == j_random) {
                 value = mutated_population_vector[individual_i].getComponent(component_i);
                 offspring_vector[individual_i].setComponent(component_i, value);
 
@@ -790,37 +790,45 @@ vector<vector<double>> selectMeanCRFValues(TableFandCR table_mean_cr_f_prob, vec
 
     vector<double> probability_per_f_row0 = table_mean_cr_f_prob.getProbabilityFromRow(0);
     double max_value_row0 = 0.0;
-    int f = -1;
+    double f = -1;
     vector<double> probability_per_cr_col_selected;
     double max_value_col_selected;
-    int cr = -1;
+    double cr = -1;
     //get random_value from 0 to cumulative
 
-    rowToSearch = wheel_roulette()
+    //rowToSearch = wheel_roulette()
 
     for (int ind = 0; ind < number_of_individuals; ind++) {
-        // generar un numero random de 0 al max de la primera fila
         // obtener el vector de las probabilidades de la primera fila (f)
+        probability_per_f_row0 = table_mean_cr_f_prob.getProbabilityFromRow(0);
         // obtener el max acumulado de la primera fila
+        max_value_row0 = table_mean_cr_f_prob.getAccumulatedProbabilityFromRow(0);
         // hacer ruleta para encontrar el elemento de la columna (f) que tenemos que usar
+        f = wheel_roulette(probability_per_f_row0, max_value_row0);
 
-        // generar un numero random de 0 al max de la fila cuya columna es la encontrada anteriormente
+
         // obtener el vector de las probabilidades de la primera fila (f)
+        probability_per_cr_col_selected = table_mean_cr_f_prob.getProbabilityFromCol(f);
         // obtener el max acumulado de la primera fila
+        max_value_col_selected = table_mean_cr_f_prob.getAccumulatedProbabilityFromCol(f);
         //hacer ruleta para encontrar el elemento de la columna (cr) que tenemos que usar
+        cr = wheel_roulette(probability_per_cr_col_selected, max_value_col_selected);
 
 
         //dividir entre 10 el cr y guardarlo
         //dividir entre 10 el f y guardarlo
 
+        cr = (double) cr/10;
+        f = (double) f/10;
+
+        mean_cr_f_values_to_use_to_return[ind][0] = cr;
+        mean_cr_f_values_to_use_to_return[ind][1] = f;
+
+
+
     }
 
-
-
-
-
-
-
+    return mean_cr_f_values_to_use_to_return;
 
 }
 
@@ -828,61 +836,6 @@ vector<vector<double>> selectMeanCRFValues(TableFandCR table_mean_cr_f_prob, vec
 
 
 
-/*
-vector<double> selectMeanCRValues(TableFandCR table_mean_values, int number_of_individuals, Population current_population) {
-    vector<int> mutation_to_use_vector(number_of_individuals, -1);
-    vector<double> probability_of_the_cr(TableFandCR::AMOUNT_OF_POSSIBLE_F, 0);
-
-    double max_prob_of_the_group;
-
-    //for each individual
-
-
-    //obtenemos el individuo
-    for (int individual = 0; individual < mutation_to_use_vector.size(); individual++) {
-        // mirar a que grupo pertenece
-        // coger el vector de probabilidades del grupo
-
-
-        max_prob_of_the_Cr = table_mean_values.getAccumulatedProbabilityFromRow()
-
-        max_prob_of_the_group = mutation_probability_table.getAccumulatedProbabilityFromGroup(group);
-        probability_of_the_cr = mutation_probability_table.getProbabilityFromGroup(cr);
-        mutation_to_use_vector[individual] = wheel_roulette(probability_of_the_group, max_prob_of_the_group);
-
-
-    }
-    return mutation_to_use_vector;
-
-}
-
-vector<double> selectMeanFValues(TableFandCR table_mean_values, int number_of_individuals, Population current_population, vector<double> mean_cr_values) {
-    vector<int> mutation_to_use_vector(number_of_individuals, -1);
-    int group = -1;
-    vector<double> probability_of_the_group(mutation_probability_table.getNumberOfGroups(), 0);
-    double max_prob_of_the_group;
-
-    //for each individual
-
-
-    //obtenemos el individuo
-    for (int individual = 0; individual < mutation_to_use_vector.size(); individual++) {
-        // mirar a que grupo pertenece
-        // coger el vector de probabilidades del grupo
-
-        //group = ceil(individual / GROUP_SIZE);
-
-        group = current_population.getIndividual(individual).getGroup();
-        max_prob_of_the_group = mutation_probability_table.getAccumulatedProbabilityFromGroup(group);
-        probability_of_the_group = mutation_probability_table.getProbabilityFromGroup(group);
-        mutation_to_use_vector[individual] = wheel_roulette(probability_of_the_group, max_prob_of_the_group);
-
-
-    }
-    return mutation_to_use_vector;
-
-}
-*/
 void updateTriesAndSuccessMutTable(Population current_population, Population offspring, MutationProbabilityTable *mutation_probability_table,
                            vector<int> mutation_strategy_to_use, int number_of_function) {
     int group;
@@ -1041,7 +994,7 @@ int main() {
 
         eva_maxeva_ratio = ((double)number_of_fit_eva/ MAX_FITNESS_EVALUATIONS);
 
-        mean_cr_f_values_to_use = selectMeanCRFValues( mean_cr_f_values_to_use, current_population.getPopulationSize(), current_population);
+        mean_cr_f_values_to_use = selectMeanCRFValues(table_mean_cr_f_prob, mean_cr_f_values_to_use, current_population.getPopulationSize(), current_population);
 
         /*
          * create values for f and cr
