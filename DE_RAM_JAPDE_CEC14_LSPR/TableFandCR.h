@@ -24,7 +24,7 @@ public:
 
     TableFandCR(void);
 
-    void updateTable(void);
+    void updateTable(double eva_maxeva_ratio);
 
 
 

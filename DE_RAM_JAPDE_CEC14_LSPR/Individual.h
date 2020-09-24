@@ -29,7 +29,7 @@ public:
 
     Individual(vector<double> components_vector);
 
-    double getFitness(void);
+    double getFitness (void) const;
 
     void setFitness(double fitness);
 
@@ -62,5 +62,6 @@ private:
 
 };
 
+bool operator<(const Individual &s1, const Individual &s2);
 
 #endif //DE_RAM_JAPDE_CEC14_LSPR_INDIVIDUAL_H

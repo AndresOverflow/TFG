@@ -63,28 +63,27 @@ Individual Population::bestIndividual(void) {
     return best_individual;
 }
 
-bool cmp(Individual a, Individual b ) {
-        return a.getFitness() < b.getFitness();
-}
+
+
 
 //TODO to be checked set group? y que no se modifique la population
 Individual Population::pBestIndividual(double p) {
-    double max_pbest_individual = ceil( (double) POPULATION_SIZE_INIT * p);
+    int max_pbest_individual = ceil( (double) POPULATION_SIZE_INIT * p);
 
-    random_pbest_individual = (rand() % this->max_pbest_individual);
+    int random_pbest_individual_index = (rand() % max_pbest_individual); // indice del elemento random de la poblacion
 
 
     Individual pbest_individual = Individual();
 
     vector<Individual> individuals_sorted = this->getIndividuals();
-    sort(individuals_sorted.begin(), individuals_sorted.end(), cmp);
+    sort(individuals_sorted.begin(), individuals_sorted.end());
 
 
-    pbest_individual.setFitness(individuals_sorted[i].getFitness());
-    pbest_individual.setComponents(individuals_sorted[i].getComponents());
-    pbest_individual.setGroup(individuals_sorted[i].getGroup());
+    pbest_individual.setFitness(individuals_sorted[random_pbest_individual_index].getFitness());
+    pbest_individual.setComponents(individuals_sorted[random_pbest_individual_index].getComponents());
+    pbest_individual.setGroup(individuals_sorted[random_pbest_individual_index].getGroup());
 
-    return best_individual;
+    return pbest_individual;
 }
 
 Individual Population::getIndividual(int position) {
@@ -160,4 +159,7 @@ void Population::assignGroupToIndividuals(int group_size) {
 void Population::setGroupToInd(int position, int group_value) {
     this->individuals[position].setGroup(group_value);
 }
+
+
+
 

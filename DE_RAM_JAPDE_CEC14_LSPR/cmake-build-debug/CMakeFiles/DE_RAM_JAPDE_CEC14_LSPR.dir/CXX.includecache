@@ -49,10 +49,28 @@ stdlib.h
 -
 math.h
 -
+algorithm
+-
 Individual.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/Individual.h
 armadillo.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/armadillo.h
+
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TableFandCR.h
+TripletPST.h
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TripletPST.h
+vector
+-
+string
+-
+cmath
+-
+stdlib.h
+-
+math.h
+-
+iostream
+-
 
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TripletPST.h
 vector
@@ -2491,4 +2509,6 @@ MutationProbabilityTable.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/MutationProbabilityTable.h
 armadillo.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/armadillo.h
+TableFandCR.h
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TableFandCR.h
 

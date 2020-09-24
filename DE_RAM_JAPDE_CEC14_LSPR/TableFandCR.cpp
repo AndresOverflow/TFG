@@ -54,20 +54,31 @@ double TableFandCR::getProbabilityFromElement(int cr, int f) {
 
 
 
+void TableFandCR::addTries(int cr, int f, int tries_to_add) {
+    int tries;
+    tries = table_of_triplets[cr][f].getTries();
+    table_of_triplets[cr][f].setTries(tries + tries_to_add);
+}
+
+void TableFandCR::addSuccess(int cr, int f, int success_to_add) {
+    int success;
+    success = table_of_triplets[cr][f].getSuccess();
+    table_of_triplets[cr][f].setSuccess(success + success_to_add);
+}
 
 
 void TableFandCR::updateTable(double eva_maxeva_ratio) {
     cout << "updateTable_M table";
-    double increment = 0.0
+    double increment = 0.0;
     double probability_to_set_first;
     double probability_to_set_second;
     double probability_to_set;
-    for(int rowCr; rowCr < AMOUNT_OF_POSSIBLE_CR; rowCR++) {
+    for(int rowCr = 0; rowCr < AMOUNT_OF_POSSIBLE_CR; rowCr++) {
         for (int colF = 0; colF < AMOUNT_OF_POSSIBLE_F; colF++) {
-            increment = incrementMcrf(rowf, colcr, eva_maxeva_ratio);
+            increment = incrementMcrf(rowCr, colF, eva_maxeva_ratio);
 
             probability_to_set_first = (1 - EPA) * table_of_triplets[rowCr][colF].getProbability();
-            probability_to_set_second = EPA * incrementMcrf(rowCr, colF, eva_maxeva_ratio);
+            probability_to_set_second = EPA * increment;
             probability_to_set = probability_to_set_first + probability_to_set_second;
             table_of_triplets[rowCr][colF].setProbability(probability_to_set);
         }
@@ -97,14 +108,14 @@ double TableFandCR::incrementMcrf(int rowCr, int colF, double eva_maxeva_ratio) 
 }
 
 double TableFandCR::EPf(int val_f, double eva_maxeva_ratio) {
-    result = 0;
+    double result = 0;
 
     double division;
     double exponent_with_ratio;
 
 
     division = (double)val_f / 10.0;
-    if (dision == 0.0) division = 0.001;
+    if (division == 0.0) division = 0.001;
 
     exponent_with_ratio = exp(-pow(eva_maxeva_ratio, 3));
 
@@ -114,14 +125,3 @@ double TableFandCR::EPf(int val_f, double eva_maxeva_ratio) {
 }
 
 
-void TableFandCR::addTries(int cr, int f, int tries_to_add) {
-    int tries;
-    tries = table_of_triplets[cr][f].getTries();
-    table_of_triplets[cr][f].setTries(tries + tries_to_add);
-}
-
-void TableFandCR::addSuccess(int cr, int f, int success_to_add) {
-    int success;
-    success = table_of_triplets[cr][f].getSuccess();
-    table_of_triplets[cr][f].setSuccess(success + success_to_add);
-}

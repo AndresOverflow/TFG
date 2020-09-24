@@ -98,6 +98,12 @@
 		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/Population.h">
 			<Option target="DE_RAM_JAPDE_CEC14_LSPR"/>
 		</Unit>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TableFandCR.cpp">
+			<Option target="DE_RAM_JAPDE_CEC14_LSPR"/>
+		</Unit>
+		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TableFandCR.h">
+			<Option target="DE_RAM_JAPDE_CEC14_LSPR"/>
+		</Unit>
 		<Unit filename="/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TripletPST.cpp">
 			<Option target="DE_RAM_JAPDE_CEC14_LSPR"/>
 		</Unit>

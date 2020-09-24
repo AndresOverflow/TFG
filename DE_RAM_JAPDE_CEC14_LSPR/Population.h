@@ -5,7 +5,6 @@
 #ifndef DE_RAM_JAPDE_CEC14_LSPR_POPULATION_H
 #define DE_RAM_JAPDE_CEC14_LSPR_POPULATION_H
 
-
 #include <vector>
 #include <string>
 #include <cmath>
@@ -31,6 +30,7 @@ public:
     static const int POPULATION_SIZE_MIN = 4;
 
     Population(void);
+
     Population(int population_size);
 
     vector<Individual> getIndividuals(void);
@@ -49,7 +49,7 @@ public:
 
     Individual bestIndividual(void);
 
-    bool cmp( Individual a, Individual b );
+
 
 
     Individual pBestIndividual(double p);
@@ -119,12 +119,14 @@ public:
     }
 
 
+
 private:
     vector<Individual> individuals;
     int population_size;
 
 
 };
+
 
 
 #endif //DE_RAM_JAPDE_CEC14_LSPR_POPULATION_H

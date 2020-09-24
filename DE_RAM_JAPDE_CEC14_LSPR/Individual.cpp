@@ -28,7 +28,7 @@ Individual::Individual(vector<double> components_vector) {
 }
 
 // fitness
-double Individual::getFitness() {
+double Individual::getFitness() const {
     return this->fitness;
 }
 
@@ -108,6 +108,10 @@ int Individual::getGroup(){
 
 void Individual::setGroup(int group) {
     this->group = group;
+}
+
+bool operator<(const Individual &s1, const Individual &s2){
+    return s1.getFitness() < s2.getFitness();
 }
 
 

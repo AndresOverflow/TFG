@@ -1182,6 +1182,10 @@ CMakeFiles/DE_RAM_JAPDE_CEC14_LSPR.dir/Population.cpp.o
  /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/armadillo/9.900.2/include/armadillo_bits/xtrans_mat_meat.hpp
  /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/armadillo/9.900.2/include/armadillo_bits/xvec_htrans_bones.hpp
  /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/armadillo/9.900.2/include/armadillo_bits/xvec_htrans_meat.hpp
+CMakeFiles/DE_RAM_JAPDE_CEC14_LSPR.dir/TableFandCR.cpp.o
+ /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TableFandCR.cpp
+ /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TableFandCR.h
+ /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TripletPST.h
 CMakeFiles/DE_RAM_JAPDE_CEC14_LSPR.dir/TripletPST.cpp.o
  /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TripletPST.cpp
  /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TripletPST.h
@@ -1191,6 +1195,7 @@ CMakeFiles/DE_RAM_JAPDE_CEC14_LSPR.dir/main.cpp.o
  /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/Individual.h
  /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/MutationProbabilityTable.h
  /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/Population.h
+ /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TableFandCR.h
  /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/TripletPST.h
  /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/armadillo.h
  /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_LSPR/armadillo/9.900.2/include/armadillo_bits/BaseCube_bones.hpp

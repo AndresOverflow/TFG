@@ -992,7 +992,6 @@ int main() {
     while (number_of_fit_eva < MAX_FITNESS_EVALUATIONS && !isOptimumIndividualFound(current_population, number_of_function)) {
         p = calculateP(number_of_fit_eva, current_population.getPopulationSize());
 
-        eva_maxeva_ratio = ((double)number_of_fit_eva/ MAX_FITNESS_EVALUATIONS);
 
         mean_cr_f_values_to_use = selectMeanCRFValues(table_mean_cr_f_prob, mean_cr_f_values_to_use, current_population.getPopulationSize(), current_population);
 
@@ -1047,10 +1046,13 @@ int main() {
             p = calculateP(number_of_fit_eva, current_population.getPopulationSize());
         }
 
+
         // si es LP_RAM actualizamos
         if ((iteration % LP_RAM) == 0) {
             mutation_probability_table.updateTable();
-            table_mean_cr_f_prob.updateTable();
+
+            eva_maxeva_ratio = ((double)number_of_fit_eva/ MAX_FITNESS_EVALUATIONS);
+            table_mean_cr_f_prob.updateTable(eva_maxeva_ratio);
         }
 
         // Mirar en cuanto se reduce la poblacion
