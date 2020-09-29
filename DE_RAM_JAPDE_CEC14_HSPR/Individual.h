@@ -20,7 +20,6 @@ class Individual {
 public:
 
     static const int DIMENSION = 30;
-    static const bool BEST_LESS = 1; // 1 if aims for less fitness else 0.
     constexpr static const double NOT_INITIALIZED = 9999.9;
     static const int NOT_INITIALIZED_GROUP = -1;
 
@@ -29,7 +28,7 @@ public:
 
     Individual(vector<double> components_vector);
 
-    double getFitness (void) const;
+    double getFitness(void) const;
 
     void setFitness(double fitness);
 
@@ -52,7 +51,6 @@ public:
     bool betterFitnessThan(Individual compare_to_individual, int number_of_function);
 
     double getErrorToOptimum(int number_of_function);
-
 
 
 private:

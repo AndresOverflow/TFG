@@ -48,24 +48,6 @@ void Individual::setComponents(vector<double> vector2) {
 
 }
 
-string Individual::toString(void) {
-    string result = "------------------ \n";
-    result.append("Fitness:");
-    result.append(to_string(fitness));
-    result.append("\n");
-    for (int i = 0; i < this->components.size(); i++) {
-
-        result.append("Component ");
-        result.append(to_string(i));
-        result.append(" : ");
-        result.append(to_string(this->components[i]));
-        result.append("\n");
-    }
-
-    result.append("------------------ \n");
-    return result;
-}
-
 double Individual::calculate_fitness() {
     double aim = 50;
     double diff = 0;
@@ -102,7 +84,7 @@ double Individual::getErrorToOptimum(int function_number) {
     return dif;
 }
 
-int Individual::getGroup(){
+int Individual::getGroup() {
     return this->group;
 }
 
@@ -110,7 +92,7 @@ void Individual::setGroup(int group) {
     this->group = group;
 }
 
-bool operator<(const Individual &s1, const Individual &s2){
+bool operator<(const Individual &s1, const Individual &s2) {
     return s1.getFitness() < s2.getFitness();
 }
 

@@ -17,6 +17,7 @@ Population::Population() {
     }
 
 }
+
 Population::Population(int size) {
     this->population_size = size;
 
@@ -38,18 +39,6 @@ void Population::setIndividuals(vector<Individual> to_set_population) {
 
 }
 
-
-void Population::toString(void) {
-    std::cout << "output from Population function";
-    std::cout << "The population individuals are :  \n";
-
-    for (int i = 0; i < this->population_size; i++) {
-        cout << "Element number " << i << "\n";
-        cout << this->individuals[i].toString();
-    }
-
-}
-
 Individual Population::bestIndividual(void) {
     Individual best_individual = Individual();
     for (int i = 0; i < this->population_size; i++) {
@@ -64,13 +53,16 @@ Individual Population::bestIndividual(void) {
 }
 
 
-
-
 //TODO to be checked set group? y que no se modifique la population
 Individual Population::pBestIndividual(double p) {
-    int max_pbest_individual = round( (double) POPULATION_SIZE_INIT * p);
+    //Obtenemos los el numero de p mejores individuos en la poblacion actual
+    int max_pbest_individuals = round((double) this->population_size * p);
 
-    int random_pbest_individual_index = (rand() % max_pbest_individual); // indice del elemento random de la poblacion
+    //si el valor es 0, ponemos el 4
+    if (max_pbest_individuals < 1) { max_pbest_individuals = this->population_size; }
+
+    //Escogemos un individo random entre ellos
+    int random_pbest_individual_index = (rand() % max_pbest_individuals);
 
 
     Individual pbest_individual = Individual();
@@ -125,32 +117,27 @@ int Population::getPopulationSize(void) {
     return this->population_size;
 }
 
-int Population::WorstIndividualPosition(void) {
-    int worst_ind_position = 0;
-    for (int position = 0; position < this->population_size; position++) {
-        if (this->getIndividual(position).getFitness() > this->getIndividual(worst_ind_position).getFitness()) {
-            worst_ind_position = position;
+void Population::reducePopulationInHalf() {
+    int offset_second_half = this->population_size / 2;
+    vector<Individual> vector_to_assign;
+
+    for (int i = 0; i < this->population_size / 2; i++) {
+        if (this->individuals[i].getFitness() < this->individuals[i + offset_second_half].getFitness()) {
+            vector_to_assign.insert(vector_to_assign.end(), this->individuals[i]);
+        } else {
+            vector_to_assign.insert(vector_to_assign.end(), this->individuals[i + offset_second_half]);
         }
     }
-    return worst_ind_position;
-}
+    this->individuals.assign(vector_to_assign.begin(), vector_to_assign.end());
+    this->population_size = vector_to_assign.size();
 
-void Population::removeIndividual(int pos) {
-    this->individuals.erase(this->individuals.begin() + pos);
-    this->population_size -= 1;
-}
-
-void Population::reducePopulation(int number_of_ind_to_reduce) {
-    for (int i = 0; i < number_of_ind_to_reduce; i++) {
-        removeIndividual(WorstIndividualPosition());
-    }
 }
 
 
 void Population::assignGroupToIndividuals(int group_size) {
     int group;
     for (int ind = 0; ind < this->population_size; ind++) {
-        group = ceil(ind/group_size);
+        group = ceil(ind / group_size);
         this->individuals[ind].setGroup(group);
     }
 

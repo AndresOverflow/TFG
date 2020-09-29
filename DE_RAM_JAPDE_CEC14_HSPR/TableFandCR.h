@@ -27,19 +27,23 @@ public:
     void updateTable(double eva_maxeva_ratio);
 
 
-
     vector<double> getProbabilityFromRow(int row);
+
     vector<double> getProbabilityFromCol(int col);
+
     double getAccumulatedProbabilityFromRow(int row);
+
     double getAccumulatedProbabilityFromCol(int col);
 
-    double getProbabilityFromElement(int cr, int f);
-
     double incrementMcrf(int rowCr, int colF, double eva_maxeva_ratio);
+
     double EPf(int val_f, double eva_maxeva_ratio);
 
     void addTries(int cr, int f, int tries_to_add);
+
     void addSuccess(int cr, int f, int success_to_add);
+
+    void resetTripletsKeepProbabilities();
 
 private:
 

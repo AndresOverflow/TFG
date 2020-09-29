@@ -24,8 +24,6 @@ class Population {
 
 public:
 
-    //202.414 5
-    //202.372 30
     static const int POPULATION_SIZE_INIT = 100;
     static const int POPULATION_SIZE_MIN = 4;
 
@@ -50,8 +48,6 @@ public:
     Individual bestIndividual(void);
 
 
-
-
     Individual pBestIndividual(double p);
 
     int WorstIndividualPosition(void);
@@ -60,11 +56,11 @@ public:
 
     void recalculateFitness(void);
 
+    void reducePopulationInHalf(void);
+
     double calculateMeanErrorToOptimumPopulation(int function_number);
 
     void assignFitness(vector<double> fitness_vector);
-
-    void reducePopulation(int number_of_ind_to_reduce);
 
     void assignGroupToIndividuals(int group_size);
 
@@ -119,14 +115,12 @@ public:
     }
 
 
-
 private:
     vector<Individual> individuals;
     int population_size;
 
 
 };
-
 
 
 #endif //DE_RAM_JAPDE_CEC14_LSPR_POPULATION_H

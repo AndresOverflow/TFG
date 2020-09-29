@@ -21,28 +21,25 @@ using namespace std;
 class MutationProbabilityTable {
 
 
-
-
 public:
     static const int MUTATION_STRATEGIES = 2;
 
 
-
     MutationProbabilityTable(int group_size, double evaporation);
+
     void updateTable(void);
-    //vector<vector<TripletPST>> getTableOfProbabilities(void);
+
     int getNumberOfGroups(void);
-    void setNumberOfGroups(int number_of_groups);
-    int getNumberOfElementsPerGroup();
-    void setNumberOfElementsPerGroup(int number_of_elements_per_group);
-    double getProbability(int group, int mutation_str);
+
     void addTries(int group, int mutation_str, int tries_to_add);
+
     void addSuccess(int group, int mutation_str, int success_to_add);
+
     vector<double> getProbabilityFromGroup(int group);
+
     double getAccumulatedProbabilityFromGroup(int group);
 
-
-
+    void resetTripletsKeepProbabilities();
 
 
 private:
@@ -50,11 +47,7 @@ private:
     int number_of_mutation_strategies = 0;
     int number_of_groups;
 
-   vector<vector<TripletPST>> table_of_triplets;
-
-
-
-
+    vector<vector<TripletPST>> table_of_triplets;
 
 
 };

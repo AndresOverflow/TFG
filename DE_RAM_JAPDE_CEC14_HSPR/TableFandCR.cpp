@@ -124,4 +124,11 @@ double TableFandCR::EPf(int val_f, double eva_maxeva_ratio) {
     return result;
 }
 
+void TableFandCR::resetTripletsKeepProbabilities() {
+    for (int cr = 0; cr < this->AMOUNT_OF_POSSIBLE_CR; cr++) {
+        for (int f = 0; f < this->AMOUNT_OF_POSSIBLE_F; f++) {
+            this->table_of_triplets[cr][f].resetTripletKeepProb();
+        }
+    }
+}
 

@@ -13,7 +13,6 @@
 #include <iostream>
 
 
-
 using namespace std;
 
 class TripletPST {
@@ -23,11 +22,18 @@ public:
     TripletPST(int mutation_strategies);
 
     double getProbability(void);
+
     void setProbability(double probability);
+
     int getTries(void);
+
     void setTries(int tries);
+
     int getSuccess(void);
+
     void setSuccess(int success);
+
+    void resetTripletKeepProb();
 
 private:
 
