@@ -314,10 +314,10 @@ selectMeanCRFValues(TableFandCR table_mean_cr_f_prob, vector<vector<double>> mea
 
     vector<double> probability_per_f_row0 = table_mean_cr_f_prob.getProbabilityFromRow(0);
     double max_value_row0 = 0.0;
-    double f = -1;
+    double col_selected = -1;
     vector<double> probability_per_cr_col_selected;
     double max_value_col_selected;
-    double cr = -1;
+    double row_selected = -1;
     //get random_value from 0 to cumulative
 
     //rowToSearch = wheel_roulette()
@@ -328,25 +328,25 @@ selectMeanCRFValues(TableFandCR table_mean_cr_f_prob, vector<vector<double>> mea
         // obtener el max acumulado de la primera fila
         max_value_row0 = table_mean_cr_f_prob.getAccumulatedProbabilityFromRow(0);
         // hacer ruleta para encontrar el elemento de la columna (f) que tenemos que usar
-        f = wheel_roulette(probability_per_f_row0, max_value_row0);
+        col_selected = wheel_roulette(probability_per_f_row0, max_value_row0);
 
 
         // obtener el vector de las probabilidades de la primera fila (f)
-        probability_per_cr_col_selected = table_mean_cr_f_prob.getProbabilityFromCol(f);
+        probability_per_cr_col_selected = table_mean_cr_f_prob.getProbabilityFromCol(col_selected);
         // obtener el max acumulado de la primera fila
-        max_value_col_selected = table_mean_cr_f_prob.getAccumulatedProbabilityFromCol(f);
+        max_value_col_selected = table_mean_cr_f_prob.getAccumulatedProbabilityFromCol(col_selected);
         //hacer ruleta para encontrar el elemento de la columna (cr) que tenemos que usar
-        cr = wheel_roulette(probability_per_cr_col_selected, max_value_col_selected);
+        row_selected = wheel_roulette(probability_per_cr_col_selected, max_value_col_selected);
 
 
         //dividir entre 10 el cr y guardarlo
         //dividir entre 10 el f y guardarlo
 
-        cr = (double) cr / 10;
-        f = (double) f / 10;
+        row_selected = (double) row_selected / 10;
+        col_selected = (double) col_selected / 10;
 
-        mean_cr_f_values_to_use_to_return[ind][0] = cr;
-        mean_cr_f_values_to_use_to_return[ind][1] = f;
+        mean_cr_f_values_to_use_to_return[ind][0] = row_selected;
+        mean_cr_f_values_to_use_to_return[ind][1] = col_selected;
 
 
     }
@@ -584,6 +584,9 @@ int main() {
         if ((iteration % LP_RAM) == 0) {
             mutation_probability_table.updateTable();
             mutation_probability_table.resetTripletsKeepProbabilities();
+            if (iteration == 300) {
+                cout << "hasd";
+            }
 
             eva_maxeva_ratio = ((double) number_of_fit_eva / MAX_FITNESS_EVALUATIONS);
             table_mean_cr_f_prob.updateTable(eva_maxeva_ratio);
@@ -607,6 +610,10 @@ int main() {
             generations_for_current_p = calculateGenerations(fitness_operations_per_p, current_population.getPopulationSize());
 
 
+        }
+
+        if (iteration == 300) {
+            cout << "hasd";
         }
 
 

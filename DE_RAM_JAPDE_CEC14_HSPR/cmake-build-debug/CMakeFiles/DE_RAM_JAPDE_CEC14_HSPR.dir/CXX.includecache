@@ -20,10 +20,6 @@ math.h
 iostream
 -
 
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/MutationProbabilityTable.cpp
-MutationProbabilityTable.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/MutationProbabilityTable.h
-
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/MutationProbabilityTable.h
 TripletPST.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/TripletPST.h
@@ -39,10 +35,6 @@ math.h
 -
 iostream
 -
-Population.h
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/Population.h
-
-/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/Population.cpp
 Population.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/Population.h
 

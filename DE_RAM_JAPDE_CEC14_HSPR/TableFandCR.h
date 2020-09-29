@@ -19,8 +19,8 @@ class TableFandCR {
 
 public:
     constexpr static const double EPA = 0.05;
-    static const int AMOUNT_OF_POSSIBLE_F = 11;
     static const int AMOUNT_OF_POSSIBLE_CR = 11;
+    static const int AMOUNT_OF_POSSIBLE_F = 11;
 
     TableFandCR(void);
 
