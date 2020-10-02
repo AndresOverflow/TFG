@@ -41,6 +41,9 @@ void Population::setIndividuals(vector<Individual> to_set_population) {
 
 Individual Population::bestIndividual(void) {
     Individual best_individual = Individual();
+    best_individual.setFitness(this->getIndividuals()[0].getFitness());
+    best_individual.setComponents(this->getIndividuals()[0].getComponents());
+
     for (int i = 0; i < this->population_size; i++) {
 
         if (this->getIndividuals()[i].getFitness() < best_individual.getFitness()) {
@@ -145,6 +148,10 @@ void Population::assignGroupToIndividuals(int group_size) {
 
 void Population::setGroupToInd(int position, int group_value) {
     this->individuals[position].setGroup(group_value);
+}
+
+void Population::sortPopulation() {
+    sort(this->individuals.begin(), this->individuals.end());
 }
 
 

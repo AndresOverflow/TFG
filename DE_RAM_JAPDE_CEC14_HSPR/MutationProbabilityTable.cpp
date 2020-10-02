@@ -31,8 +31,8 @@ void MutationProbabilityTable::updateTable() {
 
         for (int mutation_strategy = 0; mutation_strategy < this->number_of_mutation_strategies; mutation_strategy++) {
             probability_to_set_first = (1 - evaporation_rate) * table_of_triplets[group][mutation_strategy].getProbability();
-            probability_to_set_second = (evaporation_rate * ((double) table_of_triplets[group][mutation_strategy].getSuccess() /
-                                                             (double) table_of_triplets[group][mutation_strategy].getTries()));
+            probability_to_set_second = (evaporation_rate * (((double) table_of_triplets[group][mutation_strategy].getSuccess() /
+                                                             (double) table_of_triplets[group][mutation_strategy].getTries())/ division_for_group));
             probability_to_set = probability_to_set_first + probability_to_set_second;
             table_of_triplets[group][mutation_strategy].setProbability(probability_to_set);
         }

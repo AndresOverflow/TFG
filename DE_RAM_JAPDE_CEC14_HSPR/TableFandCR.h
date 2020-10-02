@@ -35,6 +35,8 @@ public:
 
     double getAccumulatedProbabilityFromCol(int col);
 
+    vector<double> getProbabilityFromCols(void);
+
     double incrementMcrf(int rowCr, int colF, double eva_maxeva_ratio);
 
     double EPf(int val_f, double eva_maxeva_ratio);

@@ -21,12 +21,20 @@ vector<double> TableFandCR::getProbabilityFromRow(int row) {
 }
 
 vector<double> TableFandCR::getProbabilityFromCol(int col) {
-    vector<double> vector_of_probabilities(AMOUNT_OF_POSSIBLE_CR, -1);
+    vector<double> vector_of_probabilities(AMOUNT_OF_POSSIBLE_CR, -1.0);
 
     for (int i_cr = 0; i_cr < AMOUNT_OF_POSSIBLE_CR; i_cr++) {
         vector_of_probabilities[i_cr] = table_of_triplets[i_cr][col].getProbability();
     }
     return vector_of_probabilities;
+}
+
+vector<double> TableFandCR::getProbabilityFromCols(void) {
+    vector<double> vector_to_return(AMOUNT_OF_POSSIBLE_F, -1.0);
+    for (int col_f = 0; col_f < AMOUNT_OF_POSSIBLE_F; col_f++) {
+        vector_to_return[col_f] = getAccumulatedProbabilityFromCol(col_f);
+    }
+    return vector_to_return;
 }
 
 double TableFandCR::getAccumulatedProbabilityFromRow(int row) {
@@ -85,13 +93,26 @@ double TableFandCR::incrementMcrf(int rowCr, int colF, double eva_maxeva_ratio) 
     double down_part = 0;
     double result;
 
+
     double Epf = EPf(colF, eva_maxeva_ratio);
 
-    upper_part = ((double) this->table_of_triplets[rowCr][colF].getSuccess() * Epf / (double) this->table_of_triplets[rowCr][colF].getTries());
+    if (table_of_triplets[rowCr][colF].getTries() == 0) {
+        upper_part = ((double) this->table_of_triplets[rowCr][colF].getSuccess() * Epf/ 1);
+    } else {
+        upper_part = ((double) this->table_of_triplets[rowCr][colF].getSuccess() * Epf/ (double) this->table_of_triplets[rowCr][colF].getTries());
+
+    }
+
 
     for (int row = 0; row < AMOUNT_OF_POSSIBLE_CR; row++) {
         for (int col = 0; col < AMOUNT_OF_POSSIBLE_F; col++) {
-            down_part += ((double) this->table_of_triplets[row][col].getSuccess() * Epf / (double) this->table_of_triplets[row][col].getTries());
+            Epf = EPf(col, eva_maxeva_ratio);
+            if (table_of_triplets[row][col].getTries() == 0) {
+                down_part += ((double) this->table_of_triplets[row][col].getSuccess() * Epf / 1);
+            } else {
+                down_part += ((double) this->table_of_triplets[row][col].getSuccess() * Epf / (double) this->table_of_triplets[row][col].getTries());
+
+            }
         }
     }
 
