@@ -6,8 +6,8 @@
 
 
 //constructor
-TripletPST::TripletPST(int amount_of_cols) {
-    this->probability = 1.0 / amount_of_cols;
+TripletPST::TripletPST(int initialization_value) {
+    this->probability = 1.0 / initialization_value;
     this->tries = 0;
     this->success = 0;
 

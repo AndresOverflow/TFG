@@ -60,6 +60,30 @@ Individual.h
 armadillo.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/armadillo.h
 
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/TableFandCR.cpp
+TableFandCR.h
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/TableFandCR.h
+
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/TableFandCR.h
+TripletPST.h
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/TripletPST.h
+vector
+-
+string
+-
+cmath
+-
+stdlib.h
+-
+math.h
+-
+iostream
+-
+
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/TripletPST.cpp
+TripletPST.h
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/TripletPST.h
+
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/TripletPST.h
 vector
 -
@@ -2477,4 +2501,26 @@ hdf5.h
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/armadillo/9.900.2/include/armadillo_bits/xvec_htrans_bones.hpp
 
 /Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/armadillo/9.900.2/include/armadillo_bits/xvec_htrans_meat.hpp
+
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/main.cpp
+iostream
+-
+string
+-
+vector
+-
+fstream
+-
+sstream
+-
+Individual.h
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/Individual.h
+Population.h
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/Population.h
+MutationProbabilityTable.h
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/MutationProbabilityTable.h
+armadillo.h
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/armadillo.h
+TableFandCR.h
+/Users/AndresOverflow/Documents/Universidad/TFG/DE_RAM_JAPDE_CEC14_HSPR/TableFandCR.h
 

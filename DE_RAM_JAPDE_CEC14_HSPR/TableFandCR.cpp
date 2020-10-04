@@ -6,7 +6,7 @@
 
 TableFandCR::TableFandCR() {
 
-    std::vector<std::vector<TripletPST>> fog(AMOUNT_OF_POSSIBLE_CR, std::vector<TripletPST>(AMOUNT_OF_POSSIBLE_F, TripletPST(AMOUNT_OF_POSSIBLE_F)));
+    std::vector<std::vector<TripletPST>> fog(AMOUNT_OF_POSSIBLE_CR, std::vector<TripletPST>(AMOUNT_OF_POSSIBLE_F, TripletPST(AMOUNT_OF_POSSIBLE_CR * AMOUNT_OF_POSSIBLE_F)));
     table_of_triplets.assign(fog.begin(), fog.end());
 }
 

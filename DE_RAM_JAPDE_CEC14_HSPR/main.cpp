@@ -321,11 +321,11 @@ selectMeanCRFValues(TableFandCR table_mean_cr_f_prob, vector<vector<double>> mea
                     Population current_population) {
     std::vector<std::vector<double>> mean_cr_f_values_to_use_to_return(current_population.getPopulationSize(), std::vector<double>(2, -1));
 
-    vector<double> vector_accumulated_prob_per_col (TableFandCR::AMOUNT_OF_POSSIBLE_F, -1.0);
+    vector<double> vector_accumulated_prob_per_col(TableFandCR::AMOUNT_OF_POSSIBLE_F, -1.0);
     double sum_vector_of_accumulated_prob_per_col = 0.0;
     double col_selected = -1;
 
-    vector<double> vector_probability_per_cr_col_selected (TableFandCR::AMOUNT_OF_POSSIBLE_F, -1.0);
+    vector<double> vector_probability_per_cr_col_selected(TableFandCR::AMOUNT_OF_POSSIBLE_F, -1.0);
     double accumulated_value_col_selected;
     double row_selected = -1;
     //get random_value from 0 to cumulative
@@ -339,7 +339,7 @@ selectMeanCRFValues(TableFandCR table_mean_cr_f_prob, vector<vector<double>> mea
             vector_accumulated_prob_per_col[col] = table_mean_cr_f_prob.getAccumulatedProbabilityFromCol(col);
         }
         // obtener el max acumulado de las probabilidades acumuladas de cada columna
-        sum_vector_of_accumulated_prob_per_col = accumulate(vector_accumulated_prob_per_col.begin(),vector_accumulated_prob_per_col.end(),0.0);
+        sum_vector_of_accumulated_prob_per_col = accumulate(vector_accumulated_prob_per_col.begin(), vector_accumulated_prob_per_col.end(), 0.0);
         // hacer ruleta para encontrar el elemento de la columna (f) que tenemos que usar
         col_selected = wheel_roulette(vector_accumulated_prob_per_col, sum_vector_of_accumulated_prob_per_col);
 
@@ -471,9 +471,6 @@ int calculateGenerations(int fitness_operations_per_p, int population_size) {
 int main() {
 
 
-
-
-
     cout << "HSPR!!!\n";
 
     //Para hacerlo random, descomentar
@@ -590,7 +587,7 @@ int main() {
             cout << "\n Fitness Evaluations done to the moment:    " << number_of_fit_eva;
             cout << "\nBest individual of the population diff to the optimum:   "
                  << current_population.bestIndividual().getErrorToOptimum(number_of_function);
-            cout << "\n" << ((double) number_of_fit_eva / MAX_FITNESS_EVALUATIONS) * 100 << " %";
+            cout << "\n" << ((double) number_of_fit_eva / MAX_FITNESS_EVALUATIONS) * 100 << " % \n \n";
 
         }
 
