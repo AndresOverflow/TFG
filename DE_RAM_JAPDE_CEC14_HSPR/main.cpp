@@ -191,6 +191,9 @@ Individual DE_PBest_1_ind(vector<Individual> current_population_vector, int ind,
 
 
         value = CN_X_pbest + mean_cr_f_values_to_use[ind][1] * (CN_X_r1 - CN_X_r2);
+        //control de -100 o 100
+        if (value < -100) value = -100;
+        if (value > 100) value = 100;
 
         ind_to_return.setComponent(component_i, value);
     }
@@ -228,6 +231,9 @@ Individual DE_currentToPBest_1_ind(vector<Individual> current_population_vector,
         CN_X_pbest = pbest_individual_components[component_i];
 
         value = CN_X_i + mean_cr_f_values_to_use[ind][1] * (CN_X_pbest - CN_X_i + CN_X_r1 - CN_X_r2);
+
+        if (value < -100) value = -100;
+        if (value > 100) value = 100;
 
         ind_to_return.setComponent(component_i, value);
     }
