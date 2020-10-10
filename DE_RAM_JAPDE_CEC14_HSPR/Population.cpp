@@ -76,7 +76,6 @@ Individual Population::pBestIndividual(double p) {
 
     pbest_individual.setFitness(individuals_sorted[random_pbest_individual_index].getFitness());
     pbest_individual.setComponents(individuals_sorted[random_pbest_individual_index].getComponents());
-    pbest_individual.setGroup(individuals_sorted[random_pbest_individual_index].getGroup());
 
     return pbest_individual;
 }
@@ -134,20 +133,6 @@ void Population::reducePopulationInHalf() {
     this->individuals.assign(vector_to_assign.begin(), vector_to_assign.end());
     this->population_size = vector_to_assign.size();
 
-}
-
-
-void Population::assignGroupToIndividuals(int group_size) {
-    int group;
-    for (int ind = 0; ind < this->population_size; ind++) {
-        group = ceil(ind / group_size);
-        this->individuals[ind].setGroup(group);
-    }
-
-}
-
-void Population::setGroupToInd(int position, int group_value) {
-    this->individuals[position].setGroup(group_value);
 }
 
 void Population::sortPopulation() {

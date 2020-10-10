@@ -40,9 +40,6 @@ public:
 
     double getComponent(int position);
 
-    int getGroup(void);
-
-    void setGroup(int group);
 
     string toString(void);
 
@@ -56,7 +53,6 @@ public:
 private:
     double fitness;
     vector<double> components;
-    int group;
 
 };
 

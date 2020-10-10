@@ -13,7 +13,6 @@
 
 
 Individual::Individual(void) {
-    this->group = NOT_INITIALIZED_GROUP;
     this->fitness = NOT_INITIALIZED;
     for (int i = 0; i < DIMENSION; i++) {
         this->components.insert(this->components.begin(), 0);
@@ -84,13 +83,6 @@ double Individual::getErrorToOptimum(int function_number) {
     return dif;
 }
 
-int Individual::getGroup() {
-    return this->group;
-}
-
-void Individual::setGroup(int group) {
-    this->group = group;
-}
 
 bool operator<(const Individual &s1, const Individual &s2) {
     return s1.getFitness() < s2.getFitness();

@@ -62,7 +62,6 @@ public:
 
     void assignFitness(vector<double> fitness_vector);
 
-    void assignGroupToIndividuals(int group_size);
 
     void setGroupToInd(int position, int group_value);
 

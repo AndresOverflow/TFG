@@ -30,9 +30,9 @@ using namespace arma;
 // GS group size = population_size = number of groups
 
 static const int AMOUNT_OF_GROUPS = 10;
-static const int GROUP_SIZE = Population::POPULATION_SIZE_INIT / AMOUNT_OF_GROUPS;
-static const double EVAPORATION_RATE = 0.05;
-static const int LP_RAM = 30;
+static const int GROUP_SIZE_INIT = Population::POPULATION_SIZE_INIT / AMOUNT_OF_GROUPS;
+static const double EVAPORATION_RATE = 0.2;
+static const int LP_RAM = 80;
 static const int UPPER_BOUND = 100;
 static const int LOWER_BOUND = -100;
 const double EPSILON = pow(10.0, -8);
@@ -101,7 +101,6 @@ Population selection(Population current_population, Population offspring, int nu
             final_population_vector[i].setComponents(offspring_vector[i].getComponents());
             final_population_vector[i].setFitness(offspring_vector[i].getFitness());
         }
-        final_population_vector[i].setGroup(current_population_vector[i].getGroup());
     }
 
     final_population.setIndividuals(final_population_vector);
@@ -260,7 +259,6 @@ Population mutate_RAM_JAPDE(Population current_population, vector<int> mutation_
     for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
         // SELECTION OF MUTATION DEPENDING ON THE NUMBER
         offspring_vector[ind] = mutation_functions_ram_japde[mutation_vector[ind]](current_population_vector, ind, mean_cr_f_values_to_use, p);
-        offspring_vector[ind].setGroup(current_population.getIndividual(ind).getGroup());
     }
 
     offspring.setIndividuals(offspring_vector);
@@ -268,6 +266,17 @@ Population mutate_RAM_JAPDE(Population current_population, vector<int> mutation_
     return offspring;
 
 }
+
+
+int extract_group_by_ind(int group_size, int ind) {
+
+    if (ind < group_size * AMOUNT_OF_GROUPS) {
+        return floor(ind / group_size);
+    } else {
+        return ind - (group_size * AMOUNT_OF_GROUPS);
+    }
+}
+
 
 //TODO check wheel_roulette
 int wheel_roulette(vector<double> probabilities, double acc_prob_of_group) {
@@ -295,7 +304,8 @@ int wheel_roulette(vector<double> probabilities, double acc_prob_of_group) {
     return mutation_strategy;
 }
 
-vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability_table, int number_of_individuals, Population current_population) {
+vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability_table, int number_of_individuals, Population current_population,
+                                   int group_size) {
     vector<int> mutation_to_use_vector(number_of_individuals, -1);
     int group = -1;
     vector<double> probability_per_mut_str_of_the_group(mutation_probability_table.getNumberOfGroups(), 0);
@@ -310,7 +320,7 @@ vector<int> selectMutationStrategy(MutationProbabilityTable mutation_probability
         // coger el vector de probabilidades del grupo
 
 
-        group = current_population.getIndividual(individual).getGroup();
+        group = extract_group_by_ind(group_size, individual);
         max_prob_of_the_group = mutation_probability_table.getAccumulatedProbabilityFromGroup(group);
         probability_per_mut_str_of_the_group = mutation_probability_table.getProbabilityFromGroup(group);
         mutation_to_use_vector[individual] = wheel_roulette(probability_per_mut_str_of_the_group, max_prob_of_the_group);
@@ -328,22 +338,21 @@ selectMeanCRFValues(TableFandCR table_mean_cr_f_prob, vector<vector<double>> mea
     std::vector<std::vector<double>> mean_cr_f_values_to_use_to_return(current_population.getPopulationSize(), std::vector<double>(2, -1));
 
     vector<double> vector_accumulated_prob_per_col(TableFandCR::AMOUNT_OF_POSSIBLE_F, -1.0);
+
     double sum_vector_of_accumulated_prob_per_col = 0.0;
     double col_selected = -1;
 
     vector<double> vector_probability_per_cr_col_selected(TableFandCR::AMOUNT_OF_POSSIBLE_F, -1.0);
     double accumulated_value_col_selected;
     double row_selected = -1;
-    //get random_value from 0 to cumulative
 
-    //rowToSearch = wheel_roulette()
+    for (int col = 0; col < TableFandCR::AMOUNT_OF_POSSIBLE_F; col++) {
+            vector_accumulated_prob_per_col[col] = table_mean_cr_f_prob.getAccumulatedProbabilityFromCol(col);
+        }
 
     for (int ind = 0; ind < number_of_individuals; ind++) {
         // obtener el vector de las probabilidades accumuladas de cada columna (f)
-        for (int col = 0; col < TableFandCR::AMOUNT_OF_POSSIBLE_F; col++) {
 
-            vector_accumulated_prob_per_col[col] = table_mean_cr_f_prob.getAccumulatedProbabilityFromCol(col);
-        }
         // obtener el max acumulado de las probabilidades acumuladas de cada columna
         sum_vector_of_accumulated_prob_per_col = accumulate(vector_accumulated_prob_per_col.begin(), vector_accumulated_prob_per_col.end(), 0.0);
         // hacer ruleta para encontrar el elemento de la columna (f) que tenemos que usar
@@ -361,11 +370,19 @@ selectMeanCRFValues(TableFandCR table_mean_cr_f_prob, vector<vector<double>> mea
         //dividir entre 10 el cr y guardarlo
         //dividir entre 10 el f y guardarlo
 
+        /*
+         * create values for f and cr
+         */
+        for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
+            mean_cr_f_values_to_use[ind][0] = rand_gauss(mean_cr_f_values_to_use[ind][0], 0.05);          // cr
+            mean_cr_f_values_to_use[ind][1] = rand_cauchy(mean_cr_f_values_to_use[ind][1], 0.05);        // f
+        }
+
         row_selected = (double) row_selected / 10;
         col_selected = (double) col_selected / 10;
 
-        mean_cr_f_values_to_use_to_return[ind][0] = row_selected;
-        mean_cr_f_values_to_use_to_return[ind][1] = col_selected;
+        mean_cr_f_values_to_use_to_return[ind][0] = rand_gauss(row_selected, 0.05);          // cr
+        mean_cr_f_values_to_use_to_return[ind][1] = rand_cauchy(col_selected, 0.05);        // f
 
 
     }
@@ -376,10 +393,10 @@ selectMeanCRFValues(TableFandCR table_mean_cr_f_prob, vector<vector<double>> mea
 
 
 void updateTriesAndSuccessMutTable(Population current_population, Population offspring, MutationProbabilityTable *mutation_probability_table,
-                                   vector<int> mutation_strategy_to_use, int number_of_function) {
+                                   vector<int> mutation_strategy_to_use, int number_of_function, int group_size) {
     int group;
     for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
-        group = current_population.getIndividual(ind).getGroup();
+        group = extract_group_by_ind(group_size, ind);
         mutation_probability_table->addTries(group, mutation_strategy_to_use[ind], 1);
         if (offspring.getIndividual(ind).betterFitnessThan(current_population.getIndividual(ind), number_of_function)) {
             mutation_probability_table->addSuccess(group, mutation_strategy_to_use[ind], 1);
@@ -474,7 +491,16 @@ int calculateGenerations(int fitness_operations_per_p, int population_size) {
  *
  */
 
+
+// mutation_to_use -> roulette
+// extraction -> ese indice pertenece a tal grupo
+
 int main() {
+
+
+    ofstream results_file;
+    results_file.open ("Results.txt", ios::app);
+
 
 
     cout << "HSPR!!!\n";
@@ -483,173 +509,177 @@ int main() {
     //srand((unsigned) time(0));
 
     int number_of_function = 18;
-    int number_of_fit_eva = 0;
-
-    //Calculamos p_max
-    //Calculamos el numero de fitness operaciones permitidas por poblacion
-    // Calculamos el numero de generaciones para la primera iteracion
-    //Ponemos el contado de generaciones a 0
-    //en el main, cuando llegue a 0 actualizar
-    // poblacion
-    //calcular max generaciones de la poblacion
-    //contador de generaciones
-
-    int p_max = calculatePMax();
-    int fitness_operations_per_p = calculateFitnessOperations(p_max);
-    int generations_for_current_p = calculateGenerations(fitness_operations_per_p, Population::POPULATION_SIZE_INIT);
-
-    int generations_counter = 0;
-    int p_reduccions_to_do = p_max - 1;
-
-    double p = 0;
-
-    double eva_maxeva_ratio = 0.0;
-
-    //inicializar población
-
-    cout << "\n correcto \n";
-    cout << "INICIALIZAMOS LA POBLACION";
-
-    Population current_population, mutated_population, offspring = Population();
-    vector<Individual> current_population_vector, mutated_population_vector, offspring_vector;
-    //current_population = FileReader::setPopulationIndividualsFromFile();
-
-    current_population = Population::initializePopulation(UPPER_BOUND, LOWER_BOUND);
-    mat mat_current_population = Population::populationToMat(current_population);
-    //inicializar parametros
-
-    vector<double> fitness_vector;
-    fitness_vector = calculateCECFitness(current_population, Individual::DIMENSION, current_population.getPopulationSize(), number_of_function);
-    number_of_fit_eva += fitness_vector.size();
-    current_population.assignFitness(fitness_vector);
-
-    cout << "Su media de Fitness respecto al optimo";
-    cout << current_population.calculateMeanErrorToOptimumPopulation(number_of_function);
-
-    current_population.sortPopulation();
-    current_population.assignGroupToIndividuals(GROUP_SIZE);
-
-    // current_population_size * 2(cr and f)
-    std::vector<std::vector<double>> mean_cr_f_values_to_use(current_population.getPopulationSize(), std::vector<double>(2, -1));
-
-    TableFandCR table_mean_cr_f_prob = TableFandCR();
 
 
-    vector<int> mutation_strategy_to_use(current_population.getPopulationSize(), -1);
-
-    // Crear la tabla de mutacion
-    MutationProbabilityTable mutation_probability_table = MutationProbabilityTable(GROUP_SIZE, EVAPORATION_RATE);
+    for (int execution = 0; execution < 30; execution++) {
 
 
-    int iteration = 1;
-    while (number_of_fit_eva < MAX_FITNESS_EVALUATIONS && !isOptimumIndividualFound(current_population, number_of_function)) {
-        generations_counter = generations_counter + 1;
+        int number_of_fit_eva = 0;
 
-        p = calculateP(number_of_fit_eva, current_population.getPopulationSize());
+        //Calculamos p_max
+        //Calculamos el numero de fitness operaciones permitidas por poblacion
+        // Calculamos el numero de generaciones para la primera iteracion
+        //Ponemos el contado de generaciones a 0
+        //en el main, cuando llegue a 0 actualizar
+        // poblacion
+        //calcular max generaciones de la poblacion
+        //contador de generaciones
 
+        int p_max = calculatePMax();
+        int fitness_operations_per_p = calculateFitnessOperations(p_max);
+        int generations_for_current_p = calculateGenerations(fitness_operations_per_p, Population::POPULATION_SIZE_INIT);
 
-        mean_cr_f_values_to_use = selectMeanCRFValues(table_mean_cr_f_prob, mean_cr_f_values_to_use, current_population.getPopulationSize(),
-                                                      current_population);
+        int generations_counter = 0;
+        int p_reduccions_to_do = p_max - 1;
 
-        /*
-         * create values for f and cr
-         */
-        for (int ind = 0; ind < current_population.getPopulationSize(); ind++) {
-            mean_cr_f_values_to_use[ind][0] = rand_gauss(mean_cr_f_values_to_use[ind][0], 0.05);          // cr
-            mean_cr_f_values_to_use[ind][1] = rand_cauchy(mean_cr_f_values_to_use[ind][1], 0.05);        // f
-        }
-        if (iteration == 31) {
-            cout << " asdf";
-        }
+        double p = 0;
 
-        mutation_strategy_to_use = selectMutationStrategy(mutation_probability_table, current_population.getPopulationSize(), current_population);
-        //cout << "\n2.MUTATE THE POPULATION " << "\n";
-        mutated_population = mutate_RAM_JAPDE(current_population, mutation_strategy_to_use, mean_cr_f_values_to_use, p);
+        double eva_maxeva_ratio = 0.0;
 
-        //cout << "\n 3.DO CROSSOVER" << "\n";
-        offspring = crossover(current_population, mutated_population, mean_cr_f_values_to_use);
+        int group_size;
 
 
-        fitness_vector = calculateCECFitness(offspring, Individual::DIMENSION, current_population.getPopulationSize(), number_of_function);
+        //inicializar población
+
+        cout << "\n correcto \n";
+        cout << "INICIALIZAMOS LA POBLACION";
+
+        Population current_population, mutated_population, offspring = Population();
+        vector<Individual> current_population_vector, mutated_population_vector, offspring_vector;
+
+        current_population = Population::initializePopulation(UPPER_BOUND, LOWER_BOUND);
+        mat mat_current_population = Population::populationToMat(current_population);
+        //inicializar parametros
+
+        vector<double> fitness_vector;
+        fitness_vector = calculateCECFitness(current_population, Individual::DIMENSION, current_population.getPopulationSize(), number_of_function);
         number_of_fit_eva += fitness_vector.size();
-        offspring.assignFitness(fitness_vector);
-        //cout << "Diff to the optimum of the offspring : " << offspring.calculateMeanErrorToOptimumPopulation(number_of_function);
+        current_population.assignFitness(fitness_vector);
 
-        //cout << "\n Store Tries and Success" << "\n";
+        cout << "Su media de Fitness respecto al optimo";
+        cout << current_population.calculateMeanErrorToOptimumPopulation(number_of_function);
 
-        //cout << "\n 4.DO SELECTION" << "\n";
-        for (int ind_to_assign_group = 0; ind_to_assign_group < current_population.getPopulationSize(); ind_to_assign_group++) {
-            offspring.setGroupToInd(ind_to_assign_group, current_population.getIndividual(ind_to_assign_group).getGroup());
-        }
-        updateTriesAndSuccessMutTable(current_population, offspring, &mutation_probability_table, mutation_strategy_to_use, number_of_function);
-        updateTriesAndSuccessMeanValuesCRF(current_population, offspring, &table_mean_cr_f_prob, mean_cr_f_values_to_use, number_of_function);
+        current_population.sortPopulation();
 
-        current_population = selection(current_population, offspring, number_of_function);
+        // current_population_size * 2(cr and f)
+        std::vector<std::vector<double>> mean_cr_f_values_to_use(current_population.getPopulationSize(), std::vector<double>(2, -1));
+
+        TableFandCR table_mean_cr_f_prob = TableFandCR();
 
 
-        if (iteration % 1 == 0) {
-            cout << "\n ---------iteration " << iteration << "    diff to the optimum de la poblacion:     "
-                 << current_population.calculateMeanErrorToOptimumPopulation(number_of_function) << "\n";
-            cout << "\n Fitness Evaluations done to the moment:    " << number_of_fit_eva;
-            cout << "\nBest individual of the population diff to the optimum:   "
-                 << current_population.bestIndividual().getErrorToOptimum(number_of_function);
-            cout << "\n" << ((double) number_of_fit_eva / MAX_FITNESS_EVALUATIONS) * 100 << " % \n \n";
+        vector<int> mutation_strategy_to_use(current_population.getPopulationSize(), -1);
 
-        }
+        // Crear la tabla de mutacion
+        MutationProbabilityTable mutation_probability_table = MutationProbabilityTable(GROUP_SIZE_INIT, EVAPORATION_RATE);
 
 
-        if (number_of_fit_eva > 18000) {
-            cout << "asdf";
-        }
+        // START OF THE LOOP
+
+        int iteration = 1;
+        while (number_of_fit_eva < MAX_FITNESS_EVALUATIONS && !isOptimumIndividualFound(current_population, number_of_function)) {
+
+            generations_counter = generations_counter + 1;
+
+            p = calculateP(number_of_fit_eva, current_population.getPopulationSize());
 
 
 
-        // si es LP_RAM actualizamos
-        if ((iteration % LP_RAM) == 0) {
-            mutation_probability_table.updateTable();
-            mutation_probability_table.resetTripletsKeepProbabilities();
+            // calcular el group_size
 
-            if (iteration == 2400) {
-                cout << "hasd";
+            group_size = current_population.getPopulationSize() / AMOUNT_OF_GROUPS;
+
+
+            mean_cr_f_values_to_use = selectMeanCRFValues(table_mean_cr_f_prob, mean_cr_f_values_to_use, current_population.getPopulationSize(),
+                                                          current_population);
+
+
+            mutation_strategy_to_use = selectMutationStrategy(mutation_probability_table, current_population.getPopulationSize(), current_population,
+                                                              group_size);
+
+
+            //cout << "\n2.MUTATE THE POPULATION " << "\n";
+            mutated_population = mutate_RAM_JAPDE(current_population, mutation_strategy_to_use, mean_cr_f_values_to_use, p);
+
+            //cout << "\n 3.DO CROSSOVER" << "\n";
+            offspring = crossover(current_population, mutated_population, mean_cr_f_values_to_use);
+
+
+            fitness_vector = calculateCECFitness(offspring, Individual::DIMENSION, current_population.getPopulationSize(), number_of_function);
+            number_of_fit_eva += fitness_vector.size();
+            offspring.assignFitness(fitness_vector);
+
+            //cout << "\n Store Tries and Success" << "\n";
+
+            //cout << "\n 4.DO SELECTION" << "\n";
+            updateTriesAndSuccessMutTable(current_population, offspring, &mutation_probability_table, mutation_strategy_to_use, number_of_function,
+                                          group_size);
+            updateTriesAndSuccessMeanValuesCRF(current_population, offspring, &table_mean_cr_f_prob, mean_cr_f_values_to_use, number_of_function);
+
+            current_population = selection(current_population, offspring, number_of_function);
+
+
+            // ordenar por fitness
+            current_population.sortPopulation();
+
+
+            if (iteration % 25 == 0) {
+                cout << "\n Iteration: " << iteration << "\n";
+                cout << "\n Fitness Evaluations done to the moment:    " << number_of_fit_eva;
+                //    << " " << current_population.getIndividual(0).getErrorToOptimum(number_of_function);
+                cout << "\nBest individual of the population diff to the optimum:   " << current_population.getIndividual(0).getErrorToOptimum(number_of_function);
+
+                cout << "\n" << "Execution:" << execution << " --> " << ((double) number_of_fit_eva / MAX_FITNESS_EVALUATIONS) * 100 << " % \n \n";
+
             }
 
-            eva_maxeva_ratio = ((double) number_of_fit_eva / MAX_FITNESS_EVALUATIONS);
-            table_mean_cr_f_prob.updateTable(eva_maxeva_ratio);
-            table_mean_cr_f_prob.resetTripletsKeepProbabilities();
+
+            // si es LP_RAM actualizamos
+            if ((iteration % LP_RAM) == 0) {
+                mutation_probability_table.updateTable();
+                mutation_probability_table.resetTripletsKeepProbabilities();
+
+
+                eva_maxeva_ratio = ((double) number_of_fit_eva / MAX_FITNESS_EVALUATIONS);
+                table_mean_cr_f_prob.updateTable(eva_maxeva_ratio);
+                table_mean_cr_f_prob.resetTripletsKeepProbabilities();
+            }
+
+
+
+            // Mirar en cuanto se reduce la poblacion
+            //int new_population_size = newPopulationSize(number_of_fit_eva);
+            //int number_of_ind_to_reduce = numberOfIndividualsToReduce(current_population, new_population_size);
+            // Mirar que individuos reducir y reducir la poblacion
+
+
+            if (generations_counter >= generations_for_current_p and p_reduccions_to_do > 0) {
+                current_population.reducePopulationInHalf();
+
+                generations_counter = 0;
+                p_reduccions_to_do--;
+
+                generations_for_current_p = calculateGenerations(fitness_operations_per_p, current_population.getPopulationSize());
+
+
+            }
+
+
+
+            iteration += 1;
+
+
         }
+        cout << "\n ---------iteration " << iteration << "    diff to the optimum de la poblacion:     "
+             << current_population.calculateMeanErrorToOptimumPopulation(number_of_function) << "\n";
+        cout << "\n Fitness Evaluations done to the moment:    " << number_of_fit_eva;
+        cout << "\nBest individual of the population diff to the optimum:   "
+             << current_population.bestIndividual().getErrorToOptimum(number_of_function);
 
-
-
-        // Mirar en cuanto se reduce la poblacion
-        //int new_population_size = newPopulationSize(number_of_fit_eva);
-        //int number_of_ind_to_reduce = numberOfIndividualsToReduce(current_population, new_population_size);
-        // Mirar que individuos reducir y reducir la poblacion
-
-
-        /*if (generations_counter >= generations_for_current_p and p_reduccions_to_do > 0) {
-            current_population.reducePopulationInHalf();
-
-            generations_counter = 0;
-            p_reduccions_to_do--;
-
-            generations_for_current_p = calculateGenerations(fitness_operations_per_p, current_population.getPopulationSize());
-
-
-        }*/
-
-        if (iteration == 2) {
-            cout << "hasd";
-        }
-
-
-        iteration += 1;
-
-
+        results_file << current_population.bestIndividual().getErrorToOptimum(number_of_function);
+        results_file << "\t";
     }
-    cout << "\n ---------iteration " << iteration << "    diff to the optimum de la poblacion:     "
-         << current_population.calculateMeanErrorToOptimumPopulation(number_of_function) << "\n";
-    cout << "\n Fitness Evaluations done to the moment:    " << number_of_fit_eva;
-    cout << "\nBest individual of the population diff to the optimum:   "
-         << current_population.bestIndividual().getErrorToOptimum(number_of_function);
+
+    results_file.close();
+
     return 0;
 }
