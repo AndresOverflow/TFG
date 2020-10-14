@@ -52,6 +52,7 @@ Individual Population::bestIndividual(void) {
 
         }
     }
+
     return best_individual;
 }
 
@@ -67,15 +68,9 @@ Individual Population::pBestIndividual(double p) {
     //Escogemos un individo random entre ellos
     int random_pbest_individual_index = (rand() % max_pbest_individuals);
 
-
     Individual pbest_individual = Individual();
-
-    vector<Individual> individuals_sorted = this->getIndividuals();
-    sort(individuals_sorted.begin(), individuals_sorted.end());
-
-
-    pbest_individual.setFitness(individuals_sorted[random_pbest_individual_index].getFitness());
-    pbest_individual.setComponents(individuals_sorted[random_pbest_individual_index].getComponents());
+    pbest_individual.setFitness(this->getIndividual(random_pbest_individual_index).getFitness());
+    pbest_individual.setComponents(this->getIndividual(random_pbest_individual_index).getComponents());
 
     return pbest_individual;
 }
@@ -98,6 +93,7 @@ void Population::recalculateFitness(void) {
 
         this->setIndividual(individual_i, individual);
     }
+    cout << " ";
 
 }
 

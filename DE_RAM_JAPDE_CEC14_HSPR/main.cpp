@@ -22,17 +22,14 @@ int ini_flag = 0, n_flag, func_flag, *SS;
 using namespace std;
 using namespace arma;
 
-//static const double F = 1.7; //mutate factor
-//static const double F = 0.7; //mutate factor
-//static const double CR = 0.15; //Crossover factor
-//static const double CR = 0.15; //Crossover factor
 
 // GS group size = population_size = number of groups
 
 static const int AMOUNT_OF_GROUPS = 10;
 static const int GROUP_SIZE_INIT = Population::POPULATION_SIZE_INIT / AMOUNT_OF_GROUPS;
 static const double EVAPORATION_RATE = 0.2;
-static const int LP_RAM = 80;
+static const int LP_RAM = 30;
+static const int FITNESS_EVALUATIONS_PER_UPDATE = 8000;
 static const int UPPER_BOUND = 100;
 static const int LOWER_BOUND = -100;
 const double EPSILON = pow(10.0, -8);
@@ -358,7 +355,6 @@ selectMeanCRFValues(TableFandCR table_mean_cr_f_prob, vector<vector<double>> mea
         // hacer ruleta para encontrar el elemento de la columna (f) que tenemos que usar
         col_selected = wheel_roulette(vector_accumulated_prob_per_col, sum_vector_of_accumulated_prob_per_col);
 
-
         // obtener el vector de las probabilidades de la columna (f)
         vector_probability_per_cr_col_selected = table_mean_cr_f_prob.getProbabilityFromCol(col_selected);
         // obtener el max acumulado de la columna
@@ -400,7 +396,6 @@ void updateTriesAndSuccessMutTable(Population current_population, Population off
         mutation_probability_table->addTries(group, mutation_strategy_to_use[ind], 1);
         if (offspring.getIndividual(ind).betterFitnessThan(current_population.getIndividual(ind), number_of_function)) {
             mutation_probability_table->addSuccess(group, mutation_strategy_to_use[ind], 1);
-
         }
     }
 }
@@ -441,7 +436,7 @@ vector<double> calculateCECFitness(Population current_population, int dimension,
 }
 
 bool isOptimumIndividualFound(Population population_to_evaluate, int number_of_function) {
-    if ((population_to_evaluate.bestIndividual().getErrorToOptimum(number_of_function)) > EPSILON)
+    if ((population_to_evaluate.getIndividual(0).getErrorToOptimum(number_of_function)) > EPSILON)
         return false;
     return true;
 }
@@ -495,6 +490,16 @@ int calculateGenerations(int fitness_operations_per_p, int population_size) {
 // mutation_to_use -> roulette
 // extraction -> ese indice pertenece a tal grupo
 
+
+//Calculamos p_max
+        //Calculamos el numero de fitness operaciones permitidas por poblacion
+        // Calculamos el numero de generaciones para la primera iteracion
+        //Ponemos el contado de generaciones a 0
+        //en el main, cuando llegue a 0 actualizar
+        // poblacion
+        //calcular max generaciones de la poblacion
+        //contador de generaciones
+
 int main() {
 
 
@@ -506,24 +511,21 @@ int main() {
     cout << "HSPR!!!\n";
 
     //Para hacerlo random, descomentar
-    //srand((unsigned) time(0));
+    srand((unsigned) time(0));
 
-    int number_of_function = 18;
+    int number_of_function = 3;
+
+
+    int number_of_fit_eva;
+    int number_of_fit_to_update;
+    bool update_tables = false;
 
 
     for (int execution = 0; execution < 30; execution++) {
 
 
-        int number_of_fit_eva = 0;
-
-        //Calculamos p_max
-        //Calculamos el numero de fitness operaciones permitidas por poblacion
-        // Calculamos el numero de generaciones para la primera iteracion
-        //Ponemos el contado de generaciones a 0
-        //en el main, cuando llegue a 0 actualizar
-        // poblacion
-        //calcular max generaciones de la poblacion
-        //contador de generaciones
+        number_of_fit_eva = 0;
+        number_of_fit_to_update = 0;
 
         int p_max = calculatePMax();
         int fitness_operations_per_p = calculateFitnessOperations(p_max);
@@ -553,7 +555,7 @@ int main() {
 
         vector<double> fitness_vector;
         fitness_vector = calculateCECFitness(current_population, Individual::DIMENSION, current_population.getPopulationSize(), number_of_function);
-        number_of_fit_eva += fitness_vector.size();
+
         current_population.assignFitness(fitness_vector);
 
         cout << "Su media de Fitness respecto al optimo";
@@ -606,6 +608,12 @@ int main() {
 
             fitness_vector = calculateCECFitness(offspring, Individual::DIMENSION, current_population.getPopulationSize(), number_of_function);
             number_of_fit_eva += fitness_vector.size();
+
+            number_of_fit_to_update += fitness_vector.size();
+            if (number_of_fit_to_update >= FITNESS_EVALUATIONS_PER_UPDATE) {
+            number_of_fit_to_update -= 3000;
+            update_tables = true;
+            }
             offspring.assignFitness(fitness_vector);
 
             //cout << "\n Store Tries and Success" << "\n";
@@ -622,19 +630,19 @@ int main() {
             current_population.sortPopulation();
 
 
-            if (iteration % 25 == 0) {
+            if ((iteration % 25) == 0) {
                 cout << "\n Iteration: " << iteration << "\n";
                 cout << "\n Fitness Evaluations done to the moment:    " << number_of_fit_eva;
                 //    << " " << current_population.getIndividual(0).getErrorToOptimum(number_of_function);
                 cout << "\nBest individual of the population diff to the optimum:   " << current_population.getIndividual(0).getErrorToOptimum(number_of_function);
 
                 cout << "\n" << "Execution:" << execution << " --> " << ((double) number_of_fit_eva / MAX_FITNESS_EVALUATIONS) * 100 << " % \n \n";
-
+                cout <<  "Number of fitness op to update : " << number_of_fit_to_update << "\n\n";
             }
 
 
             // si es LP_RAM actualizamos
-            if ((iteration % LP_RAM) == 0) {
+            if (update_tables == true) {
                 mutation_probability_table.updateTable();
                 mutation_probability_table.resetTripletsKeepProbabilities();
 
@@ -642,6 +650,8 @@ int main() {
                 eva_maxeva_ratio = ((double) number_of_fit_eva / MAX_FITNESS_EVALUATIONS);
                 table_mean_cr_f_prob.updateTable(eva_maxeva_ratio);
                 table_mean_cr_f_prob.resetTripletsKeepProbabilities();
+
+                update_tables = false;
             }
 
 
@@ -665,6 +675,7 @@ int main() {
 
 
 
+
             iteration += 1;
 
 
@@ -673,9 +684,9 @@ int main() {
              << current_population.calculateMeanErrorToOptimumPopulation(number_of_function) << "\n";
         cout << "\n Fitness Evaluations done to the moment:    " << number_of_fit_eva;
         cout << "\nBest individual of the population diff to the optimum:   "
-             << current_population.bestIndividual().getErrorToOptimum(number_of_function);
+             << current_population.getIndividual(0).getErrorToOptimum(number_of_function);
 
-        results_file << current_population.bestIndividual().getErrorToOptimum(number_of_function);
+        results_file << current_population.getIndividual(0).getErrorToOptimum(number_of_function);
         results_file << "\t";
     }
 

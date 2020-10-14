@@ -24,7 +24,7 @@ class Population {
 
 public:
 
-    static const int POPULATION_SIZE_INIT = 100;
+    static const int POPULATION_SIZE_INIT = 480;
     static const int POPULATION_SIZE_MIN = 4;
 
     Population(void);
