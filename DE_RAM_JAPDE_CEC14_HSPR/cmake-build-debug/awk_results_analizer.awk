@@ -9,7 +9,7 @@ BEGIN {
 }
 
 {
-    if ($1 == "perros4") {
+    if ($1 == "HSPR1" && $2 == "480" && $3 == "8000") {
         number_of_exe = NF - 5
         for (i = 6; i < NF + 1; i++) {
             sum += $i
